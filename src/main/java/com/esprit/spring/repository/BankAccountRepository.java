@@ -27,7 +27,8 @@ public class BankAccountRepository {
         return this.entityManager.find(BankAccount.class, id);
     }
  
-    public List<BankAccountInfo> listBankAccountInfo() {
+    @SuppressWarnings("unchecked")
+	public List<BankAccountInfo> listBankAccountInfo() {
         String sql = "Select new " + BankAccountInfo.class.getName() //
                 + "(e.id,e.fullName,e.balance) " //
                 + " from " + BankAccount.class.getName() + " e ";
