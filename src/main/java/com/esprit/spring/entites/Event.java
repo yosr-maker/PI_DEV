@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,8 +30,11 @@ public class Event  implements Serializable{
 	@Column(name = "idEvent")
 	private  Long idEvent ;
 	
-	@Column(name="Title")
-	private String Title;
+	@Enumerated(EnumType.STRING)
+	private EventCategory category;
+	
+	@Column(name="name")
+	private String name;
 	
 	@Temporal(TemporalType.DATE)
 	private Date dateEvent;
@@ -51,13 +56,16 @@ public class Event  implements Serializable{
 		this.idEvent = idEvent;
 	}
 
-	public String getTitle() {
-		return Title;
+	
+	public String getName() {
+		return name;
 	}
 
-	public void setTitle(String title) {
-		Title = title;
+
+	public void setName(String name) {
+		this.name = name;
 	}
+
 
 	public Date getDateEvent() {
 		return dateEvent;
@@ -85,10 +93,12 @@ public class Event  implements Serializable{
 	}
 
 
-	public Event(Long idEvent, String title, Date dateEvent, Boolean status, Jackpot jackpot) {
+
+
+	public Event(Long idEvent, String name, Date dateEvent, Boolean status, Jackpot jackpot) {
 		super();
 		this.idEvent = idEvent;
-		Title = title;
+		this.name = name;
 		this.dateEvent = dateEvent;
 		Status = status;
 		this.jackpot = jackpot;
