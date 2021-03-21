@@ -36,6 +36,10 @@ public class Event  implements Serializable{
 	@Column(name="name")
 	private String name;
 	
+
+	@Column(name="description")
+	private String description;
+	
 	@Temporal(TemporalType.DATE)
 	private Date dateEvent;
 	
@@ -57,6 +61,26 @@ public class Event  implements Serializable{
 	}
 
 	
+	public EventCategory getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(EventCategory category) {
+		this.category = category;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
 	public String getName() {
 		return name;
 	}

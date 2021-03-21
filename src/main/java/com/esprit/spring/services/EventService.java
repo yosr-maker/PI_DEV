@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.esprit.spring.entites.Event;
+import com.esprit.spring.entites.EventCategory;
 import com.esprit.spring.repository.EventRepository;
 
 
@@ -48,5 +49,28 @@ public Event updateEvent(Event e) {
 public Event retrieveEvent(String id) {
 	Event e= EventRepository.findById(Long.parseLong(id)).orElse(null);
 	return e;
+}
+
+public Event findbyId(Long s) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public Event findEventByName(String name) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public List<Event> filterEvent(EventCategory category) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public void refundUsers(String idEvent) {
+	// TODO Auto-generated method stub
+	
 }
 }
