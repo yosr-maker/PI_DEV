@@ -11,11 +11,9 @@ public interface EventServiceI {
 	
 	List<Event> retrieveAllEvents();
 	Event addEvent(Event e);
-	void deleteEvent (String id);
 	Event retrieveEvent(String id);
 	Event findEventByName(String name);
 	List<Event> filterEvent(EventCategory category);
-	void refundUsers(String idEvent);
 	List<Event> upcomingEvents();
 	List<Event> passedEvents();
 	List<String> displayBestEventsByViews();
@@ -24,5 +22,7 @@ public interface EventServiceI {
 	List<Event> eventsLists();
 	Event findbyId(Long id);
 	void updateEvent(Long s);
+	void refundUsers(Long s);
+	void deleteEvent(Long s);
 
 }

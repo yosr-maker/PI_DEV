@@ -36,7 +36,7 @@ public class User_account  implements Serializable {
 
 		@Id
 		@Column(name = "id")
-		private int id;
+		private static int id;
 		
 	
 		@Column(name="Cin")
@@ -71,7 +71,7 @@ public class User_account  implements Serializable {
 		private String Password;
 		
 		
-		public int getId() {
+		public static int getId() {
 			return id;
 		}
 
@@ -256,7 +256,7 @@ public class User_account  implements Serializable {
 		public User_account(int id, int cin, String firstName, String lastName, Date dateNaissance, boolean status,
 				String email, String phoneNumber, String login, String password) {
 			super();
-			this.id = id;
+			User_account.id = id;
 			Cin = cin;
 			this.firstName = firstName;
 			this.lastName = lastName;

@@ -76,8 +76,8 @@ public class Jackpot  implements Serializable{
 
 
 
-	public void setSum(int i) {
-		this.sum = (double) i;
+	public void setSum(double d) {
+		this.sum = (double) d;
 	}
 	
 	
