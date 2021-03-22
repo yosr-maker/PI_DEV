@@ -28,9 +28,7 @@ public class Jackpot  implements Serializable{
 	@Column(name = "idJackpot")
 	private  Long idJackpot ;
 	
-	private Long fromAccountId;
-    private Long toAccountId;
-    private Double amount;
+    private Double sum;
 	
 	@ManyToOne
 	@JoinColumn(name = "id")
@@ -102,55 +100,20 @@ public class Jackpot  implements Serializable{
 
 
 
+	
 
 
 
-	@Override
-	public String toString() {
-		return "Jackpot [idJackpot=" + idJackpot + ", fromAccountId=" + fromAccountId + ", toAccountId=" + toAccountId
-				+ ", amount=" + amount + ", client=" + client + ", event=" + event + "]";
+
+	public Double getSum() {
+		return sum;
 	}
 
 
 
 
-	public Long getFromAccountId() {
-		return fromAccountId;
-	}
-
-
-
-
-	public void setFromAccountId(Long fromAccountId) {
-		this.fromAccountId = fromAccountId;
-	}
-
-
-
-
-	public Long getToAccountId() {
-		return toAccountId;
-	}
-
-
-
-
-	public void setToAccountId(Long toAccountId) {
-		this.toAccountId = toAccountId;
-	}
-
-
-
-
-	public Double getAmount() {
-		return amount;
-	}
-
-
-
-
-	public void setAmount(Double amount) {
-		this.amount = amount;
+	public void setSum(Double sum) {
+		this.sum = sum;
 	}
 	
 	
