@@ -1,6 +1,7 @@
 package com.esprit.spring.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,13 +10,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import 	com.esprit.spring.repository.EventRepository;
 import com.esprit.spring.repository.ParticipationRepository;
+import com.esprit.spring.entites.Contribution;
 import com.esprit.spring.entites.Event;
 import com.esprit.spring.entites.Participation;
 import com.esprit.spring.entites.EventCategory;
+import com.esprit.spring.entites.Notification;
 import com.esprit.spring.services.ContributionService;
 import com.esprit.spring.services.EventServiceI;
 import com.esprit.spring.services.NotifactionService;
@@ -89,10 +93,68 @@ public List<Participation> getParticipations(){
 }
 
 
-@PutMapping("/modify-event")
+
+
+
+													//User//
+
+
+@PostMapping("/add-Contribution/{eid}/{amount}")
 @ResponseBody
-public Event modifyEvent(@RequestBody Event e) {
-return EventService.updateEvent(e);
+public void Contribute(@PathVariable("eid") Long s,@PathVariable("amount") float amount) {
+	ContributionService.Contribute(s, amount);
 }
+
+@GetMapping("/retrieve-my-Contributions")
+public List<Contribution> myContributionsHistory(){
+	return ContributionService.myContributionHistory();
 }
+
+@RequestMapping("/add-Participation/{eid}")
+@ResponseBody
+public String addParticipation(@PathVariable("s") Long s) {
+	return ParticipationService.addParticipation(s);
+}
+
+@GetMapping("/retrieve-my-Participations")
+public List<Participation> getMyParticipations(){
+	return ParticipationService.myParticipations();
+}
+
+@GetMapping("/retrieve-my-Notifications")
+public List<Notification> getMyNotifications(){
+	return NotifactionService.myNotifications();
+}
+
+@GetMapping("/retrieve-upcoming-Events")
+public List<Event> upcomingEvents() {
+	return EventService.upcomingEvents();
+}
+
+@GetMapping("/retrieve-passed-Events")
+public List<Event> passedEvents() {
+	return EventService.passedEvents();
+}
+
+@GetMapping("/bestEventsByViews")
+public Map<Long, Integer> bestEventsByViews(){
+	return EventService.bestEventsByViews();
+	}
+
+@GetMapping("/retrieveBestEventsByViews")
+public List<String> displayBestEventsByViews(){
+	return EventService.displayBestEventsByViews();
+	}
+
+@GetMapping("/retrieveBestEventsByParticipations")
+public List<String> displayBestEventsByParticipations(){
+	return EventService.displayBestEventsByParticipations();
+	}
+
+}
+
+
+
+
+
 

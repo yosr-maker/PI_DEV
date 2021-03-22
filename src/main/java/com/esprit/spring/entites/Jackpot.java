@@ -1,7 +1,7 @@
  package com.esprit.spring.entites;
 
 import java.io.Serializable;
-import java.util.List;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 
 @Entity
@@ -35,9 +35,6 @@ public class Jackpot  implements Serializable{
 	private Client client;
 	
 	
-	@OneToMany(mappedBy="jackpot")
-	private List<Event>event;
-
 
 
 
@@ -72,18 +69,18 @@ public class Jackpot  implements Serializable{
 
 
 
-	public List<Event> getEvent() {
-		return event;
+	public Double getSum() {
+		return sum;
 	}
 
 
 
 
-	public void setEvent(List<Event> event) {
-		this.event = event;
+	public void setSum(int i) {
+		this.sum = (double) i;
 	}
-
-
+	
+	
 
 
 	
@@ -103,20 +100,6 @@ public class Jackpot  implements Serializable{
 	
 
 
-
-
-	public Double getSum() {
-		return sum;
-	}
-
-
-
-
-	public void setSum(Double sum) {
-		this.sum = sum;
-	}
-	
-	
 	
 	
 }

@@ -93,7 +93,13 @@ public class ParticipationService implements ParticipationServiceI {
 	//	List<Participation> list = ParticipationRepository.myParticipations(UserController.USERCONNECTED);
 	//	return list;
 //	}
-	public String addParticipation(Long eid) {
+	public String addParticipation(Long s) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public List<Participation> myParticipations() {
 		// TODO Auto-generated method stub
 		return null;
 	}

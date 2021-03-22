@@ -48,8 +48,6 @@ public class Stock implements Serializable {
 	@JoinColumn(name="id")
 	private Product product;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="stock")
-	List<Shalves> shalves;
 
 
 	
@@ -86,13 +84,6 @@ public class Stock implements Serializable {
 		this.product = product;
 	}
 
-	public List<Shalves> getShalves() {
-		return shalves;
-	}
-
-	public void setShalves(List<Shalves> shalves) {
-		this.shalves = shalves;
-	}
 
 	public Stock() {
 		super();

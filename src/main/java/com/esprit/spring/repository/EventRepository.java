@@ -18,4 +18,10 @@ public interface EventRepository extends CrudRepository <Event,Long>,JpaReposito
 	@Query("SELECT ev FROM Event ev WHERE ev.category=:category")
 	List<Event> filterByCategory(@Param ("category") EventCategory category);
 
+	List<Event> upcomingEvents();
+
+	List<Event> passedEvents();
+
+
+
 }
