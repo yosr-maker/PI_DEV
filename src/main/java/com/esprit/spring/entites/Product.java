@@ -42,8 +42,7 @@ public class Product implements Serializable {
 	@Column(name="Quantity")
 	private float Quantity;
 	
-	
-	
+
 		
 	@Column(name="price")
 	private float Price;

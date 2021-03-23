@@ -25,7 +25,7 @@ import javax.persistence.TemporalType;
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @Table( name = "T_USER_Account")
 
-public class User_account  implements Serializable {
+public class UserAccount  implements Serializable {
 	
 
 	/**
@@ -36,14 +36,15 @@ public class User_account  implements Serializable {
 
 		@Id
 		@Column(name = "id")
-		private static int id;
+		private int id;
 		
 	
 		@Column(name="Cin")
 		private int Cin;
 
 		
-		
+		 private float accBalance;
+
 
 		@Column(name="firstName")
 		private String firstName;
@@ -71,7 +72,7 @@ public class User_account  implements Serializable {
 		private String Password;
 		
 		
-		public static int getId() {
+		public  int getId() {
 			return id;
 		}
 
@@ -160,7 +161,7 @@ public class User_account  implements Serializable {
 					+ phoneNumber + ", Login=" + Login + ", Password=" + Password + "]";
 		}
 
-		public User_account(int cin, String firstName, String lastName, Date dateNaissance, boolean status,
+		public UserAccount(int cin, String firstName, String lastName, Date dateNaissance, boolean status,
 				String email, String phoneNumber, String login, String password) {
 			super();
 			Cin = cin;
@@ -174,7 +175,7 @@ public class User_account  implements Serializable {
 			Password = password;
 		}
 
-		public User_account() {
+		public UserAccount() {
 			super();
 			// TODO Auto-generated constructor stub
 		}
@@ -194,11 +195,12 @@ public class User_account  implements Serializable {
 			result = prime * result + ((dateNaissance == null) ? 0 : dateNaissance.hashCode());
 			result = prime * result + ((email == null) ? 0 : email.hashCode());
 			result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-			result = prime * result + id;
 			result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 			result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
 			return result;
 		}
+
+		
 
 		@Override
 		public boolean equals(Object obj) {
@@ -208,7 +210,7 @@ public class User_account  implements Serializable {
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			User_account other = (User_account) obj;
+			UserAccount other = (UserAccount) obj;
 			if (Cin != other.Cin)
 				return false;
 			if (Login == null) {
@@ -238,8 +240,6 @@ public class User_account  implements Serializable {
 					return false;
 			} else if (!firstName.equals(other.firstName))
 				return false;
-			if (id != other.id)
-				return false;
 			if (lastName == null) {
 				if (other.lastName != null)
 					return false;
@@ -253,10 +253,10 @@ public class User_account  implements Serializable {
 			return true;
 		}
 
-		public User_account(int id, int cin, String firstName, String lastName, Date dateNaissance, boolean status,
+		public UserAccount(int id, int cin, String firstName, String lastName, Date dateNaissance, boolean status,
 				String email, String phoneNumber, String login, String password) {
 			super();
-			User_account.id = id;
+			this.id = id;
 			Cin = cin;
 			this.firstName = firstName;
 			this.lastName = lastName;
@@ -267,6 +267,16 @@ public class User_account  implements Serializable {
 			Login = login;
 			Password = password;
 		}
+
+		public float getAccBalance() {
+			return accBalance;
+		}
+
+		public void setAccBalance(float accBalance) {
+			this.accBalance = accBalance;
+		}
+
+		
 
 
 }

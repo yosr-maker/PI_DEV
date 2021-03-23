@@ -1,17 +1,12 @@
 package com.esprit.spring.services;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.esprit.spring.controller.ClientController;
-import com.esprit.spring.entites.Client;
-import com.esprit.spring.entites.Event;
 import com.esprit.spring.entites.Participation;
-import com.esprit.spring.repository.ClientRepository;
 import com.esprit.spring.repository.EventRepository;
 import com.esprit.spring.repository.ParticipationRepository;
 
@@ -39,8 +34,8 @@ public class ParticipationService implements ParticipationServiceI {
 
 	
 	//User//
-	@Override
-	public String addParticipation(Long s) {
+	//@Override
+	/*public String addParticipation(Long s) {
 		Participation p = new Participation();
 		Event e = EventService.findbyId(s);
 		Client c = ClientService.findbyid(Client.getId());
@@ -67,7 +62,7 @@ public class ParticipationService implements ParticipationServiceI {
 				c.setAccBalance(c.getAccBalance()-e.getTicketPrice());	
 				ParticipationRepository.save(p);
 				EventRepository.saveAndFlush(e);
-				ClientRepository.save(c);
+				//ClientRepository.save(c);
 				return "Participation successfully added. You're welcome.";
 		}else {
 			return "Sorry, there are no places available.";
@@ -88,16 +83,28 @@ public class ParticipationService implements ParticipationServiceI {
 //				UR.save(u);
 //				return "you are among the first 20 participants, discount by 20%";
 //			}
-				
-			
 	
+	}
+*/
+
+	@Override
+	public List<Participation> myParticipations() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String addParticipation(Long s) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	//Retrieve my participations
-	@Override
-	public List<Participation> myParticipations() {
-		List<Participation> list = ParticipationRepository.myParticipations(UserController.USERCONNECTED);
-		return list;
-	}
-}
+	//@Override
+//	public List<Participation> myParticipations() {
+	//	List<Participation> list = ParticipationRepository.myParticipations(UserController.USERCONNECTED);
+	//	return list;
+//	}
 
+}

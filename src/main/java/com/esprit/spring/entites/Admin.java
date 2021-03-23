@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="T_ADMIN")
 
-public class Admin extends User_account implements Serializable{
+public class Admin extends UserAccount implements Serializable{
 
 	/**
 	 * 

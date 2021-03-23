@@ -13,19 +13,25 @@ import javax.persistence.Table;
 @Entity
 @Table(name="T_CLIENT")
 
-public class Client extends User_account {
+public class Client extends UserAccount {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private int donation;
 	
-	 private float accBalance;
+	public int getDonation() {
+		return donation;
+	}
 
 
-	@OneToMany(mappedBy="client")
-	private List<Jackpot> jackpots;
+	public void setDonation(int donation) {
+		this.donation = donation;
+	}
+
+
 	@OneToOne
 	private Basket basket;
 	
@@ -43,51 +49,9 @@ public class Client extends User_account {
 	}
 
 
-	public Client(int cin, String firstName, String lastName, Date dateNaissance, boolean status, String email,
-			String phoneNumber, String login, String password, float accBalance, List<Jackpot> jackpots,
-			Basket basket) {
-		super(cin, firstName, lastName, dateNaissance, status, email, phoneNumber, login, password);
-		this.accBalance = accBalance;
-		this.jackpots = jackpots;
-		this.basket = basket;
-	}
-
-
-
-
-
-
-
-
-	public List<Jackpot> getJackpots() {
-		return jackpots;
-	}
-
-
-
-
-
-
-
-
-	public void setJackpots(List<Jackpot> jackpots) {
-		this.jackpots = jackpots;
-	}
-
-
-
-
-
-
-
-
 	public Basket getBasket() {
 		return basket;
 	}
-
-
-
-
 
 
 
@@ -96,32 +60,84 @@ public class Client extends User_account {
 		this.basket = basket;
 	}
 
-
-
-
-
-
-
-
 	@Override
 	public String toString() {
 		return "Client [basket=" + basket + "]";
 	}
 
-	public float getAccBalance() {
-		return accBalance;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public Client(int cin, String firstName, String lastName, Date dateNaissance, boolean status, String email,
+			String phoneNumber, String login, String password, Basket basket, List<Participation> participation,
+			List<Notification> notification, List<Contribution> contribution) {
+		super(cin, firstName, lastName, dateNaissance, status, email, phoneNumber, login, password);
+		this.basket = basket;
+		this.participation = participation;
+		this.notification = notification;
+		this.contribution = contribution;
 	}
 
-	public void setAccBalance(float accBalance) {
-		this.accBalance = accBalance;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public List<Participation> getParticipation() {
+		return participation;
 	}
-	
-	
-	
+
+
+	public void setParticipation(List<Participation> participation) {
+		this.participation = participation;
+	}
+
+
+	public List<Notification> getNotification() {
+		return notification;
+	}
+
+
+	public void setNotification(List<Notification> notification) {
+		this.notification = notification;
+	}
+
+
+	public List<Contribution> getContribution() {
+		return contribution;
+	}
+
+
+	public void setContribution(List<Contribution> contribution) {
+		this.contribution = contribution;
+	}
+
 
 	
 
-	
 
 
 }

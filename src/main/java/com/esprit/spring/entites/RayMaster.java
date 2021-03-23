@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="T_RAYMASTER")
 
-public class RayMaster extends User_account {
+public class RayMaster extends UserAccount {
 
 	
 	private static final long serialVersionUID = 1L;

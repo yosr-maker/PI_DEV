@@ -1,6 +1,7 @@
 package com.esprit.spring.services;
 
 import java.util.List;
+import java.util.Map;
 
 import com.esprit.spring.entites.Donation;
 
@@ -15,6 +16,8 @@ public interface DonationServiceI {
 	Donation updateDonation(Donation d);
 	Donation retrieveDonation(String id);
 	Donation validerMyDonation();
+	Donation findbyId(Long idDo);
+	Map<Long, Integer> bestClientsByDonation();
 
 }
 

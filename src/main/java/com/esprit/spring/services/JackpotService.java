@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.esprit.spring.entites.Event;
 import com.esprit.spring.entites.Jackpot;
 
 import com.esprit.spring.repository.JackpotRepository;
@@ -49,5 +50,9 @@ public class JackpotService implements JackpotServiceI {
 		Jackpot j  =jackpotRepository.findById(Long.parseLong(id)).orElse(null);
 			return j;
 	}
-
+	@Override
+	public Jackpot findJackpot(Event event) {
+		Jackpot jackpot = event.getJackpot();
+		return jackpot;
+	}
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.esprit.spring.entites.Notification;
 
 @Service
-public class NotifactionService {
+public class NotificationService {
 
 	
 

@@ -11,13 +11,11 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Participation implements Serializable{
-
+public class Participation implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	private Long id;
@@ -34,38 +32,7 @@ public class Participation implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public float getPrice() {
-		return price;
-	}
-	public void setPrice(float price) {
-		this.price = price;
-	}
-	public String getParticipationDate() {
-		return participationDate;
-	}
-	public void setParticipationDate(String participationDate) {
-		this.participationDate = participationDate;
-	}
-	public Event getEvent() {
-		return event;
-	}
-	public void setEvent(Event event) {
-		this.event = event;
-	}
-	public Client getClient() {
-		return client;
-	}
-	public void setClient(Client client) {
-		this.client = client;
-	}
+
 	public Participation(Long id, float price, String participationDate, Event event, Client client) {
 		super();
 		this.id = id;
@@ -75,6 +42,45 @@ public class Participation implements Serializable{
 		this.client = client;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	public String getParticipationDate() {
+		return participationDate;
+	}
+
+	public void setParticipationDate(String participationDate) {
+		this.participationDate = participationDate;
+	}
+
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
 
 	@Override
 	public int hashCode() {
@@ -87,7 +93,6 @@ public class Participation implements Serializable{
 		result = prime * result + Float.floatToIntBits(price);
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -123,12 +128,13 @@ public class Participation implements Serializable{
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Participation [id=" + id + ", price=" + price + ", participationDate=" + participationDate + ", event="
 				+ event + ", client=" + client + "]";
 	}
 
-
+	
+	
+	
 }

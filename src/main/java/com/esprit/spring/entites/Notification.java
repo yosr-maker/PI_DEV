@@ -1,5 +1,6 @@
 package com.esprit.spring.entites;
 
+
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Notification implements Serializable {
 
@@ -16,7 +18,6 @@ public class Notification implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	private Long id;
@@ -34,57 +35,65 @@ public class Notification implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	 
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getBody() {
-		return body;
-	}
-	public void setBody(String body) {
-		this.body = body;
-	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public Client getClient() {
-		return client;
-	}
-	public void setClient(Client client) {
-		this.client = client;
-	}
-	public Event getEvent() {
-		return event;
-	}
-	public void setEvent(Event event) {
-		this.event = event;
-	}
+
 	public Notification(Long id, String body, String date, String status, Client client, Event event) {
 		super();
 		this.id = id;
 		this.body = body;
 		this.date = date;
 		this.status = status;
-		this.client = client;
+		this.client= client;
 		this.event = event;
 	}
 
-	@Override
-	public String toString() {
-		return "Notification [id=" + id + ", body=" + body + ", date=" + date + ", status=" + status + ", client="
-				+ client + ", event=" + event + "]";
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getBody() {
+		return body;
+	}
+
+	public void setBody(String body) {
+		this.body = body;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 
 	@Override
@@ -141,6 +150,15 @@ public class Notification implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Notification [id=" + id + ", body=" + body + ", date=" + date + ", status=" + status + ", client="
+				+ client + ", event=" + event + "]";
+	}
+
+
+
 
 
 }

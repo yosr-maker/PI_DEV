@@ -27,6 +27,7 @@ public class Contribution implements Serializable {
 	@ManyToOne
 	@JsonIgnore
 	private Client client;
+	
 	private String contributionDate;
 	private float amount;
 	

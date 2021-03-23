@@ -10,4 +10,6 @@ public interface ParticipationServiceI {
 
 	List<Participation> myParticipations();
 
+	List<Participation> participationsList();
+
 }
