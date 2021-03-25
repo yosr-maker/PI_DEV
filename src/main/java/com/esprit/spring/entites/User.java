@@ -25,7 +25,7 @@ import javax.persistence.TemporalType;
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @Table( name = "T_USER_Account")
 
-public class UserAccount  implements Serializable {
+public class User  implements Serializable {
 	
 
 	/**
@@ -42,8 +42,8 @@ public class UserAccount  implements Serializable {
 		@Column(name="Cin")
 		private int Cin;
 
-		
-		 private float accBalance;
+		@Column(name="mCompte")
+		 private float mCompte;
 
 
 		@Column(name="firstName")
@@ -161,21 +161,8 @@ public class UserAccount  implements Serializable {
 					+ phoneNumber + ", Login=" + Login + ", Password=" + Password + "]";
 		}
 
-		public UserAccount(int cin, String firstName, String lastName, Date dateNaissance, boolean status,
-				String email, String phoneNumber, String login, String password) {
-			super();
-			Cin = cin;
-			this.firstName = firstName;
-			this.lastName = lastName;
-			this.dateNaissance = dateNaissance;
-			Status = status;
-			this.email = email;
-			this.phoneNumber = phoneNumber;
-			Login = login;
-			Password = password;
-		}
-
-		public UserAccount() {
+	
+		public User() {
 			super();
 			// TODO Auto-generated constructor stub
 		}
@@ -184,23 +171,26 @@ public class UserAccount  implements Serializable {
 
 		
 		
+	
+		
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
 			result = prime * result + Cin;
 			result = prime * result + ((Login == null) ? 0 : Login.hashCode());
+			result = prime * result + Float.floatToIntBits(mCompte);
 			result = prime * result + ((Password == null) ? 0 : Password.hashCode());
 			result = prime * result + (Status ? 1231 : 1237);
 			result = prime * result + ((dateNaissance == null) ? 0 : dateNaissance.hashCode());
 			result = prime * result + ((email == null) ? 0 : email.hashCode());
 			result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+			result = prime * result + id;
 			result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 			result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
 			return result;
 		}
-
-		
 
 		@Override
 		public boolean equals(Object obj) {
@@ -210,13 +200,15 @@ public class UserAccount  implements Serializable {
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			UserAccount other = (UserAccount) obj;
+			User other = (User) obj;
 			if (Cin != other.Cin)
 				return false;
 			if (Login == null) {
 				if (other.Login != null)
 					return false;
 			} else if (!Login.equals(other.Login))
+				return false;
+			if (Float.floatToIntBits(mCompte) != Float.floatToIntBits(other.mCompte))
 				return false;
 			if (Password == null) {
 				if (other.Password != null)
@@ -240,6 +232,8 @@ public class UserAccount  implements Serializable {
 					return false;
 			} else if (!firstName.equals(other.firstName))
 				return false;
+			if (id != other.id)
+				return false;
 			if (lastName == null) {
 				if (other.lastName != null)
 					return false;
@@ -253,7 +247,7 @@ public class UserAccount  implements Serializable {
 			return true;
 		}
 
-		public UserAccount(int id, int cin, String firstName, String lastName, Date dateNaissance, boolean status,
+		public User(int id, int cin, String firstName, String lastName, Date dateNaissance, boolean status,
 				String email, String phoneNumber, String login, String password) {
 			super();
 			this.id = id;
@@ -268,12 +262,15 @@ public class UserAccount  implements Serializable {
 			Password = password;
 		}
 
-		public float getAccBalance() {
-			return accBalance;
+	
+		
+
+		public float getMcompte() {
+			return mCompte;
 		}
 
-		public void setAccBalance(float accBalance) {
-			this.accBalance = accBalance;
+		public void setMcompte(float mcompte) {
+			mCompte = mcompte;
 		}
 
 		

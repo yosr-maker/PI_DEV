@@ -1,7 +1,7 @@
 package com.esprit.spring.entites;
 
 import java.io.Serializable;
-import java.util.Date;
+
 //import java.util.List;
 import java.util.List;
 
@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="T_ADMIN")
 
-public class Admin extends UserAccount implements Serializable{
+public class Admin extends User implements Serializable{
 
 	/**
 	 * 
@@ -95,20 +95,15 @@ public class Admin extends UserAccount implements Serializable{
 	}
 
 
-	public Admin(int cin, String firstName, String lastName, Date dateNaissance, boolean status, String email,
-			String phoneNumber, String login, String password, int adminId, List<Ray> rays) {
-		super(cin, firstName, lastName, dateNaissance, status, email, phoneNumber, login, password);
+
+	public Admin(int adminId, List<Ray> rays) {
+		super();
 		this.adminId = adminId;
 		this.rays = rays;
 	}
 
 
 
-	public Admin(int cin, String firstName, String lastName, Date dateNaissance, boolean status, String email,
-			String phoneNumber, String login, String password) {
-		super(cin, firstName, lastName, dateNaissance, status, email, phoneNumber, login, password);
-		// TODO Auto-generated constructor stub
-	}
 
 	
 	

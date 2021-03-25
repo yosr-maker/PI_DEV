@@ -17,7 +17,7 @@ import com.esprit.spring.entites.Donation;
 public interface DonationRepository extends CrudRepository<Donation,Long>,JpaRepository<Donation,Long>{
 
 
-	@Query("SELECT d FROM Donations d WHERE d.product=:product")
-	List<Donation> Donations(@Param ("donation")Donation d);
+	//@Query("SELECT d FROM Donations d WHERE d.product=:product")
+	//List<Donation> Donations(@Param ("donation")Donation d);
 
 }

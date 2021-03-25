@@ -3,10 +3,10 @@ package com.esprit.spring.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.esprit.spring.entites.UserAccount;
+import com.esprit.spring.entites.User;
 
 @Repository
-public interface UserAccountRepository  extends CrudRepository<UserAccount,Long>{
+public interface UserRepository  extends CrudRepository<User,Long>{
 
 
 

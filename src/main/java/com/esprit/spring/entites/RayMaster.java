@@ -1,8 +1,5 @@
 package com.esprit.spring.entites;
 
-
-
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -11,7 +8,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="T_RAYMASTER")
 
-public class RayMaster extends UserAccount {
+public class RayMaster extends User {
 
 	
 	private static final long serialVersionUID = 1L;
@@ -28,11 +25,14 @@ public class RayMaster extends UserAccount {
 	}
 
 
-	public RayMaster(int cin, String firstName, String lastName, Date dateNaissance, boolean status, String email,
-			String phoneNumber, String login, String password, List<Ray> rays) {
-		super(cin, firstName, lastName, dateNaissance, status, email, phoneNumber, login, password);
+
+
+	public RayMaster(List<Ray> rays) {
+		super();
 		this.rays = rays;
 	}
+
+
 
 
 	@Override
@@ -72,11 +72,6 @@ public class RayMaster extends UserAccount {
 	}
 
 
-	public RayMaster(int cin, String firstName, String lastName, Date dateNaissance, boolean status, String email,
-			String phoneNumber, String login, String password) {
-		super(cin, firstName, lastName, dateNaissance, status, email, phoneNumber, login, password);
-		// TODO Auto-generated constructor stub
-	}
 	
 }
 

@@ -22,10 +22,10 @@ import com.esprit.spring.entites.Notification;
 import com.esprit.spring.entites.Participation;
 import com.esprit.spring.repository.EventRepository;
 import com.esprit.spring.repository.ParticipationRepository;
-import com.esprit.spring.services.ContributionService;
+//import com.esprit.spring.services.ContributionService;
 import com.esprit.spring.services.EventServiceI;
 import com.esprit.spring.services.NotificationService;
-import com.esprit.spring.services.ParticipationService;
+//import com.esprit.spring.services.ParticipationService;
 
 
 @RestController
@@ -36,10 +36,10 @@ public class EventController {
 	EventRepository ER;
 	@Autowired
 	NotificationService NS;
-	@Autowired
-	ParticipationService PS;
-	@Autowired
-	ContributionService CS;
+	//@Autowired
+//	ParticipationService PS;
+//	@Autowired
+	//ContributionService CS;
 	@Autowired
 	ParticipationRepository PR;
 	
@@ -91,13 +91,13 @@ public class EventController {
 		ES.deleteEvent(eventID);
 	}
 	
-	@GetMapping("/retrieve-all-Participations")
+	/*@GetMapping("/retrieve-all-Participations")
 	public List<Participation> getParticipations(){
 		return PS.participationsList();
 	}
 	
 	/**********************************User**********************************/
-	@PostMapping("/add-Contribution/{eid}/{amount}")
+	/* @PostMapping("/add-Contribution/{eid}/{amount}")
 	@ResponseBody
 	public void Contribute(@PathVariable("eid") Long eid,@PathVariable("amount") float amount) {
 		CS.Contribute(eid, amount);
@@ -148,10 +148,8 @@ public class EventController {
 	public List<String> displayBestEventsByParticipations(){
 		return ES.displayBestEventsByParticipations();
 		}
-	
+	*/
 }
-
-	
 
 
 

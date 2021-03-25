@@ -23,7 +23,7 @@ import com.esprit.spring.repository.EventRepository;
 import com.esprit.spring.repository.JackpotRepository;
 import com.esprit.spring.repository.NotificationRepository;
 import com.esprit.spring.repository.ParticipationRepository;
-import com.esprit.spring.repository.UserAccountRepository;
+import com.esprit.spring.repository.UserRepository;
 
 
 @Service
@@ -35,7 +35,7 @@ public class EventService implements EventServiceI {
 	@Autowired
 	ParticipationRepository PR;
 	@Autowired
-	UserAccountRepository UR;
+	UserRepository UR;
 	@Autowired
 	ContributionRepository CR;
 	@Autowired
@@ -43,7 +43,7 @@ public class EventService implements EventServiceI {
 	
 
 	/**********************************Admin**********************************/
-	@Override
+ @Override
 	public void addEvent(Event event) {
 		Event NewEvent = new Event();
 		NewEvent.setCategory(event.getCategory());
@@ -51,7 +51,7 @@ public class EventService implements EventServiceI {
 		NewEvent.setDescription(event.getDescription());
 		NewEvent.setPlacesNbr(event.getPlacesNbr());
 		NewEvent.setParticipantsNbr(0);
-		NewEvent.setCollAmount(0);
+		NewEvent.setMontant(0);
 		NewEvent.setDate(event.getDate());
 		NewEvent.setHour(event.getHour());
 		NewEvent.setLocation(event.getLocation());
@@ -64,7 +64,6 @@ public class EventService implements EventServiceI {
 		
 		NewEvent.setPoster(event.getPoster());
 		NewEvent.setTicketPrice(event.getTicketPrice());
-		NewEvent.setGoal(event.getGoal());
 		NewEvent.setStatus(false);
 		Jackpot j = new Jackpot();
 		j.setSum(0);
@@ -90,7 +89,6 @@ public class EventService implements EventServiceI {
 		ev.setLocation(ev.getLocation());
 		ev.setPoster(ev.getPoster());
 		ev.setTicketPrice(ev.getTicketPrice());
-		ev.setGoal(ev.getGoal());
 		ER.save(ev);
 	}
 
@@ -137,9 +135,9 @@ public class EventService implements EventServiceI {
 		
 		for(Participation p : participationsOfEvent) {
 			Client u = p.getClient();
-			float refundedAmount = p.getPrice();
-			ev.setCollAmount(ev.getCollAmount()-refundedAmount);
-			u.setAccBalance(u.getAccBalance()+refundedAmount);
+			float montantRembourse = p.getPrice();
+			ev.setMontant(ev.getMontant()-montantRembourse);
+			u.setMcompte(u.getMcompte()+montantRembourse);
 			UR.save(u);
 			PR.deleteById(p.getId());
 			ER.save(ev);
@@ -159,10 +157,10 @@ public class EventService implements EventServiceI {
 		
 		for(Contribution c : contributionsOfEvent) {
 			Client u = c.getClient();
-			float refundedAmount = c.getAmount();
-			ev.getJackpot().setSum(ev.getJackpot().getSum()-refundedAmount);
-			ev.setCollAmount(ev.getCollAmount()-refundedAmount);
-			u.setAccBalance(u.getAccBalance()+refundedAmount);
+			float montantRembourse = c.getAmount();
+			ev.getJackpot().setSum(ev.getJackpot().getSum()-montantRembourse);
+			ev.setMontant(ev.getMontant()-montantRembourse);
+			u.setMcompte(u.getMcompte()+montantRembourse);
 			Notification n = new Notification();
 			n.setClient(u);
 			n.setBody("Dear "+u.getLastName()+" "+u.getFirstName()+""
@@ -269,3 +267,4 @@ public class EventService implements EventServiceI {
 
 
 }
+

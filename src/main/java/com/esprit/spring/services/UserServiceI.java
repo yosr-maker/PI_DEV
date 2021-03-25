@@ -1,5 +1,5 @@
 package com.esprit.spring.services;
 
-public interface UserAccountServiceI {
+public interface UserServiceI {
 
 }

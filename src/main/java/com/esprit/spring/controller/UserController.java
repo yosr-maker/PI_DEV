@@ -1,6 +1,6 @@
 package com.esprit.spring.controller;
 
-public class UserAccountController {
+public class UserController {
 
 	public static final String USERCONNECTED = null;
 	public int getId() {

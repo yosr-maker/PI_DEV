@@ -1,4 +1,4 @@
-package com.esprit.spring.services;
+/*package com.esprit.spring.services;
 
 import com.esprit.spring.entites.Client;
 
@@ -11,3 +11,4 @@ public class ClientService implements ClientServiceI {
 
 	
 }
+*/

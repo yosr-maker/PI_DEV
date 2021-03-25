@@ -1,4 +1,4 @@
-package com.esprit.spring.services;
+/*package com.esprit.spring.services;
 
 
 import java.util.List;
@@ -86,7 +86,7 @@ public class ParticipationService implements ParticipationServiceI {
 	
 	}
 */
-
+/*
 	@Override
 	public List<Participation> myParticipations() {
 		// TODO Auto-generated method stub
@@ -108,3 +108,4 @@ public class ParticipationService implements ParticipationServiceI {
 //	}
 
 }
+*/

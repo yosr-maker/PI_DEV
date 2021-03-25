@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="T_CLIENT")
 
-public class Client extends UserAccount {
+public class Client extends User {
 
 	/**
 	 * 
@@ -49,6 +49,17 @@ public class Client extends UserAccount {
 	}
 
 
+	public Client(int donation, Basket basket, List<Participation> participation, List<Notification> notification,
+			List<Contribution> contribution) {
+		super();
+		this.donation = donation;
+		this.basket = basket;
+		this.participation = participation;
+		this.notification = notification;
+		this.contribution = contribution;
+	}
+
+
 	public Basket getBasket() {
 		return basket;
 	}
@@ -64,46 +75,6 @@ public class Client extends UserAccount {
 	public String toString() {
 		return "Client [basket=" + basket + "]";
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	public Client(int cin, String firstName, String lastName, Date dateNaissance, boolean status, String email,
-			String phoneNumber, String login, String password, Basket basket, List<Participation> participation,
-			List<Notification> notification, List<Contribution> contribution) {
-		super(cin, firstName, lastName, dateNaissance, status, email, phoneNumber, login, password);
-		this.basket = basket;
-		this.participation = participation;
-		this.notification = notification;
-		this.contribution = contribution;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	public List<Participation> getParticipation() {

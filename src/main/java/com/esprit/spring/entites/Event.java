@@ -30,8 +30,8 @@
  	private EventCategory category;
  	private String name;
  	private String description;
- 	private float goal;
- 	private float collAmount;
+ 
+ 	private float montant;
  	private int placesNbr;
  	private int participantsNbr;
  	private float ticketPrice;
@@ -58,7 +58,7 @@
  		// TODO Auto-generated constructor stub
  	}
 
- 	public Event(Long id, EventCategory category, String name, String description, float goal, float collAmount,
+ 	public Event(Long id, EventCategory category, String name, String description, float montant,
  			int placesNbr, int participantsNbr, float ticketPrice, Date date, String hour, String location,
  			String poster, int views, boolean status, Jackpot jackpot, List<Notification> notification,
  			List<Publicity> publicity, List<Participation> participation, List<Contribution> contribution) {
@@ -67,8 +67,8 @@
  		this.category = category;
  		this.name = name;
  		this.description = description;
- 		this.goal = goal;
- 		this.collAmount = collAmount;
+
+ 		this.montant = montant;
  		this.placesNbr = placesNbr;
  		this.participantsNbr = participantsNbr;
  		this.ticketPrice = ticketPrice;
@@ -117,21 +117,8 @@
  		this.description = description;
  	}
 
- 	public float getGoal() {
- 		return goal;
- 	}
-
- 	public void setGoal(float goal) {
- 		this.goal = goal;
- 	}
-
- 	public float getCollAmount() {
- 		return collAmount;
- 	}
-
- 	public void setCollAmount(float collAmount) {
- 		this.collAmount = collAmount;
- 	}
+ 
+ 	
 
  	public int getPlacesNbr() {
  		return placesNbr;
@@ -250,11 +237,10 @@
  		final int prime = 31;
  		int result = 1;
  		result = prime * result + ((category == null) ? 0 : category.hashCode());
- 		result = prime * result + Float.floatToIntBits(collAmount);
+ 		result = prime * result + Float.floatToIntBits(montant);
  		result = prime * result + ((contribution == null) ? 0 : contribution.hashCode());
  		result = prime * result + ((date == null) ? 0 : date.hashCode());
  		result = prime * result + ((description == null) ? 0 : description.hashCode());
- 		result = prime * result + Float.floatToIntBits(goal);
  		result = prime * result + ((hour == null) ? 0 : hour.hashCode());
  		result = prime * result + ((id == null) ? 0 : id.hashCode());
  		result = prime * result + ((jackpot == null) ? 0 : jackpot.hashCode());
@@ -283,7 +269,7 @@
  		Event other = (Event) obj;
  		if (category != other.category)
  			return false;
- 		if (Float.floatToIntBits(collAmount) != Float.floatToIntBits(other.collAmount))
+ 		if (Float.floatToIntBits(montant) != Float.floatToIntBits(other.montant))
  			return false;
  		if (contribution == null) {
  			if (other.contribution != null)
@@ -300,8 +286,7 @@
  				return false;
  		} else if (!description.equals(other.description))
  			return false;
- 		if (Float.floatToIntBits(goal) != Float.floatToIntBits(other.goal))
- 			return false;
+ 		
  		if (hour == null) {
  			if (other.hour != null)
  				return false;
@@ -363,12 +348,22 @@
  	@Override
  	public String toString() {
  		return "Event [id=" + id + ", category=" + category + ", name=" + name + ", description=" + description
- 				+ ", goal=" + goal + ", collAmount=" + collAmount + ", placesNbr=" + placesNbr + ", participantsNbr="
+ 				+ ", montant=" + montant + ", placesNbr=" + placesNbr + ", participantsNbr="
  				+ participantsNbr + ", ticketPrice=" + ticketPrice + ", date=" + date + ", hour=" + hour + ", location="
  				+ location + ", poster=" + poster + ", views=" + views + ", status=" + status + ", jackpot=" + jackpot
  				+ ", notification=" + notification + ", publicity=" + publicity + ", participation=" + participation
  				+ ", contribution=" + contribution + "]";
  	}
+
+	public float getMontant() {
+		return montant;
+	}
+
+	public void setMontant(float montant) {
+		this.montant = montant;
+	}
+
+	
  	
  	
  	}

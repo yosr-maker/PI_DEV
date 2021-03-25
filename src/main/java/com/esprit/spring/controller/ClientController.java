@@ -1,4 +1,4 @@
-package com.esprit.spring.controller;
+/*package com.esprit.spring.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,3 +13,4 @@ public class ClientController {
 	}
 
 }
+*/

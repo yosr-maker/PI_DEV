@@ -1,5 +1,5 @@
 package com.esprit.spring.services;
 
-public class UserAccountService {
+public class UserService {
 
 }

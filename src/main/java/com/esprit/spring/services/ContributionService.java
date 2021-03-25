@@ -1,4 +1,4 @@
-package com.esprit.spring.services;
+/*package com.esprit.spring.services;
 
 import java.util.List;
 
@@ -61,6 +61,7 @@ public class ContributionService implements ContributionServiceI {
 		}
 	}
 	*/
+/*
 	@Override
 	public List<Contribution> contributionOfEvent(Event event) {
 		List<Contribution> list = CR.contributionOfEvent(event);
@@ -81,3 +82,4 @@ public class ContributionService implements ContributionServiceI {
 
 
 }
+*/
