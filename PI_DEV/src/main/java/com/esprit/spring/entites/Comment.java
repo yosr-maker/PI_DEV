@@ -31,10 +31,16 @@ public class Comment implements Serializable
 		this.commentId = commentId;
 	}
 	
+	@Override
+	public String toString() {
+		return "Comment [commentId=" + commentId + ", starrating=" + starrating + ", evaluationcomments="
+				+ evaluationcomments + ", publication=" + publication + "]";
+	}
+
 	@OneToOne
     @JoinColumn(name = "idStar")
 	private StarRating starrating;
-
+ 
 	@OneToMany(mappedBy="comment")
    
 	List <EvaluationComment> evaluationcomments;

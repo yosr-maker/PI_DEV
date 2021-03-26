@@ -3,6 +3,8 @@ package com.esprit.spring.entites;
 
 
 import java.io.Serializable;
+
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -18,6 +20,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 
@@ -25,7 +29,7 @@ import javax.persistence.TemporalType;
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @Table( name = "T_USER_Account")
 
-public class Useraccount  implements Serializable {
+public class User   implements UserDetails, Serializable {
 	
 
 	/**
@@ -40,7 +44,7 @@ public class Useraccount  implements Serializable {
 		
 	
 		@Column(name="Cin")
-		private int Cin;
+		private int cin;
 
 		
 		
@@ -56,7 +60,7 @@ public class Useraccount  implements Serializable {
 		private Date dateNaissance; 
 		
 		@Column(name="Status")
-		private boolean Status ;
+		private boolean status ;
 		
 		@Column(name="email")
 		private String email;
@@ -64,13 +68,15 @@ public class Useraccount  implements Serializable {
 		@Column(name="phoneNumber")
 		private String phoneNumber;
 		
-		@Column(name="Login")
-		private String Login;
+		@Column(name="Username")
+		private String username;
 		
 		@Column(name="password")
-		private String Password;
+		private String password;
 		
-		
+		@Column(name="role")
+		private String role;
+
 		public int getId() {
 			return id;
 		}
@@ -80,11 +86,11 @@ public class Useraccount  implements Serializable {
 		}
 
 		public int getCin() {
-			return Cin;
+			return cin;
 		}
 
 		public void setCin(int cin) {
-			Cin = cin;
+			this.cin = cin;
 		}
 
 		public String getFirstName() {
@@ -110,13 +116,12 @@ public class Useraccount  implements Serializable {
 		public void setDateNaissance(Date dateNaissance) {
 			this.dateNaissance = dateNaissance;
 		}
+
 		public boolean isStatus() {
-			return Status;
+			return status;
 		}
 
-		public void setStatus(boolean status) {
-			this.Status = status;
-		}
+		
 
 		public String getEmail() {
 			return email;
@@ -124,7 +129,8 @@ public class Useraccount  implements Serializable {
 
 		public void setEmail(String email) {
 			this.email = email;
-		} 
+		}
+
 		public String getPhoneNumber() {
 			return phoneNumber;
 		}
@@ -133,70 +139,45 @@ public class Useraccount  implements Serializable {
 			this.phoneNumber = phoneNumber;
 		}
 
-		public String getLogin() {
-			return Login;
+		public String getUsername() {
+			return username;
 		}
 
-		public void setLogin(String login) {
-			Login = login;
+		public void setUsername(String username) {
+			this.username = username;
 		}
 
 		public String getPassword() {
-			return Password;
+			return password;
 		}
 
 		public void setPassword(String password) {
-			Password = password;
+			this.password = password;
 		}
 
-		
-
-		
-
-		@Override
-		public String toString() {
-			return "User_account [Cin=" + Cin + ", firstName=" + firstName + ", lastName=" + lastName
-					+ ", dateNaissance=" + dateNaissance + ", Status=" + Status + ", email=" + email + ", phoneNumber="
-					+ phoneNumber + ", Login=" + Login + ", Password=" + Password + "]";
+		public String getRole() {
+			return role;
 		}
 
-		public Useraccount(int cin, String firstName, String lastName, Date dateNaissance, boolean status,
-				String email, String phoneNumber, String login, String password) {
-			super();
-			Cin = cin;
-			this.firstName = firstName;
-			this.lastName = lastName;
-			this.dateNaissance = dateNaissance;
-			Status = status;
-			this.email = email;
-			this.phoneNumber = phoneNumber;
-			Login = login;
-			Password = password;
+		public void setRole(String role) {
+			this.role = role;
 		}
 
-		public Useraccount() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
-
-		
-
-		
-		
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + Cin;
-			result = prime * result + ((Login == null) ? 0 : Login.hashCode());
-			result = prime * result + ((Password == null) ? 0 : Password.hashCode());
-			result = prime * result + (Status ? 1231 : 1237);
+			result = prime * result + (status ? 1231 : 1237);
+			result = prime * result + cin;
 			result = prime * result + ((dateNaissance == null) ? 0 : dateNaissance.hashCode());
 			result = prime * result + ((email == null) ? 0 : email.hashCode());
 			result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 			result = prime * result + id;
 			result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+			result = prime * result + ((password == null) ? 0 : password.hashCode());
 			result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
+			result = prime * result + ((role == null) ? 0 : role.hashCode());
+			result = prime * result + ((username == null) ? 0 : username.hashCode());
 			return result;
 		}
 
@@ -208,20 +189,10 @@ public class Useraccount  implements Serializable {
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			Useraccount other = (Useraccount) obj;
-			if (Cin != other.Cin)
+			User other = (User) obj;
+			if (status != other.status)
 				return false;
-			if (Login == null) {
-				if (other.Login != null)
-					return false;
-			} else if (!Login.equals(other.Login))
-				return false;
-			if (Password == null) {
-				if (other.Password != null)
-					return false;
-			} else if (!Password.equals(other.Password))
-				return false;
-			if (Status != other.Status)
+			if (cin != other.cin)
 				return false;
 			if (dateNaissance == null) {
 				if (other.dateNaissance != null)
@@ -245,28 +216,106 @@ public class Useraccount  implements Serializable {
 					return false;
 			} else if (!lastName.equals(other.lastName))
 				return false;
+			if (password == null) {
+				if (other.password != null)
+					return false;
+			} else if (!password.equals(other.password))
+				return false;
 			if (phoneNumber == null) {
 				if (other.phoneNumber != null)
 					return false;
 			} else if (!phoneNumber.equals(other.phoneNumber))
 				return false;
+			if (role == null) {
+				if (other.role != null)
+					return false;
+			} else if (!role.equals(other.role))
+				return false;
+			if (username == null) {
+				if (other.username != null)
+					return false;
+			} else if (!username.equals(other.username))
+				return false;
 			return true;
 		}
 
-		public Useraccount(int id, int cin, String firstName, String lastName, Date dateNaissance, boolean status,
-				String email, String phoneNumber, String login, String password) {
+		@Override
+		public String toString() {
+			return "User [id=" + id + ", cin=" + cin + ", firstName=" + firstName + ", lastName=" + lastName
+					+ ", dateNaissance=" + dateNaissance + ", Status=" + status + ", email=" + email + ", phoneNumber="
+					+ phoneNumber + ", username=" + username + ", password=" + password + ", role=" + role + "]";
+		}
+
+		public User() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		public User(int id, int cin, String firstName, String lastName, Date dateNaissance, boolean status,
+				String email, String phoneNumber, String username, String password, String role) {
 			super();
 			this.id = id;
-			Cin = cin;
+			this.cin = cin;
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.dateNaissance = dateNaissance;
-			Status = status;
+			this.status = status;
 			this.email = email;
 			this.phoneNumber = phoneNumber;
-			Login = login;
-			Password = password;
+			this.username = username;
+			this.password = password;
+			this.role = role;
 		}
 
+		@Override
+		public Collection<? extends GrantedAuthority> getAuthorities() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 
-}
+		@Override
+		public boolean isAccountNonExpired() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean isAccountNonLocked() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean isCredentialsNonExpired() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean isEnabled() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		
+
+		
+		
+	    
+//	    public void addRole(Role alg) {roles.add(alg);}
+//	    public Set<Role> getRoles(){
+//	        if(this.roles==null){this.roles = new HashSet<Role>();}
+//	        return this.roles;
+//	    }
+//	    public void setRoles(Set<Role> alg){this.roles = alg;}
+//	    public boolean isInRoles(int aid){
+//	        ArrayList<Role> mylgs = new ArrayList<Role>();
+//	        mylgs.addAll(this.roles);
+//	        for(int a=0;a<mylgs.size();a++){if(mylgs.get(a).getId()==aid){return true;}}
+//	        return false;
+	}
+
+
+
+		
+		

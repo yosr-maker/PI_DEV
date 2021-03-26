@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="T_ADMIN")
 
-public class Admin extends Useraccount implements Serializable{
+public class Admin extends User implements Serializable{
 
 	/**
 	 * 
@@ -34,15 +34,12 @@ public class Admin extends Useraccount implements Serializable{
 
 
 
-	public List<Ray> getRays() {
-		return rays;
+
+	public Admin() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-
-
-	public void setRays(List<Ray> rays) {
-		this.rays = rays;
-	}
 
 
 
@@ -52,16 +49,26 @@ public class Admin extends Useraccount implements Serializable{
 
 
 
+
 	public void setAdminId(int adminId) {
 		this.adminId = adminId;
 	}
 
 
 
-	public Admin() {
-		super();
-		// TODO Auto-generated constructor stub
+
+	public List<Ray> getRays() {
+		return rays;
 	}
+
+
+
+
+	public void setRays(List<Ray> rays) {
+		this.rays = rays;
+	}
+
+
 
 
 	@Override
@@ -72,6 +79,7 @@ public class Admin extends Useraccount implements Serializable{
 		result = prime * result + ((rays == null) ? 0 : rays.hashCode());
 		return result;
 	}
+
 
 
 
@@ -95,20 +103,35 @@ public class Admin extends Useraccount implements Serializable{
 	}
 
 
-	public Admin(int cin, String firstName, String lastName, Date dateNaissance, boolean status, String email,
-			String phoneNumber, String login, String password, int adminId, List<Ray> rays) {
-		super(cin, firstName, lastName, dateNaissance, status, email, phoneNumber, login, password);
+
+
+	@Override
+	public String toString() {
+		return "Admin [adminId=" + adminId + ", rays=" + rays + "]";
+	}
+
+
+
+
+	public Admin(int adminId, List<Ray> rays) {
+		super();
 		this.adminId = adminId;
 		this.rays = rays;
 	}
 
 
 
-	public Admin(int cin, String firstName, String lastName, Date dateNaissance, boolean status, String email,
-			String phoneNumber, String login, String password) {
-		super(cin, firstName, lastName, dateNaissance, status, email, phoneNumber, login, password);
+
+	public Admin(int id, int cin, String firstName, String lastName, Date dateNaissance, boolean status, String email,
+			String phoneNumber, String username, String password, String role) {
+		super(id, cin, firstName, lastName, dateNaissance, status, email, phoneNumber, username, password, role);
 		// TODO Auto-generated constructor stub
 	}
+
+
+	
+
+
 
 	
 	

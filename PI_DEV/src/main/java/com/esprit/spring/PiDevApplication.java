@@ -2,8 +2,10 @@ package com.esprit.spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 public class PiDevApplication {
 
 	public static void main(String[] args) {
@@ -11,3 +13,6 @@ public class PiDevApplication {
 	}
 
 }
+
+
+ //i wanna add this line just to commit haha

@@ -17,6 +17,8 @@ public class CommentService implements CommentServiceI{
 	CommentRepository commentRepository;
 	private static final org.apache.logging.log4j.Logger l= LogManager.getLogger(CommentService.class);
 	
+	
+	@Override
 	public List<Comment> retrieveAllComments() {
 		List<Comment> comments= (List<Comment>) commentRepository.findAll();
 		for (Comment comment: comments){

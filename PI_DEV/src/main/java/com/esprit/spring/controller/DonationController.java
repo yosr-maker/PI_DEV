@@ -22,7 +22,7 @@ public class DonationController {
 @Autowired
 DonationServiceI donationService;
 
-@GetMapping("/retrieve-all-Donations")
+@GetMapping("0")
 @ResponseBody
 public List<Donation> getClaims() {
 List<Donation> list = donationService.retrieveAllDonations();
