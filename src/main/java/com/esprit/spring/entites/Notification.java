@@ -84,8 +84,8 @@ public class Notification implements Serializable {
 		return client;
 	}
 
-	public void setClient(Client client) {
-		this.client = client;
+	public void setClient(User u) {
+		this.client = (Client) u;
 	}
 
 	public Event getEvent() {

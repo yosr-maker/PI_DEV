@@ -18,12 +18,12 @@ import com.esprit.spring.entites.EventCategory;
 import com.esprit.spring.entites.Jackpot;
 import com.esprit.spring.entites.Notification;
 import com.esprit.spring.entites.Participation;
+import com.esprit.spring.repository.ClientRepository;
 import com.esprit.spring.repository.ContributionRepository;
 import com.esprit.spring.repository.EventRepository;
 import com.esprit.spring.repository.JackpotRepository;
 import com.esprit.spring.repository.NotificationRepository;
 import com.esprit.spring.repository.ParticipationRepository;
-import com.esprit.spring.repository.UserRepository;
 
 
 @Service
@@ -35,14 +35,12 @@ public class EventService implements EventServiceI {
 	@Autowired
 	ParticipationRepository PR;
 	@Autowired
-	UserRepository UR;
+	ClientRepository UR;
 	@Autowired
 	ContributionRepository CR;
 	@Autowired
 	NotificationRepository NR;
 	
-
-	/**********************************Admin**********************************/
  @Override
 	public void addEvent(Event event) {
 		Event NewEvent = new Event();
@@ -54,16 +52,10 @@ public class EventService implements EventServiceI {
 		NewEvent.setMontant(0);
 		NewEvent.setDate(event.getDate());
 		NewEvent.setHour(event.getHour());
-		NewEvent.setLocation(event.getLocation());
-		
-//		File file = new File(event.getPoster());
-//		String img = ServletUriComponentsBuilder.fromCurrentContextPath()
-//				.path("/files/download/")
-//				.path(event.getPoster())
-//				.toUriString();
-		
+		NewEvent.setLocation(event.getLocation());		
 		NewEvent.setPoster(event.getPoster());
 		NewEvent.setTicketPrice(event.getTicketPrice());
+		NewEvent.setGoal(event.getGoal());
 		NewEvent.setStatus(false);
 		Jackpot j = new Jackpot();
 		j.setSum(0);
@@ -89,6 +81,7 @@ public class EventService implements EventServiceI {
 		ev.setLocation(ev.getLocation());
 		ev.setPoster(ev.getPoster());
 		ev.setTicketPrice(ev.getTicketPrice());
+		ev.setGoal(ev.getGoal());
 		ER.save(ev);
 	}
 

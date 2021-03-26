@@ -1,7 +1,5 @@
 package com.esprit.spring.entites;
 
-
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -22,16 +20,6 @@ public class Client extends User {
 
 	private int donation;
 	
-	public int getDonation() {
-		return donation;
-	}
-
-
-	public void setDonation(int donation) {
-		this.donation = donation;
-	}
-
-
 	@OneToOne
 	private Basket basket;
 	
@@ -57,6 +45,15 @@ public class Client extends User {
 		this.participation = participation;
 		this.notification = notification;
 		this.contribution = contribution;
+	}
+
+	public int getDonation() {
+		return donation;
+	}
+
+
+	public void setDonation(int donation) {
+		this.donation = donation;
 	}
 
 

@@ -30,7 +30,7 @@
  	private EventCategory category;
  	private String name;
  	private String description;
- 
+ 	private float goal;
  	private float montant;
  	private int placesNbr;
  	private int participantsNbr;
@@ -47,8 +47,6 @@
  	@OneToMany(cascade=CascadeType.ALL, mappedBy="event")
  	private List<Notification> notification;
  	@OneToMany(cascade=CascadeType.ALL, mappedBy="event")
- 	private List <Publicity> publicity;
- 	@OneToMany(cascade=CascadeType.ALL, mappedBy="event")
  	private List<Participation> participation;
  	@OneToMany(cascade=CascadeType.ALL, mappedBy="event")
  	private List<Contribution> contribution;
@@ -58,16 +56,16 @@
  		// TODO Auto-generated constructor stub
  	}
 
- 	public Event(Long id, EventCategory category, String name, String description, float montant,
+ 	public Event(Long id, EventCategory category, String name, String description, float goal, float montant,
  			int placesNbr, int participantsNbr, float ticketPrice, Date date, String hour, String location,
  			String poster, int views, boolean status, Jackpot jackpot, List<Notification> notification,
- 			List<Publicity> publicity, List<Participation> participation, List<Contribution> contribution) {
+ 			 List<Participation> participation, List<Contribution> contribution) {
  		super();
  		this.id = id;
  		this.category = category;
  		this.name = name;
  		this.description = description;
-
+ 		this.goal = goal;
  		this.montant = montant;
  		this.placesNbr = placesNbr;
  		this.participantsNbr = participantsNbr;
@@ -80,7 +78,6 @@
  		this.status = status;
  		this.jackpot = jackpot;
  		this.notification = notification;
- 		this.publicity = publicity;
  		this.participation = participation;
  		this.contribution = contribution;
  	}
@@ -117,7 +114,14 @@
  		this.description = description;
  	}
 
- 
+ 	public float getGoal() {
+ 		return goal;
+ 	}
+
+ 	public void setGoal(float goal) {
+ 		this.goal = goal;
+ 	}
+
  	
 
  	public int getPlacesNbr() {
@@ -200,20 +204,19 @@
  		this.jackpot = jackpot;
  	}
 
+	public float getMontant() {
+		return montant;
+	}
+
+	public void setMontant(float montant) {
+		this.montant = montant;
+	}
  	public List<Notification> getNotification() {
  		return notification;
  	}
 
  	public void setNotification(List<Notification> notification) {
  		this.notification = notification;
- 	}
-
- 	public List<Publicity> getPublicity() {
- 		return publicity;
- 	}
-
- 	public void setPublicity(List<Publicity> publicity) {
- 		this.publicity = publicity;
  	}
 
  	public List<Participation> getParticipation() {
@@ -241,6 +244,7 @@
  		result = prime * result + ((contribution == null) ? 0 : contribution.hashCode());
  		result = prime * result + ((date == null) ? 0 : date.hashCode());
  		result = prime * result + ((description == null) ? 0 : description.hashCode());
+ 		result = prime * result + Float.floatToIntBits(goal);
  		result = prime * result + ((hour == null) ? 0 : hour.hashCode());
  		result = prime * result + ((id == null) ? 0 : id.hashCode());
  		result = prime * result + ((jackpot == null) ? 0 : jackpot.hashCode());
@@ -251,7 +255,6 @@
  		result = prime * result + ((participation == null) ? 0 : participation.hashCode());
  		result = prime * result + placesNbr;
  		result = prime * result + ((poster == null) ? 0 : poster.hashCode());
- 		result = prime * result + ((publicity == null) ? 0 : publicity.hashCode());
  		result = prime * result + (status ? 1231 : 1237);
  		result = prime * result + Float.floatToIntBits(ticketPrice);
  		result = prime * result + views;
@@ -286,7 +289,8 @@
  				return false;
  		} else if (!description.equals(other.description))
  			return false;
- 		
+ 		if (Float.floatToIntBits(goal) != Float.floatToIntBits(other.goal))
+ 			return false;
  		if (hour == null) {
  			if (other.hour != null)
  				return false;
@@ -331,11 +335,6 @@
  				return false;
  		} else if (!poster.equals(other.poster))
  			return false;
- 		if (publicity == null) {
- 			if (other.publicity != null)
- 				return false;
- 		} else if (!publicity.equals(other.publicity))
- 			return false;
  		if (status != other.status)
  			return false;
  		if (Float.floatToIntBits(ticketPrice) != Float.floatToIntBits(other.ticketPrice))
@@ -348,20 +347,13 @@
  	@Override
  	public String toString() {
  		return "Event [id=" + id + ", category=" + category + ", name=" + name + ", description=" + description
- 				+ ", montant=" + montant + ", placesNbr=" + placesNbr + ", participantsNbr="
+ 				+ ", goal=" + goal + ", montant=" + montant + ", placesNbr=" + placesNbr + ", participantsNbr="
  				+ participantsNbr + ", ticketPrice=" + ticketPrice + ", date=" + date + ", hour=" + hour + ", location="
  				+ location + ", poster=" + poster + ", views=" + views + ", status=" + status + ", jackpot=" + jackpot
- 				+ ", notification=" + notification + ", publicity=" + publicity + ", participation=" + participation
+ 				+ ", notification=" + notification + ", participation=" + participation
  				+ ", contribution=" + contribution + "]";
  	}
 
-	public float getMontant() {
-		return montant;
-	}
-
-	public void setMontant(float montant) {
-		this.montant = montant;
-	}
 
 	
  	
