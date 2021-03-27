@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.esprit.spring.entites.Comment;
-
+import com.esprit.spring.entites.EvaluationComment;
 import com.esprit.spring.repository.CommentRepository;
 
 @Service
@@ -51,6 +51,55 @@ public class CommentService implements CommentServiceI{
 	public Comment retrieveComment(String id) {
 	  Comment comment = commentRepository.findById(Long.parseLong(id)).orElse(null);
 		return comment ;
+	}
+
+
+	@Override
+	public void deleteComment(long commentId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void addEv(EvaluationComment u, Long commentId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public List<Comment> Bestcomments() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void addComment(Comment u, int id, Long publicationId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public List<Comment> list(Long publicationId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Comment> mylist(Long publicationId, int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Comment updateComment(Long id, String mot) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

@@ -3,109 +3,191 @@ package com.esprit.spring.entites;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+
+
+
+//@Entity
+//@Table(name="T_COMMENT")
+//public class Comment implements Serializable 
+// {
+//	
+//	private static final long serialVersionUID = 1L;
+//	@Id
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	@Column(name = "commentId")
+//	private long commentId;
+//	public long getCommentId() {
+//		return commentId;
+//	}
+//	public void setCommentId(long commentId) {
+//		this.commentId = commentId;
+//	}
+//	
+//	@Override
+//	public String toString() {
+//		return "Comment [commentId=" + commentId + ", evaluationcomments="
+//				+ evaluationcomments + ", publication=" + publication + "]";
+//	}
+//
+//	
+// 
+//	@OneToMany(mappedBy="comment")
+//   
+//	List <EvaluationComment> evaluationcomments;
+//
+//	@ManyToOne
+//	@JoinColumn(name = "idPublication")
+//	Publication publication;
 @Entity
-@Table(name="T_COMMENT")
 public class Comment implements Serializable 
- {
-	
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "commentId")
-	private long commentId;
-	public long getCommentId() {
-		return commentId;
-	}
-	public void setCommentId(long commentId) {
-		this.commentId = commentId;
-	}
-	
-	@Override
-	public String toString() {
-		return "Comment [commentId=" + commentId + ", starrating=" + starrating + ", evaluationcomments="
-				+ evaluationcomments + ", publication=" + publication + "]";
-	}
+{
+private static final long serialVersionUID = 1L;
+@Id
+@GeneratedValue (strategy = GenerationType.IDENTITY)
+@Column
+private long id;
 
-	@OneToOne
-    @JoinColumn(name = "idStar")
-	private StarRating starrating;
- 
-	@OneToMany(mappedBy="comment")
-   
-	List <EvaluationComment> evaluationcomments;
+@Column
+ private String mot;
 
-	@ManyToOne
-	@JoinColumn(name = "idPublication")
-	Publication publication;
+//@JsonBackReference
+@ManyToOne(cascade=CascadeType.PERSIST)
+@JoinColumn(name="idPublication",referencedColumnName="id")
+private Publication publication;
 
-	
-	public Comment(int commentId, StarRating starrating, List<EvaluationComment> evaluationcomments,
-			Publication publication) {
-		super();
-		this.commentId = commentId;
-		this.starrating = starrating;
-		this.evaluationcomments = evaluationcomments;
-		this.publication = publication;
-	}
-	
-	
-	
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (commentId ^ (commentId >>> 32));
-		result = prime * result + ((evaluationcomments == null) ? 0 : evaluationcomments.hashCode());
-		result = prime * result + ((publication == null) ? 0 : publication.hashCode());
-		result = prime * result + ((starrating == null) ? 0 : starrating.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Comment other = (Comment) obj;
-		if (commentId != other.commentId)
-			return false;
-		if (evaluationcomments == null) {
-			if (other.evaluationcomments != null)
-				return false;
-		} else if (!evaluationcomments.equals(other.evaluationcomments))
-			return false;
-		if (publication == null) {
-			if (other.publication != null)
-				return false;
-		} else if (!publication.equals(other.publication))
-			return false;
-		if (starrating == null) {
-			if (other.starrating != null)
-				return false;
-		} else if (!starrating.equals(other.starrating))
-			return false;
+//@JsonBackReference
+@ManyToOne(cascade=CascadeType.PERSIST)
+@JoinColumn(name="idUser",referencedColumnName="id")
+private User user;
+
+
+///evaluation
+
+@OneToMany(mappedBy="comment" , cascade=CascadeType.REMOVE)
+private List<EvaluationComment> ratings;
+
+
+public long getId() {
+	return id;
+}
+
+
+public void setId(long id) {
+	this.id = id;
+}
+
+
+public String getMot() {
+	return mot;
+}
+
+
+public void setMot(String mot) {
+	this.mot = mot;
+}
+
+
+public Publication getPublication() {
+	return publication;
+}
+
+
+public void setPublication(Publication publication) {
+	this.publication = publication;
+}
+
+
+public User getUser() {
+	return user;
+}
+
+
+public void setUser(User user) {
+	this.user = user;
+}
+
+
+public List<EvaluationComment> getRatings() {
+	return ratings;
+}
+
+
+public void setRatings(List<EvaluationComment> ratings) {
+	this.ratings = ratings;
+}
+
+
+@Override
+public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + (int) (id ^ (id >>> 32));
+	result = prime * result + ((mot == null) ? 0 : mot.hashCode());
+	result = prime * result + ((publication == null) ? 0 : publication.hashCode());
+	result = prime * result + ((ratings == null) ? 0 : ratings.hashCode());
+	result = prime * result + ((user == null) ? 0 : user.hashCode());
+	return result;
+}
+
+
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
 		return true;
-	}
-	
-	public Comment() {
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	Comment other = (Comment) obj;
+	if (id != other.id)
+		return false;
+	if (mot == null) {
+		if (other.mot != null)
+			return false;
+	} else if (!mot.equals(other.mot))
+		return false;
+	if (publication == null) {
+		if (other.publication != null)
+			return false;
+	} else if (!publication.equals(other.publication))
+		return false;
+	if (ratings == null) {
+		if (other.ratings != null)
+			return false;
+	} else if (!ratings.equals(other.ratings))
+		return false;
+	if (user == null) {
+		if (other.user != null)
+			return false;
+	} else if (!user.equals(other.user))
+		return false;
+	return true;
+}
+
+
+public Comment(long id, String mot, Publication publication, User user, List<EvaluationComment> ratings) {
+	super();
+	this.id = id;
+	this.mot = mot;
+	this.publication = publication;
+	this.user = user;
+	this.ratings = ratings;
+}
+
+
+public Comment() {
 	super();
 	// TODO Auto-generated constructor stub
 }
 
 
 }
-

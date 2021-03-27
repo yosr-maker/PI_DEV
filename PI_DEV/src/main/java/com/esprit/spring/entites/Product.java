@@ -48,6 +48,10 @@ public class Product implements Serializable {
 	@Column(name="price")
 	private float Price;
 	
+	@Column(name="star")
+	private int star;
+	
+	
 	@ManyToMany
 	List<Basket> baskets;
 	
@@ -181,6 +185,15 @@ public class Product implements Serializable {
 
 	public void setAds(List<Ad> ads) {
 		this.ads = ads;
+	}
+	
+
+	public int getStar() {
+		return star;
+	}
+
+	public void setStar(int star) {
+		this.star = star;
 	}
 
 	public Product() {
