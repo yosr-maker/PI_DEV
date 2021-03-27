@@ -29,17 +29,17 @@ import com.esprit.spring.repository.ParticipationRepository;
 @Service
 public class EventService implements EventServiceI {
 	@Autowired
-	EventRepository ER;
+	EventRepository EventRepository;
 	@Autowired
-	JackpotRepository JR;
+	JackpotRepository JackpotRepository;
 	@Autowired
-	ParticipationRepository PR;
+	ParticipationRepository ParticipationRepository;
 	@Autowired
-	ClientRepository UR;
+	ClientRepository ClientRepository;
 	@Autowired
-	ContributionRepository CR;
+	ContributionRepository ContributionRepository;
 	@Autowired
-	NotificationRepository NR;
+	NotificationRepository NotificationRepository;
 	
  @Override
 	public void addEvent(Event event) {
@@ -59,19 +59,19 @@ public class EventService implements EventServiceI {
 		NewEvent.setStatus(false);
 		Jackpot j = new Jackpot();
 		j.setSum(0);
-		JR.save(j);
+		JackpotRepository.save(j);
 		NewEvent.setJackpot(j);
-		ER.save(NewEvent);
+		EventRepository.save(NewEvent);
 	}
 
 	@Override
 	public List<Event> eventsLists() {
-		return (List<Event>) ER.findAll();
+		return (List<Event>) EventRepository.findAll();
 	}
 
 	@Override
 	public void updateEvent(Long eid) {
-		Event ev = ER.findById(eid).get();
+		Event ev = EventRepository.findById(eid).get();
 		ev.setCategory(ev.getCategory());
 		ev.setName(ev.getName());
 		ev.setDescription(ev.getDescription());
@@ -82,38 +82,38 @@ public class EventService implements EventServiceI {
 		ev.setPoster(ev.getPoster());
 		ev.setTicketPrice(ev.getTicketPrice());
 		ev.setGoal(ev.getGoal());
-		ER.save(ev);
+		EventRepository.save(ev);
 	}
 
 	@Override
 	public void deleteEvent(Long id) {
-		ER.deleteById(id);
+		EventRepository.deleteById(id);
 	}
 
 	@Override
 	public Event findbyId(Long id) {
-		return ER.findById(id).get();
+		return EventRepository.findById(id).get();
 	}
 
 	@Override
 	public Event findEventByName(String name) {
-		return ER.findByName(name); 
+		return EventRepository.findByName(name); 
 	}
 
 	@Override
 	public List<Event> filterEvent(EventCategory category) {
-		return ER.filterByCategory(category);
+		return EventRepository.filterByCategory(category);
 	}
 
 	@Override
 	public List<Event> upcomingEvents() {
-		List<Event> list= ER.upcomingEvents();
+		List<Event> list= EventRepository.upcomingEvents();
 		return list;
 	}
 
 	@Override
 	public List<Event> passedEvents() {
-		List<Event> list= ER.passedEvents();
+		List<Event> list= EventRepository.passedEvents();
 		return list;
 	}
 
@@ -124,16 +124,16 @@ public class EventService implements EventServiceI {
 		
 		Event ev = findbyId(eid);
 		
-		List<Participation> participationsOfEvent = PR.Participations(ev);
+		List<Participation> participationsOfEvent = ParticipationRepository.Participations(ev);
 		
 		for(Participation p : participationsOfEvent) {
 			Client u = p.getClient();
 			float montantRembourse = p.getPrice();
 			ev.setMontant(ev.getMontant()-montantRembourse);
 			u.setMcompte(u.getMcompte()+montantRembourse);
-			UR.save(u);
-			PR.deleteById(p.getId());
-			ER.save(ev);
+			ClientRepository.save(u);
+			ParticipationRepository.deleteById(p.getId());
+			EventRepository.save(ev);
 			Notification n = new Notification();
 			n.setClient(u);
 			n.setBody("Dear "+u.getLastName()+" "+u.getFirstName()+""
@@ -142,11 +142,11 @@ public class EventService implements EventServiceI {
 					+ " Thank you.");
 			n.setDate(dateFormat.format(date));
 			n.setStatus("Not Seen Yet");
-			NR.save(n);
+			NotificationRepository.save(n);
 				
 		}	
 		
-		List<Contribution> contributionsOfEvent = CR.contributionOfEvent(ev);
+		List<Contribution> contributionsOfEvent = ContributionRepository.contributionOfEvent(ev);
 		
 		for(Contribution c : contributionsOfEvent) {
 			Client u = c.getClient();
@@ -162,10 +162,10 @@ public class EventService implements EventServiceI {
 					+ " Thank you.");
 			n.setDate(dateFormat.format(date));
 			n.setStatus("Not Seen Yet");
-			NR.save(n);
-			UR.save(u);
-			CR.deleteById(c.getId());
-			ER.save(ev);
+			NotificationRepository.save(n);
+			ClientRepository.save(u);
+			ContributionRepository.deleteById(c.getId());
+			EventRepository.save(ev);
 		}
 	}
 
@@ -175,7 +175,7 @@ public class EventService implements EventServiceI {
 		Map<Long,Integer> h = new HashMap<>();
 		List<Long> listId = new ArrayList<>();
 		List<Integer> listViews= new ArrayList<>();
-		List<Event> listEvent = ER.findAll();
+		List<Event> listEvent = EventRepository.findAll();
 		
 		for (Event ev : listEvent) {
 			listId.add(ev.getId());
@@ -203,7 +203,7 @@ public class EventService implements EventServiceI {
 		String s = "";
 		List<Long> listId = new ArrayList<>();
 		List<Integer> listViews= new ArrayList<>();
-		List<Event> listEvent = ER.findAll();
+		List<Event> listEvent = EventRepository.findAll();
 		
 		for (Event ev : listEvent) {
 			listId.add(ev.getId());
@@ -216,7 +216,7 @@ public class EventService implements EventServiceI {
 		for (int i=0; i<3; i++) {
 			int max = sortedList.get(sortedList.size()-1);// retourne le max qui a la dernière position de la liste
 			Long ind = listId.get(listViews.indexOf(max));// prend nbre de vue et retourne id d'event corresspondant
-			s = (i+1)+"- Event: "+ER.findById(ind).get().getName()+" with "+max+" views ";
+			s = (i+1)+"- Event: "+EventRepository.findById(ind).get().getName()+" with "+max+" views ";
 			list.add(s);
 			sortedList.remove(sortedList.size()-1);
 			listViews.set(listViews.indexOf(max), -1);
@@ -231,7 +231,7 @@ public class EventService implements EventServiceI {
 		String s = "";
 		List<Long> listId = new ArrayList<>();
 		List<Integer> listViews= new ArrayList<>();
-		List<Event> listEvent = ER.findAll();
+		List<Event> listEvent = EventRepository.findAll();
 		
 		for (Event ev : listEvent) {
 			listId.add(ev.getId());
@@ -244,7 +244,7 @@ public class EventService implements EventServiceI {
 		for (int i=0; i<3; i++) {
 			int max = sortedList.get(sortedList.size()-1);// retourne le max qui a la dernière position de la liste
 			Long ind = listId.get(listViews.indexOf(max));// prend nbre de participations et retourne id d'event corresspondant
-			s = (i+1)+"- Event: "+ER.findById(ind).get().getName()+" with "+max+" participations ";
+			s = (i+1)+"- Event: "+EventRepository.findById(ind).get().getName()+" with "+max+" participations ";
 			list.add(s);
 			sortedList.remove(sortedList.size()-1);
 			listViews.set(listViews.indexOf(max), -1);

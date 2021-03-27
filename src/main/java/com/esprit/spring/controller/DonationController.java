@@ -1,4 +1,4 @@
-/*package com.esprit.spring.controller;
+package com.esprit.spring.controller;
 
 import java.util.List;
 
@@ -54,4 +54,4 @@ public Donation modifyDonation(@RequestBody Donation donation) {
 return donationService.updateDonation(donation);
 }
 }
-*/
+

@@ -33,28 +33,28 @@ import com.esprit.spring.services.ParticipationService;
 @RestController
 public class EventController {
 	@Autowired
-	EventServiceI ES;
+	EventServiceI EventService;
 	@Autowired
-	EventRepository ER;
+	EventRepository EventRepository;
 	@Autowired
-	NotificationService NS;
+	NotificationService NotificationService;
 	@Autowired
-	ParticipationService PS;
+	ParticipationService ParticipationService;
 	@Autowired
-	ContributionService CS;
+	ContributionService ContributionService;
 	@Autowired
 	ParticipationRepository PR;
 	
 	@PostMapping("/add-Event")
 	@ResponseBody
 	public void addEvent(@RequestBody Event ev) {
-		ES.addEvent(ev);
-		NS.notifyAllClient(ev.getName(),ev.getDescription());
+		EventService.addEvent(ev);
+		NotificationService.notifyAllClient(ev.getName(),ev.getDescription());
 	}
 	
 	@GetMapping("/retrieve-all-Events")
 	public List<Event> getEvents(){
-		List<Event> list = ES.eventsLists();
+		List<Event> list = EventService.eventsLists();
 		return list;
 	}
 	
@@ -65,22 +65,22 @@ public class EventController {
 	
 	@GetMapping("/retrieve-Event-ById/{id}")
 	public Event getEventById(@PathVariable Long id) {
-		return ES.findbyId(id);
+		return EventService.findbyId(id);
 		}
 	
 	@GetMapping("/retrieve-Event-ByName/{name}")
 	public Event getEventByName(@PathVariable String name) {
-		final Event ev = ES.findEventByName(name);
+		final Event ev = EventService.findEventByName(name);
 		return ev;
 		}
 	
 	@GetMapping("/retrieve-Events-ByCategory/{category}")
 	public List<Event> findEventByCategory(@PathVariable EventCategory category) {
-		List<Event> list = ES.filterEvent(category);
+		List<Event> list = EventService.filterEvent(category);
 		return list;
 		}
 	
-@GetMapping("/update-Event/{eid}")
+	@GetMapping("/update-Event/{eid}")
 	@ResponseBody
 	public void updateEvent(@PathVariable Long eid) {
 	}
@@ -88,66 +88,66 @@ public class EventController {
 	@DeleteMapping("/delete-Event/{event-id}")
 	@ResponseBody
 	public void deleteEvent(@PathVariable("event-id") Long eventID) {
-		ES.refundUsers(eventID);//refund contributions & participations prices to its users
-		ES.deleteEvent(eventID);
+		EventService.refundUsers(eventID);//refund contributions & participations prices to its users
+		EventService.deleteEvent(eventID);
 	}
 	
 	@GetMapping("/retrieve-all-Participations")
 	public List<Participation> getParticipations(){
-		return PS.participationsList();
+		return ParticipationService.participationsList();
 	}
 	
 	/*user :*/
 	@PostMapping("/add-Contribution/{eid}/{amount}")
 	@ResponseBody
 	public void Contribute(@PathVariable("eid") Long eid,@PathVariable("amount") float amount) {
-		CS.Contribute(eid, amount);
+		ContributionService.Contribute(eid, amount);
 	}
 	
 	@GetMapping("/retrieve-my-Contributions")
 	public List<Contribution> myContributionsHistory(){
-		return CS.myContributionHistory();
+		return ContributionService.myContributionHistory();
 	}
 	
 	@RequestMapping("/add-Participation/{eid}")
 	@ResponseBody
 	public String addParticipation(@PathVariable("eid") Long eid) {
-		return PS.addParticipation(eid);
+		return ParticipationService.addParticipation(eid);
 	}
 	
 	@GetMapping("/retrieve-my-Participations")
 	public List<Participation> getMyParticipations(){
-		return PS.myParticipations();
+		return ParticipationService.myParticipations();
 	}
 	
 	@GetMapping("/retrieve-my-Notifications")
 	public List<Notification> getMyNotifications(){
-		return NS.myNotifications();
+		return NotificationService.myNotifications();
 	}
 	
 	@GetMapping("/retrieve-upcoming-Events")
 	public List<Event> upcomingEvents() {
-		return ES.upcomingEvents();
+		return EventService.upcomingEvents();
 	}
 	
 	@GetMapping("/retrieve-passed-Events")
 	public List<Event> passedEvents() {
-		return ES.passedEvents();
+		return EventService.passedEvents();
 	}
 	
 	@GetMapping("/bestEventsByViews")
 	public Map<Long, Integer> bestEventsByViews(){
-		return ES.bestEventsByViews();
+		return EventService.bestEventsByViews();
 		}
 	
 	@GetMapping("/retrieveBestEventsByViews")
 	public List<String> displayBestEventsByViews(){
-		return ES.displayBestEventsByViews();
+		return EventService.displayBestEventsByViews();
 		}
 	
 	@GetMapping("/retrieveBestEventsByParticipations")
 	public List<String> displayBestEventsByParticipations(){
-		return ES.displayBestEventsByParticipations();
+		return EventService.displayBestEventsByParticipations();
 		}
 	
 }

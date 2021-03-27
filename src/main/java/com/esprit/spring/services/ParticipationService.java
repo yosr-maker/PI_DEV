@@ -4,10 +4,8 @@ package com.esprit.spring.services;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.esprit.spring.controller.ClientController;
 import com.esprit.spring.entites.Client;
 import com.esprit.spring.entites.Event;
@@ -21,7 +19,7 @@ import com.esprit.spring.repository.ParticipationRepository;
 public class ParticipationService implements ParticipationServiceI {
 	
 	@Autowired
-	ClientService US;
+	ClientService ClientService;
 	@Autowired
 	EventService EventService;
 	@Autowired
@@ -29,9 +27,7 @@ public class ParticipationService implements ParticipationServiceI {
 	@Autowired
 	EventRepository EventRepository;
 	@Autowired
-	ClientService ClientService;
-	@Autowired
-	ClientRepository UR;
+	ClientRepository ClientRepository;
 	
 		// admin //
 	public List<Participation> participationsList() {
@@ -68,7 +64,7 @@ public class ParticipationService implements ParticipationServiceI {
 				c.setMcompte(c.getMcompte()-e.getTicketPrice());	
 				ParticipationRepository.save(p);
 				EventRepository.saveAndFlush(e);
-				UR.save(c);
+				ClientRepository.save(c);
 				return "Participation successfully added. You're welcome.";
 		}else {
 			return "Sorry, there are no places available.";

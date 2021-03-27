@@ -26,9 +26,6 @@ public class Donation implements Serializable {
 			@GeneratedValue(strategy=GenerationType.IDENTITY)
 			@Column(name = "idDonation")
 			private Long idDonation; 
-				
-		
-			
 			@Column(name="Quantity_donation")
 			private float quantityDonation;
 

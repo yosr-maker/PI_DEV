@@ -1,9 +1,7 @@
-/*package com.esprit.spring.services;
+package com.esprit.spring.services;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -81,7 +79,7 @@ public Map<Long, Integer> bestClientsByDonation() {
 	Map<Long,Integer> h = new HashMap<>();
 	List<Long> listId = new ArrayList<>();
 	List<Integer> listdonations= new ArrayList<>();
-	List<Client> listClient = ClientRepository.findAll();
+	List<Client> listClient = (List<Client>) ClientRepository.findAll();
 	
 	for (Client c: listClient) {
 		listId.add((long) c.getId());
@@ -103,19 +101,5 @@ public Map<Long, Integer> bestClientsByDonation() {
 	return h;
 }
 
-
-
-@Override
-public Donation validerMyDonation() {
-	// TODO Auto-generated method stub
-	return null;
 }
 
-
-
-
-	
-	
-}
-
-*/

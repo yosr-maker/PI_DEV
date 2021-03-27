@@ -20,19 +20,19 @@ import com.esprit.spring.repository.JackpotRepository;
 @Service
 public class ContributionService implements ContributionServiceI {
 	@Autowired
-	EventService ES;
+	EventService EventService;
 	@Autowired
-	ClientService US;
+	ClientService ClientService;
 	@Autowired
-	JackpotService JS;
+	JackpotService JackpotService;
 	@Autowired
-	ClientRepository UR;
+	ClientRepository ClientRepository;
 	@Autowired
-	JackpotRepository JR;
+	JackpotRepository JackpotRepository;
 	@Autowired
-	ContributionRepository CR;
+	ContributionRepository ContributionRepository;
 	@Autowired
-	EventRepository ER ;
+	EventRepository EventRepository ;
 	
 
 	
@@ -42,24 +42,24 @@ public class ContributionService implements ContributionServiceI {
 	@Override
 	public String Contribute(Long eid, float amount) {
 		Contribution c = new Contribution();
-		Event ev = ES.findbyId(eid);
-		Client u = US.findbyid(ClientController.USERCONNECTED.getId());
+		Event ev = EventService.findbyId(eid);
+		Client u = ClientService.findbyid(ClientController.USERCONNECTED.getId());
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		java.util.Date date = new java.util.Date();
 		if(u.getMcompte()>=amount) {
 			u.setMcompte(u.getMcompte()-amount);
-			Jackpot j = JS.findJackpot(ev);
+			Jackpot j = JackpotService.findJackpot(ev);
 			j.setSum(j.getSum()+amount);
 			ev.setMontant(ev.getMontant()+amount);
 			c.setAmount(amount);
 			c.setContributionDate(dateFormat.format(date));
 			c.setEvent(ev);
 			c.setClient(u);
-			UR.save(u);
-			JR.save(j);
-			ER.save(ev);
-			CR.save(c);
+			ClientRepository.save(u);
+			JackpotRepository.save(j);
+			EventRepository.save(ev);
+			ContributionRepository.save(c);
 			return "Contribution has been added with success";
 		} else{
 			return "Sorry, your account balance is insufficient !! ";
@@ -68,13 +68,13 @@ public class ContributionService implements ContributionServiceI {
 
 	@Override
 	public List<Contribution> contributionOfEvent(Event event) {
-		List<Contribution> list = CR.contributionOfEvent(event);
+		List<Contribution> list = ContributionRepository.contributionOfEvent(event);
 		return list;
 	}
 	
 	@Override
 	public List<Contribution> myContributionHistory() {
-		List<Contribution> list = CR.contributionOfUser(ClientController.USERCONNECTED);
+		List<Contribution> list = ContributionRepository.contributionOfUser(ClientController.USERCONNECTED);
 		return list;
 	}
 
