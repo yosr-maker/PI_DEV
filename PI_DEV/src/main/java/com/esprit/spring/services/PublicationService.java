@@ -2,7 +2,7 @@ package com.esprit.spring.services;
 
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
