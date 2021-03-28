@@ -16,22 +16,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-//package com.esprit.spring.entites;
-//
-//import java.io.Serializable;
-//import java.util.List;
-//import javax.persistence.Column;
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
-//import javax.persistence.JoinColumn;
-//import javax.persistence.ManyToOne;
-//import javax.persistence.OneToMany;
-//import javax.persistence.Table;
-//
+
+
 //@Entity
 //@Table(name="PUBLICATION")
 //
@@ -73,10 +62,15 @@ public class Publication implements Serializable{
 	
 	private static final long serialVersionUID = -6236517548335858347L
 			;
+//	@Id
+//	@GeneratedValue (strategy = GenerationType.IDENTITY)
+//	@Column
+//	private long id;
+	
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column
-	private long id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "idPublication")
+	private  Long id;
 	
 	@Column
 	 private String type;
@@ -91,7 +85,7 @@ public class Publication implements Serializable{
     private Date date;
 	
 	//@JsonManagedReference
-//	@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy="publication",cascade=CascadeType.REMOVE)
 	public List<Comment> comments;
 	

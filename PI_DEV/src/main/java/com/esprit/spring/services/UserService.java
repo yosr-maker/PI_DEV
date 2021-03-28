@@ -32,7 +32,7 @@ public class UserService implements UserDetailsService {
 		newuser.setLastName(user.getLastName());
 		newuser.setEmail(user.getEmail());
 		newuser.setRole(user.getRole());
-		return userRepository.save(newuser);
+		return userRepository.save(newuser); // ici il faut modifier le code (il faut ajouter the new user a sa tabla selon son, role puis modifier l'authorization//
 	}
 
 	public User findUserByUsername(String username) {

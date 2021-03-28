@@ -1,17 +1,17 @@
-package com.esprit.spring.services;
-
-import java.util.List;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.esprit.spring.entites.EvaluationPublication;
-import com.esprit.spring.entites.Publication;
-import com.esprit.spring.repository.CommentRepository;
-import com.esprit.spring.repository.EvaluationPublicationRepository;
-import com.esprit.spring.repository.PublicationRepository;
-import com.esprit.spring.services.PublicationServiceI;
+//package com.esprit.spring.services;
+//
+//import java.util.List;
+//
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Service;
+//
+//import com.esprit.spring.entites.EvaluationPublication;
+//import com.esprit.spring.entites.Publication;
+//import com.esprit.spring.repository.CommentRepository;
+//import com.esprit.spring.repository.EvaluationPublicationRepository;
+//import com.esprit.spring.repository.PublicationRepository;
+//import com.esprit.spring.services.PublicationServiceI;
 
 
 
@@ -60,7 +60,7 @@ import com.esprit.spring.services.PublicationServiceI;
 
 
 
-
+/*
 @Service
 public class PublicationService implements PublicationServiceI {
 
@@ -68,8 +68,8 @@ public class PublicationService implements PublicationServiceI {
 @Autowired
 private PublicationRepository var;
 
-@Autowired
-private CommentRepository var1;
+//@Autowired
+//private CommentRepository var1;
 
 @Autowired
 private EvaluationPublicationRepository var2;
@@ -202,7 +202,7 @@ public EvaluationPublication addrate(int value,Long id) {
 		
 		
 	
-	
+	*/
 	
 
 

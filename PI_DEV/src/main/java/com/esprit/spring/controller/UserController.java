@@ -42,7 +42,7 @@ public class UserController {
 	
 	public static User USERCONNECTED ;
 	
-	@RequestMapping("/")
+	@GetMapping("/bonjour")
 	@ResponseBody
 	public String welcome() { return "Bonjour, Bienvenue à l'application de test des Web ServicesREST"; }
 	
@@ -51,7 +51,7 @@ public class UserController {
 	@ResponseBody
 	public ResponseEntity<?> saveUser(@RequestBody Userinfo user) throws Exception {
 		System.out.println("*********Entring the register method ************");
-		return ResponseEntity.ok(userService.addUser(user));
+		return ResponseEntity.ok(userService.addUser(user));   //il faut modifier ça pour ajouter le user a la taable correspondante selon son role 
 	}
 
 	@PostMapping("/authenticate")
