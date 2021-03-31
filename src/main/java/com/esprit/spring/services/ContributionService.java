@@ -38,7 +38,7 @@ public class ContributionService implements ContributionServiceI {
 	
 	/**********************************User**********************************/
 	
-	//Add contribution to a jackpot an event
+	//Add contribution to a jackpot for an event
 	@Override
 	public String Contribute(Long eid, float amount) {
 		Contribution c = new Contribution();
@@ -60,9 +60,9 @@ public class ContributionService implements ContributionServiceI {
 			JackpotRepository.save(j);
 			EventRepository.save(ev);
 			ContributionRepository.save(c);
-			return "Contribution has been added with success";
+			return "La contribution a été ajoutée avec succès";
 		} else{
-			return "Sorry, your account balance is insufficient !! ";
+			return "Désolé, le solde de votre compte est insuffisant !! ";
 		}
 	}
 

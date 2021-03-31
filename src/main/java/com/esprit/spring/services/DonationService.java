@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.esprit.spring.entites.Client;
 import com.esprit.spring.entites.Donation;
-
+import com.esprit.spring.entites.Event;
 import com.esprit.spring.repository.*;
 
 
@@ -26,7 +26,8 @@ public class DonationService implements DonationServiceI{
 		DonationRepository DonationRepository;
 		@Autowired
 		ClientRepository ClientRepository;
-		
+		@Autowired
+		EventRepository eventReposiotry;
 		
 		
 		private static final org.apache.logging.log4j.Logger l= LogManager.getLogger(DonationService.class);

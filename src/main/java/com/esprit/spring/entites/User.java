@@ -63,7 +63,7 @@ public class User  implements Serializable {
 		private String email;
 
 		@Column(name="phoneNumber")
-		private String phoneNumber;
+		private static String phoneNumber;
 		
 		@Column(name="Login")
 		private String Login;
@@ -126,7 +126,7 @@ public class User  implements Serializable {
 		public void setEmail(String email) {
 			this.email = email;
 		} 
-		public String getPhoneNumber() {
+		public static String getPhoneNumber() {
 			return phoneNumber;
 		}
 

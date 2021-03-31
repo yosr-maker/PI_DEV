@@ -24,6 +24,10 @@ import com.esprit.spring.repository.EventRepository;
 import com.esprit.spring.repository.JackpotRepository;
 import com.esprit.spring.repository.NotificationRepository;
 import com.esprit.spring.repository.ParticipationRepository;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.rest.api.v2010.account.MessageCreator;
+import com.twilio.type.PhoneNumber;
 
 
 @Service
@@ -40,6 +44,9 @@ public class EventService implements EventServiceI {
 	ContributionRepository ContributionRepository;
 	@Autowired
 	NotificationRepository NotificationRepository;
+	
+	 public static final String ACCOUNT_SID = "AC861e84eeadedd8f2915b9bda24eb1430";
+	 public static final String AUTH_TOKEN = "566d5f0708e66edd9a9fab18d16e5ea9";
 	
  @Override
 	public void addEvent(Event event) {
@@ -136,13 +143,14 @@ public class EventService implements EventServiceI {
 			EventRepository.save(ev);
 			Notification n = new Notification();
 			n.setClient(u);
-			n.setBody("Dear "+u.getLastName()+" "+u.getFirstName()+""
-					+ ",we regret to announce that the event "+ev.getName()+" you want to attend has been canceled for a some reasons."
-					+ " That's why, we have refunded your ticket price. If there is a problem, do not hesitate to contact us."
-					+ " Thank you.");
+			//n.setBody("Mr/Mdm "+u.getLastName()+" "+u.getFirstName()+""
+			//		+ "Nous avons le regret de vous annoncer que l'événement "+ev.getName()+" vous souhaitez participer a été annulé pour certaines raisons."
+			//		+ " C'est pourquoi, nous avons remboursé le prix de votre billet. En cas de problème, n'hésitez pas à nous contacter."
+			//		+ " Merci.");
 			n.setDate(dateFormat.format(date));
-			n.setStatus("Not Seen Yet");
+			n.setStatus("Pas encore vu");
 			NotificationRepository.save(n);
+			
 				
 		}	
 		
@@ -156,19 +164,29 @@ public class EventService implements EventServiceI {
 			u.setMcompte(u.getMcompte()+montantRembourse);
 			Notification n = new Notification();
 			n.setClient(u);
-			n.setBody("Dear "+u.getLastName()+" "+u.getFirstName()+""
-					+ ",we regret to announce that the event "+ev.getName()+" to which you contributed was canceled for several reasons."
-					+ " That's why, we have refunded your contribution. If there is a problem, do not hesitate to contact us."
-					+ " Thank you.");
+		//	n.setBody("Mr/Mdm "+u.getLastName()+" "+u.getFirstName()+""
+				//	+ "Nous avons le regret de vous annoncer que l'événement "+ev.getName()+" vous souhaitez participer a été annulé pour certaines raisons."
+				//	+ " C'est pourquoi, nous avons remboursé le prix de votre billet. En cas de problème, n'hésitez pas à nous contacter."
+				//	+ " Merci.");
 			n.setDate(dateFormat.format(date));
-			n.setStatus("Not Seen Yet");
+			n.setStatus("Pas encore vu");
 			NotificationRepository.save(n);
 			ClientRepository.save(u);
 			ContributionRepository.deleteById(c.getId());
 			EventRepository.save(ev);
+			
+			 Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+	         MessageCreator message = Message.creator(new PhoneNumber(Client.getPhoneNumber()),
+	                 new PhoneNumber("+12179033359"),
+	                 "Mr/Mdm "+u.getLastName()+" "+u.getFirstName()+""
+	     					+ "Nous avons le regret de vous annoncer que l'événement "+ev.getName()+" vous souhaitez participer a été annulé pour certaines raisons."
+	     					+ " C'est pourquoi, nous avons remboursé le prix de votre billet. En cas de problème, n'hésitez pas à nous contacter."
+	     					+ " Merci.");
 		}
+		
+		
+	
 	}
-
 	@Override
 	public Map<Long, Integer> bestEventsByViews() {
 		
