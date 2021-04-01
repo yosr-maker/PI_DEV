@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,11 +47,11 @@ public class UserController {
 	public String welcome() { return "Bonjour, Bienvenue à l'application de test des Web ServicesREST"; }
 	
 
-	@PostMapping("/register")
+	@PostMapping("/subscribe")
 	@ResponseBody
 	public ResponseEntity<?> saveUser(@RequestBody Userinfo user) throws Exception {
-		System.out.println("*********Entring the register method ************");
-		return ResponseEntity.ok(userService.addUser(user));   //il faut modifier ça pour ajouter le user a la taable correspondante selon son role 
+		System.out.println("*********Entring the subscribe method ************");
+		return ResponseEntity.ok(userService.addUser(user));
 	}
 
 	@PostMapping("/authenticate")

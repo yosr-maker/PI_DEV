@@ -13,7 +13,6 @@ import com.esprit.spring.entites.User;
 import com.esprit.spring.entites.Userinfo;
 import com.esprit.spring.repository.UserRepository;
 
-
 @Service
 public class UserService implements UserDetailsService {
 	@Autowired
