@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -29,7 +29,7 @@ public class EvaluationPublication implements Serializable{
 	
 	
 	
-	@JsonIgnore 
+	//@JsonIgnore 
     @ManyToOne(cascade=CascadeType.PERSIST)
     private Publication publication;
 

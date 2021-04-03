@@ -16,8 +16,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 
 
@@ -85,7 +83,7 @@ public class Publication implements Serializable{
     private Date date;
 	
 	//@JsonManagedReference
-	@JsonIgnore
+	//@JsonIgnore
 	@OneToMany(mappedBy="publication",cascade=CascadeType.REMOVE)
 	public List<Comment> comments;
 	

@@ -1,6 +1,5 @@
 package com.esprit.spring.controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,15 +41,15 @@ public class UserController {
 	
 	public static User USERCONNECTED ;
 	
-	@GetMapping("/bonjour")
+	@RequestMapping("/bonjour")
 	@ResponseBody
-	public String welcome() { return "Bonjour, Bienvenue à l'application de test des Web ServicesREST"; }
+	public String welcome() { return "Bonjour, Bienvenue dans notre application "; }
 	
 
-	@PostMapping("/subscribe")
+	@PostMapping("/register")
 	@ResponseBody
-	public ResponseEntity<?> saveUser(@RequestBody Userinfo user) throws Exception {
-		System.out.println("*********Entring the subscribe method ************");
+	public ResponseEntity<?> saveUser(@RequestBody User user) throws Exception {
+		System.out.println("entrer la methode register");
 		return ResponseEntity.ok(userService.addUser(user));
 	}
 

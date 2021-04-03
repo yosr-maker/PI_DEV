@@ -66,8 +66,8 @@ private Publication publication;
 
 //@JsonBackReference
 @ManyToOne(cascade=CascadeType.PERSIST)
-@JoinColumn(name="idUser",referencedColumnName="id")
-private User user;
+@JoinColumn(name="idclient",referencedColumnName="id")
+private Client client;
 
 
 ///evaluation
@@ -106,13 +106,13 @@ public void setPublication(Publication publication) {
 }
 
 
-public User getUser() {
-	return user;
+public Client getClient() {
+	return client;
 }
 
 
-public void setUser(User user) {
-	this.user = user;
+public void setClient(Client client) {
+	this.client = client;
 }
 
 
@@ -134,7 +134,7 @@ public int hashCode() {
 	result = prime * result + ((mot == null) ? 0 : mot.hashCode());
 	result = prime * result + ((publication == null) ? 0 : publication.hashCode());
 	result = prime * result + ((ratings == null) ? 0 : ratings.hashCode());
-	result = prime * result + ((user == null) ? 0 : user.hashCode());
+	result = prime * result + ((client == null) ? 0 : client.hashCode());
 	return result;
 }
 
@@ -165,21 +165,22 @@ public boolean equals(Object obj) {
 			return false;
 	} else if (!ratings.equals(other.ratings))
 		return false;
-	if (user == null) {
-		if (other.user != null)
+	if (client == null) {
+		if (other.client != null)
 			return false;
-	} else if (!user.equals(other.user))
+	} else if (!client.equals(other.client))
 		return false;
 	return true;
 }
 
 
-public Comment(long id, String mot, Publication publication, User user, List<EvaluationComment> ratings) {
+
+public Comment(long id, String mot, Publication publication, Client client, List<EvaluationComment> ratings) {
 	super();
 	this.id = id;
 	this.mot = mot;
 	this.publication = publication;
-	this.user = user;
+	this.client = client;
 	this.ratings = ratings;
 }
 

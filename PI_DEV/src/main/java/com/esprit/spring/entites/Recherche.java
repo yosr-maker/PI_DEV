@@ -1,13 +1,13 @@
 package com.esprit.spring.entites;
 
-	import java.io.Serializable;
+import java.io.Serializable;
 
-	
-	import javax.persistence.Column;
-	import javax.persistence.Entity;
-	import javax.persistence.GeneratedValue;
-	import javax.persistence.GenerationType;
-	import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -28,40 +28,69 @@ import javax.persistence.Table;
 		
 		@Column
 		private Long nbr;
+		
+		
+		@ManyToOne
+	    private Client client;
+
+		
+		public Recherche() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
 
 		public long getId() {
 			return id;
 		}
 
+
 		public void setId(long id) {
 			this.id = id;
 		}
+
 
 		public String getType() {
 			return type;
 		}
 
+
 		public void setType(String type) {
 			this.type = type;
 		}
+
 
 		public Long getNbr() {
 			return nbr;
 		}
 
+
 		public void setNbr(Long nbr) {
 			this.nbr = nbr;
 		}
+
+
+		public Client getClient() {
+			return client;
+		}
+
+
+		public void setClient(Client client) {
+			this.client = client;
+		}
+
 
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
+			result = prime * result + ((client == null) ? 0 : client.hashCode());
 			result = prime * result + (int) (id ^ (id >>> 32));
 			result = prime * result + ((nbr == null) ? 0 : nbr.hashCode());
 			result = prime * result + ((type == null) ? 0 : type.hashCode());
 			return result;
 		}
+
 
 		@Override
 		public boolean equals(Object obj) {
@@ -72,6 +101,11 @@ import javax.persistence.Table;
 			if (getClass() != obj.getClass())
 				return false;
 			Recherche other = (Recherche) obj;
+			if (client == null) {
+				if (other.client != null)
+					return false;
+			} else if (!client.equals(other.client))
+				return false;
 			if (id != other.id)
 				return false;
 			if (nbr == null) {
@@ -87,31 +121,22 @@ import javax.persistence.Table;
 			return true;
 		}
 
+
 		@Override
 		public String toString() {
-			return "Recherche [id=" + id + ", type=" + type + ", nbr=" + nbr + "]";
+			return "Recherche [id=" + id + ", type=" + type + ", nbr=" + nbr + ", client=" + client + "]";
 		}
 
-		public Recherche(long id, String type, Long nbr) {
+
+		public Recherche(long id, String type, Long nbr, Client client) {
 			super();
 			this.id = id;
 			this.type = type;
 			this.nbr = nbr;
+			this.client = client;
 		}
 
-		public Recherche() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
-
-		public Recherche(String type2) {
-			// TODO Auto-generated constructor stub
-		}
-
-		public void setClient(Client c) {
-			// TODO Auto-generated method stub
-			
-		}
+	
 		
 		
 		

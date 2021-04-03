@@ -1,17 +1,16 @@
-//package com.esprit.spring.services;
-//
-//import java.util.List;
-//
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//
-//import com.esprit.spring.entites.EvaluationPublication;
-//import com.esprit.spring.entites.Publication;
-//import com.esprit.spring.repository.CommentRepository;
-//import com.esprit.spring.repository.EvaluationPublicationRepository;
-//import com.esprit.spring.repository.PublicationRepository;
-//import com.esprit.spring.services.PublicationServiceI;
+package com.esprit.spring.services;
+
+import java.util.List;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.esprit.spring.entites.EvaluationPublication;
+import com.esprit.spring.entites.Publication;
+import com.esprit.spring.repository.EvaluationPublicationRepository;
+import com.esprit.spring.repository.PublicationRepository;
+import com.esprit.spring.services.PublicationServiceI;
 
 
 
@@ -27,52 +26,51 @@
 //	}
 //	
 //	
-//	
-//
-//
-//	@Override
-//	public Publication addPublication(Publication p) {
-//		publicationRepository.save(p);
-//		return null;
-//	}
-//
-//	@Override
-//	public void deletePublication(String id) {
-//		publicationRepository.deleteById(Long.parseLong(id));
-//		
-//	}
-//
-//	
-//
-//	@Override
-//	public Publication retrievePublication(String id) {
-//		Publication publication = publicationRepository.findById(Long.parseLong(id)).orElse(null);
-//		return publication;
-//	}
-//
-//	@Override
-//	public Publication updatePublication(Publication p) {
-//		 publicationRepository.save(p);
-//		return null;
-//	}
-//
-//}
+////	
+////
+////
+////	@Override
+////	public Publication addPublication(Publication p) {
+////		publicationRepository.save(p);
+////		return null;
+////	}
+////
+////	@Override
+////	public void deletePublication(String id) {
+////		publicationRepository.deleteById(Long.parseLong(id));
+////		
+////	}
+////
+////	
+////
+////	@Override
+////	public Publication retrievePublication(String id) {
+////		Publication publication = publicationRepository.findById(Long.parseLong(id)).orElse(null);
+////		return publication;
+////	}
+////
+////	@Override
+////	public Publication updatePublication(Publication p) {
+////		 publicationRepository.save(p);
+////		return null;
+////	}
+////
+////}
 
 
 
-/*
+
 @Service
 public class PublicationService implements PublicationServiceI {
 
 
 @Autowired
-private PublicationRepository var;
+private PublicationRepository publicationRepository;
 
-//@Autowired
-//private CommentRepository var1;
+
 
 @Autowired
-private EvaluationPublicationRepository var2;
+private EvaluationPublicationRepository evaluationPublicationRepository;
 
 
 
@@ -80,7 +78,7 @@ private EvaluationPublicationRepository var2;
 
 @Override	
 public Publication addPublication(Publication publication){
-		var.save(publication) ;
+	publicationRepository.save(publication) ;
 		return publication;
 		
 	}
@@ -88,7 +86,7 @@ public Publication addPublication(Publication publication){
 @Override
 public Publication findbyid(long id){
 	
-		return var.findById(id).get() ;
+		return publicationRepository.findById(id).get() ;
 	}
 
 @Override
@@ -96,7 +94,7 @@ public List<Publication> myy(){
 	
 	
 	
-	return (List<Publication>)var.findAll();
+	return (List<Publication>)publicationRepository.findAll();
 	
 	
 		
@@ -105,31 +103,31 @@ public List<Publication> myy(){
 @Override	
 public void deletePublication(long id){
 	
-		var.deleteById(id); 
+	publicationRepository.deleteById(id); 
 	
 	}
 @Override	
 public Publication updatePublication(Publication publication2){
 	
-    Publication publication1 =var.findById(publication2.getId()).get(); 
+    Publication publication1 =publicationRepository.findById(publication2.getId()).get(); 
     publication1.setType(publication2.getType());
     publication1.setDescription(publication2.getDescription());
     publication1.setDate(publication2.getDate());
 		
-		var.save(publication1);
+    publicationRepository.save(publication1);
 		return publication1;
 	
 	}
 @Override	
 public Publication test(String type , String description){
-	Publication u = var.findByTypeAndDescription(type, description);
+	Publication u = publicationRepository.findByTypeAndDescription(type, description);
 		return u;
 }
 
 @Override	
 public List<String> pub(){
 	Double mydate = (double) 3;
-	return var.pub(mydate);
+	return publicationRepository.pub(mydate);
 	
 	
 }
@@ -137,13 +135,13 @@ public List<String> pub(){
 @Override
 public Publication listbytitle(String title){
 	
-	return var.findByTitle(title);
+	return publicationRepository.findByTitle(title);
 	
 }
 @Override
 public List<Publication> findbyType(String type){
 	
-		return var.findByType(type);
+		return publicationRepository.findByType(type);
 	}
 
 
@@ -151,9 +149,9 @@ public List<Publication> findbyType(String type){
 
 @Override
 public List<Long> notcommented() {
-	 List<Long> mylist = var.list1() ; //1
+	 List<Long> mylist = publicationRepository.list1() ; //1
 	 Double a = (double) 10;
-	 List<Long> mylist1 = var.pubs(a);  //1 2 3
+	 List<Long> mylist1 = publicationRepository.pubs(a);  //1 2 3
 	for(Long i : mylist) {
 		
 		if(mylist1.contains(i)) {
@@ -174,7 +172,7 @@ public List<Long> notcommented() {
 	
 	for(Long i : notcommented()) {
 		
-		var.deleteById(i);
+		publicationRepository.deleteById(i);
 		
 	}
 	
@@ -183,11 +181,11 @@ public List<Long> notcommented() {
 /////////////////////subject rating /////////////////////
 public EvaluationPublication addrate(int value,Long id) {
 	
-	Publication p = var.findById(id).get();
+	Publication p = publicationRepository.findById(id).get();
 	EvaluationPublication e = new EvaluationPublication();
 	e.setValue(value);
 	e.setPublication(p);
-	var2.save(e);
+	evaluationPublicationRepository.save(e);
 	return e ;
 	
 	
@@ -202,7 +200,7 @@ public EvaluationPublication addrate(int value,Long id) {
 		
 		
 	
-	*/
+	
 	
 
 

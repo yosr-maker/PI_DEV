@@ -2,7 +2,7 @@ package com.esprit.spring.entites;
 
 
 
-import java.util.Date;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 
 
@@ -32,8 +34,11 @@ public class Client extends User {
 
 
 	@JsonIgnore
-	@OneToMany(mappedBy="user",cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="client",cascade=CascadeType.REMOVE)
 	private List<Comment> comments;
+	
+	@OneToMany(mappedBy="client" , cascade=CascadeType.REMOVE)
+    private List<Recherche> recherches;
 	
 
 	public Client() {
@@ -72,6 +77,16 @@ public class Client extends User {
 	}
 
 
+	public List<Recherche> getRecherches() {
+		return recherches;
+	}
+
+
+	public void setRecherches(List<Recherche> recherches) {
+		this.recherches = recherches;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -79,6 +94,7 @@ public class Client extends User {
 		result = prime * result + ((basket == null) ? 0 : basket.hashCode());
 		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
 		result = prime * result + ((jackpots == null) ? 0 : jackpots.hashCode());
+		result = prime * result + ((recherches == null) ? 0 : recherches.hashCode());
 		return result;
 	}
 
@@ -107,34 +123,32 @@ public class Client extends User {
 				return false;
 		} else if (!jackpots.equals(other.jackpots))
 			return false;
+		if (recherches == null) {
+			if (other.recherches != null)
+				return false;
+		} else if (!recherches.equals(other.recherches))
+			return false;
 		return true;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Client [jackpots=" + jackpots + ", basket=" + basket + ", comments=" + comments + "]";
+		return "Client [jackpots=" + jackpots + ", basket=" + basket + ", comments=" + comments + ", recherches="
+				+ recherches + "]";
 	}
 
 
-	public Client(List<Jackpot> jackpots, Basket basket, List<Comment> comments) {
+	public Client(List<Jackpot> jackpots, Basket basket, List<Comment> comments, List<Recherche> recherches) {
 		super();
 		this.jackpots = jackpots;
 		this.basket = basket;
 		this.comments = comments;
+		this.recherches = recherches;
 	}
 
 
-	public Client(int id, int cin, String firstName, String lastName, Date dateNaissance, boolean status, String email,
-			String phoneNumber, String username, String password, String role) {
-		super(id, cin, firstName, lastName, dateNaissance, status, email, phoneNumber, username, password, role);
-		// TODO Auto-generated constructor stub
-	}
 	
-	
-	
-	
-
 }
 
 

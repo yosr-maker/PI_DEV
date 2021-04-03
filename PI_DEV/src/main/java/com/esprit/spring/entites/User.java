@@ -27,7 +27,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table( name = "T_USER_Account")
+@Table( name = "T_USER")
 
 public class User   implements UserDetails, Serializable {
 	
@@ -297,10 +297,39 @@ public class User   implements UserDetails, Serializable {
 			return false;
 		}
 
-		
+//		@Override
+//		public Collection<? extends GrantedAuthority> getAuthorities() {
+//			// TODO Auto-generated method stub
+//			return null;
+//		}
+//
+//		@Override
+//		public boolean isAccountNonExpired() {
+//			// TODO Auto-generated method stub
+//			return false;
+//		}
+//
+//		@Override
+//		public boolean isAccountNonLocked() {
+//			// TODO Auto-generated method stub
+//			return false;
+//		}
+//
+//		@Override
+//		public boolean isCredentialsNonExpired() {
+//			// TODO Auto-generated method stub
+//			return false;
+//		}
+//
+//		@Override
+//		public boolean isEnabled() {
+//			// TODO Auto-generated method stub
+//			return false;
+//		}
 
-		
-		
+}
+
+	
 	    
 //	    public void addRole(Role alg) {roles.add(alg);}
 //	    public Set<Role> getRoles(){
@@ -313,8 +342,7 @@ public class User   implements UserDetails, Serializable {
 //	        mylgs.addAll(this.roles);
 //	        for(int a=0;a<mylgs.size();a++){if(mylgs.get(a).getId()==aid){return true;}}
 //	        return false;
-	}
-
+	
 
 
 		

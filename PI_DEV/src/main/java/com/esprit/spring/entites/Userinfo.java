@@ -49,6 +49,10 @@ public class Userinfo {
 	}
 	public void setCin(int cin) {
 		this.cin = cin;
+	}
+	public Userinfo() {
+		super();
+		// TODO Auto-generated constructor stub
 	}	
     
 
