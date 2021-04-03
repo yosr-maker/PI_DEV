@@ -1,6 +1,8 @@
+
 package com.esprit.spring.entites;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +16,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table( name = "T_Product")
@@ -27,27 +33,38 @@ public class Product implements Serializable {
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name="Name")
+	@Column(name="name")
 	private String Name ; 
 	
-	@Column(name="Description")
+	@Column(name="description")
 	private String Description ;
 	
-	@Column(name="Category")
+	@Column(name="category")
 	private String Category; 
 	
-	@Column(name="Weight")
+	@Column(name="weight")
 	private float weight;
 	
-	@Column(name="Quantity")
-	private float Quantity;
+	@Column(name="quantity")
+	private int Quantity;
 	
-	
-	
-		
-	@Column(name="price")
+   @Column(name="price")
 	private float Price;
 	
+   @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private Date datexpiration;
+	
+	 
+	
+	
+	
+	
+	
+
+	
+	
+	
+
 	@ManyToMany
 	List<Basket> baskets;
 	
@@ -55,7 +72,7 @@ public class Product implements Serializable {
 	@JoinColumn(name = "idRay")
 	Ray ray;
 	
-   @ManyToOne
+  @ManyToOne
    private Command_line commandLine;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="product")
@@ -64,12 +81,76 @@ public class Product implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="product")
 	List<Publication> publications;
 	
-	@ManyToOne
-	@JoinColumn(name = "idStock")
-	Stock stock;
+//	@ManyToOne
+//	@JoinColumn(name = "idStock",nullable=false)
+//	private Stock stock;
+	
 	
 	@OneToMany
 	private List<Ad> ads;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	public Date getDatestock() {
+//		return datestock;
+//	}
+//
+//	public void setDatestock(Date datestock) {
+//		this.datestock = datestock;
+//	}
+
+	public Date getDatexpiration() {
+		return datexpiration;
+	}
+
+	public void setDatexpiration(Date datexpiration) {
+		this.datexpiration = datexpiration;
+	}
+
+	public Product(int id, String name, String description, String category, float weight, int quantity, float price,
+			 Date datexpiration, List<Basket> baskets, Ray ray, Command_line commandLine,
+			List<Claim> claims, List<Publication> publications, Stock stock, List<Ad> ads) {
+		super();
+		this.id = id;
+		Name = name;
+		Description = description;
+		Category = category;
+		this.weight = weight;
+		Quantity = quantity;
+		Price = price;
+		this.datexpiration = datexpiration;
+		this.baskets = baskets;
+		this.ray = ray;
+		this.commandLine = commandLine;
+		this.claims = claims;
+		this.publications = publications;
+		//this.stock = stock;
+		this.ads = ads;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public int getId() {
 		return id;
@@ -115,7 +196,7 @@ public class Product implements Serializable {
 		return Quantity;
 	}
 
-	public void setQuantity(float quantity) {
+	public void setQuantity(int quantity) {
 		Quantity = quantity;
 	}
 
@@ -159,13 +240,7 @@ public class Product implements Serializable {
 		this.publications = publications;
 	}
 
-	public Stock getStock() {
-		return stock;
-	}
 
-	public void setStock(Stock stock) {
-		this.stock = stock;
-	}
 
 	public Command_line getCommandLine() {
 		return commandLine;
@@ -183,9 +258,41 @@ public class Product implements Serializable {
 		this.ads = ads;
 	}
 
+	public Product(int id, String name, String description, String category, float weight, int quantity, float price) {
+		super();
+		this.id = id;
+		Name = name;
+		Description = description;
+		Category = category;
+		this.weight = weight;
+		Quantity = quantity;
+		Price = price;
+	
+	}
+
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Product(int id, String name, String description, String category, float weight, int quantity, float price,
+			List<Basket> baskets, Ray ray, Command_line commandLine, List<Claim> claims, List<Publication> publications,
+			Stock stock, List<Ad> ads) {
+		super();
+		this.id = id;
+		Name = name;
+		Description = description;
+		Category = category;
+		this.weight = weight;
+		Quantity = quantity;
+		Price = price;
+		this.baskets = baskets;
+		this.ray = ray;
+		this.commandLine = commandLine;
+		this.claims = claims;
+		this.publications = publications;
+		//this.stock = stock;
+		this.ads = ads;
 	}
 
 	
