@@ -19,6 +19,6 @@ public interface ContributionRepository extends CrudRepository<Contribution,Long
 	List<Contribution> contributionOfEvent(@Param("event") Event event);
 	
 	@Query("SELECT c FROM Contribution c WHERE c.client=:client ")
-	List<Contribution> contributionOfUser(@Param("client") Client userconnected);
+	List<Contribution> contributionOfClient(@Param("client") Client userconnected);
 
 }

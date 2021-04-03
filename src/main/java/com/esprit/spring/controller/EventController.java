@@ -1,10 +1,7 @@
 package com.esprit.spring.controller;
 
-
-
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.esprit.spring.entites.Contribution;
 import com.esprit.spring.entites.Event;
 import com.esprit.spring.entites.EventCategory;
@@ -23,12 +19,9 @@ import com.esprit.spring.entites.Participation;
 import com.esprit.spring.repository.EventRepository;
 import com.esprit.spring.repository.ParticipationRepository;
 import com.esprit.spring.services.ContributionService;
-//import com.esprit.spring.services.ContributionService;
 import com.esprit.spring.services.EventServiceI;
 import com.esprit.spring.services.NotificationService;
 import com.esprit.spring.services.ParticipationService;
-
-
 
 @RestController
 public class EventController {

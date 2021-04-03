@@ -47,6 +47,8 @@ public class Product implements Serializable {
 	@Column(name="price")
 	private float Price;
 	
+
+	
 	@ManyToMany
 	List<Basket> baskets;
 	
@@ -69,6 +71,7 @@ public class Product implements Serializable {
 	
 	@OneToMany
 	private List<Ad> ads;
+
 
 	public int getId() {
 		return id;
@@ -186,6 +189,11 @@ public class Product implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	public int getDate() {
+		return getDate();
+	}
+
 
 	
 	

@@ -29,6 +29,29 @@ public class Client extends User {
 	private List<Notification> notification;
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="client")
 	private List<Contribution> contribution;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="client")
+	private List<Claim> claims;
+
+	public Client(int donation, Basket basket, List<Participation> participation, List<Notification> notification,
+			List<Contribution> contribution, List<Claim> claims) {
+		super();
+		this.donation = donation;
+		this.basket = basket;
+		this.participation = participation;
+		this.notification = notification;
+		this.contribution = contribution;
+		this.claims = claims;
+	}
+
+
+	public List<Claim> getClaims() {
+		return claims;
+	}
+
+
+	public void setClaims(List<Claim> claims) {
+		this.claims = claims;
+	}
 
 
 	public Client() {

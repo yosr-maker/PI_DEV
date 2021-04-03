@@ -9,12 +9,15 @@ public interface ClaimServiceI {
 	
 	
 	List<Claim> retrieveAllClaims();
-	Claim addClaim(Claim c);
 	void deleteClaim (String id);
 	Claim updateClaim(Claim c);
 	Claim retrieveClaim(String id);
 	void updateDecision(long idClaim, ClaimDecision decision);
-	
+	Claim save(Claim rec, long u);
+/*	void rembourserReclamation(long id);
+	void ReparerReclamation(long id);
+	void EchangeReclamation(long id);*/
+
 
 }
 

@@ -35,6 +35,10 @@ public class Claim 	implements Serializable {
 	
 	@Temporal(TemporalType.DATE)
 	private Date dateClaim;
+	
+	private String reponse;
+	private Boolean Traiter;
+	private String Etat;
 
 	
 	 @Column(name = "DESCRIPTION_TEXT")
@@ -42,10 +46,14 @@ public class Claim 	implements Serializable {
 	    private String descriptionText;
 	 
 	 
+	 @ManyToOne 
+	 private Client client;
+	 
 	@ManyToOne
     @JoinColumn(name = "id")
 	private Product product;
 
+	
 	public ClaimDecision getDecision() {
 		return decision;
 	}
@@ -65,6 +73,32 @@ public class Claim 	implements Serializable {
 
 
 	
+
+	public String getReponse() {
+		return reponse;
+	}
+
+	public void setReponse(String reponse) {
+		this.reponse = reponse;
+	}
+
+	
+
+	public String getEtat() {
+		return Etat;
+	}
+
+	public void setEtat(String etat) {
+		Etat = etat;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
 
 	public Product getProduct() {
 		return product;
@@ -92,6 +126,28 @@ public class Claim 	implements Serializable {
 
 
 
+
+	public Claim(Long idClaim, ClaimDecision decision, Date dateClaim, String reponse, Boolean traiter, String etat,
+			String descriptionText, Client client, Product product) {
+		super();
+		this.idClaim = idClaim;
+		this.decision = decision;
+		this.dateClaim = dateClaim;
+		this.reponse = reponse;
+		Traiter = traiter;
+		Etat = etat;
+		this.descriptionText = descriptionText;
+		this.client = client;
+		this.product = product;
+	}
+
+	public Boolean getTraiter() {
+		return Traiter;
+	}
+
+	public void setTraiter(Boolean traiter) {
+		Traiter = traiter;
+	}
 
 	public Claim() {
 		super();

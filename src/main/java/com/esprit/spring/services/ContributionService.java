@@ -74,7 +74,7 @@ public class ContributionService implements ContributionServiceI {
 	
 	@Override
 	public List<Contribution> myContributionHistory() {
-		List<Contribution> list = ContributionRepository.contributionOfUser(ClientController.USERCONNECTED);
+		List<Contribution> list = ContributionRepository.contributionOfClient(ClientController.USERCONNECTED);
 		return list;
 	}
 

@@ -7,10 +7,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.esprit.spring.entites.Client;
 import com.esprit.spring.entites.Contribution;
 import com.esprit.spring.entites.Event;
@@ -46,7 +44,7 @@ public class EventService implements EventServiceI {
 	NotificationRepository NotificationRepository;
 	
 	 public static final String ACCOUNT_SID = "AC861e84eeadedd8f2915b9bda24eb1430";
-	 public static final String AUTH_TOKEN = "566d5f0708e66edd9a9fab18d16e5ea9";
+	 public static final String AUTH_TOKEN = "e81dbb367c3bd962127796ed81e6db55";
 	
  @Override
 	public void addEvent(Event event) {
@@ -182,6 +180,7 @@ public class EventService implements EventServiceI {
 	     					+ "Nous avons le regret de vous annoncer que l'événement "+ev.getName()+" vous souhaitez participer a été annulé pour certaines raisons."
 	     					+ " C'est pourquoi, nous avons remboursé le prix de votre billet. En cas de problème, n'hésitez pas à nous contacter."
 	     					+ " Merci.");
+	       
 		}
 		
 		

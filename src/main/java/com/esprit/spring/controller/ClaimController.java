@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.esprit.spring.entites.Claim;
+import com.esprit.spring.entites.Client;
 import com.esprit.spring.services.ClaimServiceI;
 
 @RestController
@@ -36,8 +37,8 @@ return claimService.retrieveClaim(claimId);
 
 @PostMapping("/add-claim")
 @ResponseBody
-public Claim addClaim(@RequestBody Claim c) {
-Claim claim = claimService.addClaim(c);
+public Claim addClaim(@RequestBody Claim c, @RequestBody long u) {
+Claim claim = claimService.save(c, u);
 return claim;
 }
 

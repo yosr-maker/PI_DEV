@@ -36,7 +36,7 @@ public class User  implements Serializable {
 
 		@Id
 		@Column(name = "id")
-		private int id;
+		private  int id;
 		
 	
 		@Column(name="Cin")
@@ -131,7 +131,7 @@ public class User  implements Serializable {
 		}
 
 		public void setPhoneNumber(String phoneNumber) {
-			this.phoneNumber = phoneNumber;
+			User.phoneNumber = phoneNumber;
 		}
 
 		public String getLogin() {
@@ -174,13 +174,14 @@ public class User  implements Serializable {
 	
 		
 
+
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
 			result = prime * result + Cin;
 			result = prime * result + ((Login == null) ? 0 : Login.hashCode());
-			result = prime * result + Float.floatToIntBits(mCompte);
 			result = prime * result + ((Password == null) ? 0 : Password.hashCode());
 			result = prime * result + (Status ? 1231 : 1237);
 			result = prime * result + ((dateNaissance == null) ? 0 : dateNaissance.hashCode());
@@ -188,7 +189,7 @@ public class User  implements Serializable {
 			result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 			result = prime * result + id;
 			result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-			result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
+			result = prime * result + Float.floatToIntBits(mCompte);
 			return result;
 		}
 
@@ -207,8 +208,6 @@ public class User  implements Serializable {
 				if (other.Login != null)
 					return false;
 			} else if (!Login.equals(other.Login))
-				return false;
-			if (Float.floatToIntBits(mCompte) != Float.floatToIntBits(other.mCompte))
 				return false;
 			if (Password == null) {
 				if (other.Password != null)
@@ -239,10 +238,7 @@ public class User  implements Serializable {
 					return false;
 			} else if (!lastName.equals(other.lastName))
 				return false;
-			if (phoneNumber == null) {
-				if (other.phoneNumber != null)
-					return false;
-			} else if (!phoneNumber.equals(other.phoneNumber))
+			if (Float.floatToIntBits(mCompte) != Float.floatToIntBits(other.mCompte))
 				return false;
 			return true;
 		}
@@ -250,6 +246,7 @@ public class User  implements Serializable {
 		public User(int id, int cin, String firstName, String lastName, Date dateNaissance, boolean status,
 				String email, String phoneNumber, String login, String password) {
 			super();
+
 			this.id = id;
 			Cin = cin;
 			this.firstName = firstName;
@@ -257,7 +254,7 @@ public class User  implements Serializable {
 			this.dateNaissance = dateNaissance;
 			Status = status;
 			this.email = email;
-			this.phoneNumber = phoneNumber;
+			User.phoneNumber = phoneNumber;
 			Login = login;
 			Password = password;
 		}
