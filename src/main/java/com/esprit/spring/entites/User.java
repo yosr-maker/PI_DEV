@@ -36,19 +36,29 @@ public class User  implements Serializable {
 
 		@Id
 		@Column(name = "id")
-		private  int id;
-		
-	
+		private int id;
+
 		@Column(name="Cin")
 		private int Cin;
 
-		@Column(name="mCompte")
-		 private float mCompte;
-
-
 		@Column(name="firstName")
 		private String firstName;
+
+		@Column(name="password")
+		private String Password;
 		
+	
+
+	
+
+
+		public User() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+
+
 		@Column(name="lastName", nullable=true)
 		private String lastName; 
 		
@@ -67,10 +77,6 @@ public class User  implements Serializable {
 		
 		@Column(name="Login")
 		private String Login;
-		
-		@Column(name="password")
-		private String Password;
-		
 		
 		public  int getId() {
 			return id;
@@ -111,12 +117,13 @@ public class User  implements Serializable {
 		public void setDateNaissance(Date dateNaissance) {
 			this.dateNaissance = dateNaissance;
 		}
+
 		public boolean isStatus() {
 			return Status;
 		}
 
 		public void setStatus(boolean status) {
-			this.Status = status;
+			Status = status;
 		}
 
 		public String getEmail() {
@@ -125,12 +132,13 @@ public class User  implements Serializable {
 
 		public void setEmail(String email) {
 			this.email = email;
-		} 
+		}
+
 		public static String getPhoneNumber() {
 			return phoneNumber;
 		}
 
-		public void setPhoneNumber(String phoneNumber) {
+		public static void setPhoneNumber(String phoneNumber) {
 			User.phoneNumber = phoneNumber;
 		}
 
@@ -150,32 +158,6 @@ public class User  implements Serializable {
 			Password = password;
 		}
 
-		
-
-		
-
-		@Override
-		public String toString() {
-			return "User_account [Cin=" + Cin + ", firstName=" + firstName + ", lastName=" + lastName
-					+ ", dateNaissance=" + dateNaissance + ", Status=" + Status + ", email=" + email + ", phoneNumber="
-					+ phoneNumber + ", Login=" + Login + ", Password=" + Password + "]";
-		}
-
-	
-		public User() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
-
-		
-
-		
-		
-	
-		
-
-
-
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -189,7 +171,6 @@ public class User  implements Serializable {
 			result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 			result = prime * result + id;
 			result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-			result = prime * result + Float.floatToIntBits(mCompte);
 			return result;
 		}
 
@@ -238,38 +219,34 @@ public class User  implements Serializable {
 					return false;
 			} else if (!lastName.equals(other.lastName))
 				return false;
-			if (Float.floatToIntBits(mCompte) != Float.floatToIntBits(other.mCompte))
-				return false;
 			return true;
 		}
 
-		public User(int id, int cin, String firstName, String lastName, Date dateNaissance, boolean status,
-				String email, String phoneNumber, String login, String password) {
-			super();
+		@Override
+		public String toString() {
+			return "User [id=" + id + ", Cin=" + Cin + ", firstName=" + firstName + ", Password=" + Password
+					+ ", lastName=" + lastName + ", dateNaissance=" + dateNaissance + ", Status=" + Status + ", email="
+					+ email + ", Login=" + Login + "]";
+		}
 
+		public User(int id, int cin, String firstName, String password, String lastName, Date dateNaissance,
+				boolean status, String email, String login) {
+			super();
 			this.id = id;
 			Cin = cin;
 			this.firstName = firstName;
+			Password = password;
 			this.lastName = lastName;
 			this.dateNaissance = dateNaissance;
 			Status = status;
 			this.email = email;
-			User.phoneNumber = phoneNumber;
 			Login = login;
-			Password = password;
 		}
+
+		
+	
 
 	
-		
-
-		public float getMcompte() {
-			return mCompte;
-		}
-
-		public void setMcompte(float mcompte) {
-			mCompte = mcompte;
-		}
-
 		
 
 

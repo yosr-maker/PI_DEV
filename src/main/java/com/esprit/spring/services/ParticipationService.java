@@ -29,6 +29,7 @@ public class ParticipationService implements ParticipationServiceI {
 	@Autowired
 	ClientRepository ClientRepository;
 	
+	
 		// admin //
 	public List<Participation> participationsList() {
 		List<Participation> list= ParticipationRepository.findAll();
@@ -38,22 +39,21 @@ public class ParticipationService implements ParticipationServiceI {
 	
 	//User//
 	@Override
-	public String addParticipation(Long s) {
+	public String addParticipation(Long eid) {
 		Participation p = new Participation();
-		Event e = EventService.findbyId(s);
-		Client c = ClientService.findbyid(ClientController.USERCONNECTED.getId());
+		Event e = EventService.findbyId(eid);
+		Client c = ClientService.findbyid(eid);
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		java.util.Date date = new java.util.Date();
-		
-		List<Participation> pl = ParticipationRepository.Participations(EventService.findbyId(s));
+		java.util.Date date = new java.util.Date();	
+		List<Participation> pl = ParticipationRepository.Participations(EventService.findbyId(eid));
 		for(Participation participation : pl) {
 			if((participation.getClient()).equals(c)) {
-				return "you have already participated";
+			return "you have already participated";
 			}
-		}
-		
-		if(e.getPlacesNbr()>0 && c.getMcompte()>e.getTicketPrice()) {
+		}	
+			if((e.getPlacesNbr()>0) && (c.getMcompte()>e.getTicketPrice()) )
+			{
 				p.setEvent(e);
 				p.setClient(c);
 				p.setParticipationDate(dateFormat.format(date));
@@ -64,20 +64,23 @@ public class ParticipationService implements ParticipationServiceI {
 				c.setMcompte(c.getMcompte()-e.getTicketPrice());	
 				ParticipationRepository.save(p);
 				EventRepository.saveAndFlush(e);
-				ClientRepository.save(c);
-				return "Participation successfully added. You're welcome.";
+				ClientRepository.save(c);	
+				
+			
+			return "la participation a été ajoutée avec succes. Bienvenue.";	
+			 	
 		}else {
-			return "Sorry, there are no places available.";
+		return "désolé il n'aura pas de place";
 		}
-	
-	}
 
-	
+	}
 	//Retrieve my participations
 	@Override
 	public List<Participation> myParticipations() {
-	List<Participation> list = ParticipationRepository.myParticipations(ClientController.USERCONNECTED);
+	List<Participation> list = ParticipationRepository.myParticipations((Client) ClientController.getId());
 		return list;
 	}
+	
+	
 
 }

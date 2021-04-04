@@ -21,7 +21,6 @@ public interface EventServiceI {
 	public List<Event> passedEvents();
 	public void refundUsers(Long eid);
 	public Map<Long, Integer> bestEventsByViews();
-	public List<String> displayBestEventsByViews();
 	public List<String> displayBestEventsByParticipations();
 
 }

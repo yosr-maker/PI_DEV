@@ -14,13 +14,14 @@ import com.esprit.spring.entites.Participation;
 @Repository
 public interface ParticipationRepository extends CrudRepository<Participation,Long> , JpaRepository<Participation,Long>{
 
+	
+
+	@Query("SELECT p FROM Participation p WHERE p.event=:event")
+	List<Participation> Participations(@Param ("event") Event event);
+	
 	@Query("SELECT p FROM Participation p WHERE p.client=:client")
 	List<Participation> myParticipations(@Param ("client") Client client);
 	
-	@Query("SELECT p FROM Participation p WHERE p.event=:event")
-	List<Participation> Participations(@Param ("event") Event event);
 
-
-	
 
 }

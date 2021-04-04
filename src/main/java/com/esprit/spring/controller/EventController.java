@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.esprit.spring.entites.Contribution;
 import com.esprit.spring.entites.Event;
 import com.esprit.spring.entites.EventCategory;
@@ -51,11 +52,7 @@ public class EventController {
 		return list;
 	}
 	
-	@GetMapping("/myId")
-	public Long getMyId() {
-		return (long) ClientController.USERCONNECTED.getId();
-		}
-	
+
 	@GetMapping("/retrieve-Event-ById/{id}")
 	public Event getEventById(@PathVariable Long id) {
 		return EventService.findbyId(id);
@@ -72,11 +69,7 @@ public class EventController {
 		List<Event> list = EventService.filterEvent(category);
 		return list;
 		}
-	
-	@GetMapping("/update-Event/{eid}")
-	@ResponseBody
-	public void updateEvent(@PathVariable Long eid) {
-	}
+
 	
 	@DeleteMapping("/delete-Event/{event-id}")
 	@ResponseBody
@@ -85,16 +78,23 @@ public class EventController {
 		EventService.deleteEvent(eventID);
 	}
 	
+	@RequestMapping("/add-Participation/{event-id}")
+	@ResponseBody
+	public String addParticipation(@PathVariable("event-id") Long eid) {
+		return ParticipationService.addParticipation(eid);
+	}
+	
+	
 	@GetMapping("/retrieve-all-Participations")
 	public List<Participation> getParticipations(){
 		return ParticipationService.participationsList();
 	}
 	
 	/*user :*/
-	@PostMapping("/add-Contribution/{eid}/{amount}")
+	@PostMapping("/add-Contribution/{event-id}/{amount}")
 	@ResponseBody
-	public void Contribute(@PathVariable("eid") Long eid,@PathVariable("amount") float amount) {
-		ContributionService.Contribute(eid, amount);
+	public void Contribute(@PathVariable("event-id") Long eventID,@PathVariable("amount") float amount) {
+		ContributionService.Contribute(eventID, amount);
 	}
 	
 	@GetMapping("/retrieve-my-Contributions")
@@ -102,11 +102,7 @@ public class EventController {
 		return ContributionService.myContributionHistory();
 	}
 	
-	@RequestMapping("/add-Participation/{eid}")
-	@ResponseBody
-	public String addParticipation(@PathVariable("eid") Long eid) {
-		return ParticipationService.addParticipation(eid);
-	}
+
 	
 	@GetMapping("/retrieve-my-Participations")
 	public List<Participation> getMyParticipations(){
@@ -133,10 +129,7 @@ public class EventController {
 		return EventService.bestEventsByViews();
 		}
 	
-	@GetMapping("/retrieveBestEventsByViews")
-	public List<String> displayBestEventsByViews(){
-		return EventService.displayBestEventsByViews();
-		}
+	
 	
 	@GetMapping("/retrieveBestEventsByParticipations")
 	public List<String> displayBestEventsByParticipations(){

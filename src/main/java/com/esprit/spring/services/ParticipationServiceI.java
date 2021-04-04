@@ -6,7 +6,7 @@ import com.esprit.spring.entites.Participation;
 
 public interface ParticipationServiceI {
 
-	String addParticipation(Long s);
+	String addParticipation(Long eid);
 
 	List<Participation> myParticipations();
 

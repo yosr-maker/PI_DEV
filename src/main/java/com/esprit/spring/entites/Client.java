@@ -3,6 +3,7 @@ package com.esprit.spring.entites;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -19,6 +20,8 @@ public class Client extends User {
 	private static final long serialVersionUID = 1L;
 
 	private int donation;
+	@Column(name="mCompte")
+	 private float mCompte;
 	
 	@OneToOne
 	private Basket basket;
@@ -127,6 +130,16 @@ public class Client extends User {
 	}
 
 
+
+	public float getMcompte() {
+		return mCompte;
+	}
+
+	public void setMcompte(float mcompte) {
+		mCompte = mcompte;
+	}
+
+	
 
 	
 

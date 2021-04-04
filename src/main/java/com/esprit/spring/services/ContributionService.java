@@ -43,7 +43,7 @@ public class ContributionService implements ContributionServiceI {
 	public String Contribute(Long eid, float amount) {
 		Contribution c = new Contribution();
 		Event ev = EventService.findbyId(eid);
-		Client u = ClientService.findbyid(ClientController.USERCONNECTED.getId());
+		Client u = ClientService.findbyid(eid);	
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		java.util.Date date = new java.util.Date();

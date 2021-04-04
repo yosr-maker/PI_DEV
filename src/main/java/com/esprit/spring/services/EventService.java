@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.esprit.spring.entites.Claim;
 import com.esprit.spring.entites.Client;
 import com.esprit.spring.entites.Contribution;
 import com.esprit.spring.entites.Event;
@@ -214,33 +216,6 @@ public class EventService implements EventServiceI {
 		return h;
 	}
 
-	@Override
-	public List<String> displayBestEventsByViews() {
-		List<String> list = new ArrayList<>();
-		String s = "";
-		List<Long> listId = new ArrayList<>();
-		List<Integer> listViews= new ArrayList<>();
-		List<Event> listEvent = EventRepository.findAll();
-		
-		for (Event ev : listEvent) {
-			listId.add(ev.getId());
-			listViews.add(ev.getViews());
-		}
-		
-		List<Integer> sortedList = new ArrayList<>(listViews);
-		Collections.sort(sortedList);
-		
-		for (int i=0; i<3; i++) {
-			int max = sortedList.get(sortedList.size()-1);// retourne le max qui a la dernière position de la liste
-			Long ind = listId.get(listViews.indexOf(max));// prend nbre de vue et retourne id d'event corresspondant
-			s = (i+1)+"- Event: "+EventRepository.findById(ind).get().getName()+" with "+max+" views ";
-			list.add(s);
-			sortedList.remove(sortedList.size()-1);
-			listViews.set(listViews.indexOf(max), -1);
-		}
-		
-		return list;
-	}
 
 	@Override
 	public List<String> displayBestEventsByParticipations() {
