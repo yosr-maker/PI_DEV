@@ -118,16 +118,16 @@ public class CommentService implements CommentServiceI{
 			
 		}
 	}
-	///////////////////comments + pertinents//////////////////////
+	//comments les plus pertinents
 		@Override
 		public List<Comment> Bestcomments(){
 			
 			
 			
-			List<Comment> list1 = evaluationCommentRepository.myfind(evaluationCommentRepository.best()) ;
+			List<Comment> list = evaluationCommentRepository.myfind(evaluationCommentRepository.best()) ;
 			
 		    
-			return list1;
+			return list;
 			
 			
 			

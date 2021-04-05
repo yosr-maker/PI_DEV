@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.esprit.spring.config.JwtTokenUtil;
 import com.esprit.spring.entites.User;
-import com.esprit.spring.entites.Userinfo;
+
 import com.esprit.spring.model.JwtRequest;
 import com.esprit.spring.model.JwtResponse;
 import com.esprit.spring.services.UserService;

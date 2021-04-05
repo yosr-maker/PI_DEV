@@ -4,12 +4,13 @@ package com.esprit.spring.entites;
 
 import java.io.Serializable;
 
-import java.util.Collection;
+
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.Inheritance;
@@ -20,8 +21,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 
 
@@ -29,7 +28,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @Table( name = "T_USER")
 
-public class User   implements UserDetails, Serializable {
+public class User   implements Serializable {
 	
 
 	/**
@@ -40,7 +39,8 @@ public class User   implements UserDetails, Serializable {
 
 		@Id
 		@Column(name = "id")
-		private int id;
+		@GeneratedValue(strategy = GenerationType.TABLE)
+		private Long id;
 		
 	
 		@Column(name="Cin")
@@ -77,11 +77,11 @@ public class User   implements UserDetails, Serializable {
 		@Column(name="role")
 		private String role;
 
-		public int getId() {
+		public Long getId() {
 			return id;
 		}
 
-		public void setId(int id) {
+		public void setId(Long id) {
 			this.id = id;
 		}
 
@@ -172,7 +172,7 @@ public class User   implements UserDetails, Serializable {
 			result = prime * result + ((dateNaissance == null) ? 0 : dateNaissance.hashCode());
 			result = prime * result + ((email == null) ? 0 : email.hashCode());
 			result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-			result = prime * result + id;
+			result = (int) (prime * result + id);
 			result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 			result = prime * result + ((password == null) ? 0 : password.hashCode());
 			result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
@@ -254,7 +254,7 @@ public class User   implements UserDetails, Serializable {
 		public User(int id, int cin, String firstName, String lastName, Date dateNaissance, boolean status,
 				String email, String phoneNumber, String username, String password, String role) {
 			super();
-			this.id = id;
+			this.id = (long) id;
 			this.cin = cin;
 			this.firstName = firstName;
 			this.lastName = lastName;
@@ -266,69 +266,9 @@ public class User   implements UserDetails, Serializable {
 			this.password = password;
 			this.role = role;
 		}
-
-		@Override
-		public Collection<? extends GrantedAuthority> getAuthorities() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public boolean isAccountNonExpired() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public boolean isAccountNonLocked() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public boolean isCredentialsNonExpired() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public boolean isEnabled() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-//		@Override
-//		public Collection<? extends GrantedAuthority> getAuthorities() {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//
-//		@Override
-//		public boolean isAccountNonExpired() {
-//			// TODO Auto-generated method stub
-//			return false;
-//		}
-//
-//		@Override
-//		public boolean isAccountNonLocked() {
-//			// TODO Auto-generated method stub
-//			return false;
-//		}
-//
-//		@Override
-//		public boolean isCredentialsNonExpired() {
-//			// TODO Auto-generated method stub
-//			return false;
-//		}
-//
-//		@Override
-//		public boolean isEnabled() {
-//			// TODO Auto-generated method stub
-//			return false;
-//		}
-
 }
 
+		
 	
 	    
 //	    public void addRole(Role alg) {roles.add(alg);}

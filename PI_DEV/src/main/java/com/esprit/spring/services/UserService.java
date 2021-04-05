@@ -53,7 +53,7 @@ public class UserService implements UserDetailsService {
 	}
 
 
-	public User findbyid(long id) {
+	public User findbyid(Long id) {
 
 		return userRepo.findById(id).get();
 	}
@@ -64,7 +64,7 @@ public class UserService implements UserDetailsService {
 		return (List<User>) userRepo.findAll();
 	}
 
-	public void deleteUser(long id) {
+	public void deleteUser(Long id) {
 
 		userRepo.deleteById(id);
 

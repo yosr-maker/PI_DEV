@@ -136,6 +136,11 @@ import javax.persistence.Table;
 			this.client = client;
 		}
 
+
+		public Recherche(String type2) {
+			// TODO Auto-generated constructor stub
+		}
+
 	
 		
 		

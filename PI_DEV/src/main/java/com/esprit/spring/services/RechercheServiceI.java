@@ -8,4 +8,5 @@ public interface RechercheServiceI {
 
 	Recherche addSearch(Recherche rech, Long client_id);
 
+
 }
