@@ -36,7 +36,6 @@ public class ContributionService implements ContributionServiceI {
 	
 
 	
-	/**********************************User**********************************/
 	
 	//Add contribution to a jackpot for an event
 	@Override

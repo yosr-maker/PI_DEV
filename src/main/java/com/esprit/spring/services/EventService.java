@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,9 @@ import com.esprit.spring.repository.JackpotRepository;
 import com.esprit.spring.repository.NotificationRepository;
 import com.esprit.spring.repository.ParticipationRepository;
 import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.IncomingPhoneNumber;
 import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.rest.api.v2010.account.MessageCreator;
+import com.twilio.rest.api.v2010.account.availablephonenumbercountry.Local;
 import com.twilio.type.PhoneNumber;
 
 
@@ -47,6 +49,7 @@ public class EventService implements EventServiceI {
 	
 	 public static final String ACCOUNT_SID = "AC861e84eeadedd8f2915b9bda24eb1430";
 	 public static final String AUTH_TOKEN = "e81dbb367c3bd962127796ed81e6db55";
+	 public static final PhoneNumber PHONE_NUMBER = new PhoneNumber("+12179033359");
 	
  @Override
 	public void addEvent(Event event) {
@@ -164,30 +167,46 @@ public class EventService implements EventServiceI {
 			u.setMcompte(u.getMcompte()+montantRembourse);
 			Notification n = new Notification();
 			n.setClient(u);
-		//	n.setBody("Mr/Mdm "+u.getLastName()+" "+u.getFirstName()+""
-				//	+ "Nous avons le regret de vous annoncer que l'événement "+ev.getName()+" vous souhaitez participer a été annulé pour certaines raisons."
-				//	+ " C'est pourquoi, nous avons remboursé le prix de votre billet. En cas de problème, n'hésitez pas à nous contacter."
-				//	+ " Merci.");
+			n.setBody("Mr/Mdm "+u.getLastName()+" "+u.getFirstName()+""
+				+ "Nous avons le regret de vous annoncer que l'événement "+ev.getName()+" vous souhaitez participer a été annulé pour certaines raisons."
+					+ " C'est pourquoi, nous avons remboursé le prix de votre billet. En cas de problème, n'hésitez pas à nous contacter."
+				+ " Merci.");
 			n.setDate(dateFormat.format(date));
 			n.setStatus("Pas encore vu");
 			NotificationRepository.save(n);
 			ClientRepository.save(u);
 			ContributionRepository.deleteById(c.getId());
 			EventRepository.save(ev);
+		
 			
-			 Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-	         MessageCreator message = Message.creator(new PhoneNumber(Client.getPhoneNumber()),
-	                 new PhoneNumber("+12179033359"),
-	                 "Mr/Mdm "+u.getLastName()+" "+u.getFirstName()+""
+			IncomingPhoneNumber number = buyNumber();
+	        System.out.println(number.getPhoneNumber());
+
+	        // Send a text message
+	        Message message = Message.creator( ACCOUNT_SID,PHONE_NUMBER,number.getPhoneNumber(), "Mr/Mdm "+u.getLastName()+" "+u.getFirstName()+""
 	     					+ "Nous avons le regret de vous annoncer que l'événement "+ev.getName()+" vous souhaitez participer a été annulé pour certaines raisons."
 	     					+ " C'est pourquoi, nous avons remboursé le prix de votre billet. En cas de problème, n'hésitez pas à nous contacter."
-	     					+ " Merci.");
-	       
-		}
-		
-		
-	
+	     					+ " Merci.").create();
+
+	        System.out.println(message.getSid());
+	        System.out.println(message.getBody());
 	}
+	}
+		   private static IncomingPhoneNumber buyNumber() {
+		        // Look up some phone numbers
+		        Iterable<Local> numbers = Local.reader(ACCOUNT_SID, "US").read();
+
+		        // Buy the first phone number
+		        Iterator<Local> iter = numbers.iterator();
+		        if (iter.hasNext()) {
+		            Local local = iter.next();
+		            return IncomingPhoneNumber.creator( ACCOUNT_SID,  local.getPhoneNumber()  ).create();
+		        }
+
+		        return null;
+		    }
+		
+
 	@Override
 	public Map<Long, Integer> bestEventsByViews() {
 		

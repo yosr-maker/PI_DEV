@@ -78,24 +78,27 @@ public class EventController {
 		EventService.deleteEvent(eventID);
 	}
 	
-	@RequestMapping("/add-Participation/{event-id}")
-	@ResponseBody
-	public String addParticipation(@PathVariable("event-id") Long eid) {
-		return ParticipationService.addParticipation(eid);
-	}
+
 	
-	
-	@GetMapping("/retrieve-all-Participations")
+	/*@GetMapping("/retrieve-all-Participations")
 	public List<Participation> getParticipations(){
 		return ParticipationService.participationsList();
 	}
-	
+	*/
 	/*user :*/
 	@PostMapping("/add-Contribution/{event-id}/{amount}")
 	@ResponseBody
 	public void Contribute(@PathVariable("event-id") Long eventID,@PathVariable("amount") float amount) {
 		ContributionService.Contribute(eventID, amount);
 	}
+	
+	@RequestMapping("/add-Participation/{eid}")
+	@ResponseBody
+	public String addParticipation(@PathVariable("eid") Long eid) {
+		return ParticipationService.addParticipation(eid);
+	}
+
+	
 	
 	@GetMapping("/retrieve-my-Contributions")
 	public List<Contribution> myContributionsHistory(){

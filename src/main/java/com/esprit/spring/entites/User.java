@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 
 
 
+
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @Table( name = "T_USER_Account")
@@ -36,7 +37,7 @@ public class User  implements Serializable {
 
 		@Id
 		@Column(name = "id")
-		private int id;
+		private long id;
 
 		@Column(name="Cin")
 		private int Cin;
@@ -73,16 +74,16 @@ public class User  implements Serializable {
 		private String email;
 
 		@Column(name="phoneNumber")
-		private static String phoneNumber;
+		private  String phoneNumber;
 		
 		@Column(name="Login")
 		private String Login;
 		
-		public  int getId() {
+		public  long getId() {
 			return id;
 		}
 
-		public void setId(int id) {
+		public void setId(long id) {
 			this.id = id;
 		}
 
@@ -134,12 +135,12 @@ public class User  implements Serializable {
 			this.email = email;
 		}
 
-		public static String getPhoneNumber() {
+		public  String getPhoneNumber() {
 			return phoneNumber;
 		}
 
-		public static void setPhoneNumber(String phoneNumber) {
-			User.phoneNumber = phoneNumber;
+		public  void setPhoneNumber(String phoneNumber) {
+			this.phoneNumber = phoneNumber;
 		}
 
 		public String getLogin() {
@@ -158,6 +159,8 @@ public class User  implements Serializable {
 			Password = password;
 		}
 
+	
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -169,8 +172,9 @@ public class User  implements Serializable {
 			result = prime * result + ((dateNaissance == null) ? 0 : dateNaissance.hashCode());
 			result = prime * result + ((email == null) ? 0 : email.hashCode());
 			result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-			result = prime * result + id;
+			result = prime * result + (int) (id ^ (id >>> 32));
 			result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+			result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
 			return result;
 		}
 
@@ -219,6 +223,11 @@ public class User  implements Serializable {
 					return false;
 			} else if (!lastName.equals(other.lastName))
 				return false;
+			if (phoneNumber == null) {
+				if (other.phoneNumber != null)
+					return false;
+			} else if (!phoneNumber.equals(other.phoneNumber))
+				return false;
 			return true;
 		}
 
@@ -229,7 +238,7 @@ public class User  implements Serializable {
 					+ email + ", Login=" + Login + "]";
 		}
 
-		public User(int id, int cin, String firstName, String password, String lastName, Date dateNaissance,
+		public User(long id, int cin, String firstName, String password, String lastName, Date dateNaissance,
 				boolean status, String email, String login) {
 			super();
 			this.id = id;
@@ -244,9 +253,7 @@ public class User  implements Serializable {
 		}
 
 		
-	
 
-	
 		
 
 
