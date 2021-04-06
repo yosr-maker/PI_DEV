@@ -10,5 +10,9 @@ public interface IStockDetailService {
 	public StockDetail getStockDetailById(int id);
 	public Iterable<StockDetail> getAllStockDetail();
 	public void deleteAllStockDetail();
+	public StockDetail affectationProduit(int idProd, int idStock);
+	//public StockDetail desaffectationProduit(int idProd, int idStock);
+	public void sendnotif(int idStockD);
+	public int descrementStock(int idStockdetail);
 
 }

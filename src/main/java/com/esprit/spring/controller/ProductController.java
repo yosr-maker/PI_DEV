@@ -3,6 +3,7 @@ package com.esprit.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +32,7 @@ public class ProductController {
 	
 	
 	
-	@PostMapping(value="/add-product")
+	@PostMapping(value="/add-product",produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Product addProduits(@RequestBody Product prod)
 	{

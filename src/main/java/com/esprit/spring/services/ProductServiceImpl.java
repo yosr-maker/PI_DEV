@@ -27,11 +27,11 @@ public class ProductServiceImpl  implements   IProductService{
 	public Product addProduct(Product product) {
 		// TODO Auto-generated method stub
 		
-		String t = "yosr.hamrouni@esprit.tn";
+		String t = "jonathan.jibikilayi@esprit.tn";
 		String sub = "bonjour";
 		String b = "ca marche !!!!!!!!!!!!!!!!!!!!!!!!!!!";
 		
-		emailService.sendMail(t, sub, b);
+	//	emailService.sendMail(t, sub, b);
 		
 		return productRepository.save(product);
 	}
