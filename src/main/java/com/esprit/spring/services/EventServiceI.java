@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.esprit.spring.entites.Client;
 import com.esprit.spring.entites.Event;
 import com.esprit.spring.entites.EventCategory;
 @Service
@@ -19,8 +20,11 @@ public interface EventServiceI {
 	public List<Event> filterEvent(EventCategory category);
 	public List<Event> upcomingEvents();
 	public List<Event> passedEvents();
-	public void refundUsers(Long eid);
-	public Map<Long, Integer> bestEventsByViews();
+	public void refundClients(Long eid);
+	
 	public List<String> displayBestEventsByParticipations();
+	List<String> displayBestEventsByCollects();
+
+
 
 }

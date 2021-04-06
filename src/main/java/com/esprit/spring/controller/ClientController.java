@@ -22,12 +22,7 @@ ClientService ClientService;
 	}
 
 
-	public static final Client USERCONNECTED = null;
 
-	public static Object getId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 

@@ -17,11 +17,7 @@ public class ClientService implements ClientServiceI {
 @Autowired
 ClientRepository clientRepository;
 
-	@Override
-	public Client findbyid(Object object) {
 
-		return  clientRepository.findById((Long) object).get();
-	}
 	
 	/*Chercher un client*/
 	
@@ -30,28 +26,21 @@ ClientRepository clientRepository;
 	}
 	
 	@Override
-	public Client findbyid(int id) {
+	public Client findbyid(long id) {
 
-		return  clientRepository.findById((long) id).get();
+		return  clientRepository.findById( id).get();
 	}
 	
-	@Override
-	public Client findbyid(Long s) {
-
-		return  clientRepository.findById(s).get();
-	}
-	@Override
-	public Client findbyid(Client u) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	
 	@Override
 	public Client addClient(Client c) {
-		clientRepository.save(c);
-		return null;
+		return clientRepository.save(c);
+		
 	}
+	
+	
+	
 }
 
 

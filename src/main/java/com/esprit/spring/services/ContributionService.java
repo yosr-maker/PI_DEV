@@ -39,13 +39,16 @@ public class ContributionService implements ContributionServiceI {
 	
 	//Add contribution to a jackpot for an event
 	@Override
-	public String Contribute(Long eid, float amount) {
+	public String Contribute(Long eid,Long clientId ,float amount) {
+		String s="";
 		Contribution c = new Contribution();
 		Event ev = EventService.findbyId(eid);
-		Client u = ClientService.findbyid(eid);	
-		
+		Client u = ClientService.findbyid(clientId);	
+		System.out.println(u.getMcompte());
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		
 		java.util.Date date = new java.util.Date();
+		System.out.println(date);
 		if(u.getMcompte()>=amount) {
 			u.setMcompte(u.getMcompte()-amount);
 			Jackpot j = JackpotService.findJackpot(ev);
@@ -59,10 +62,14 @@ public class ContributionService implements ContributionServiceI {
 			JackpotRepository.save(j);
 			EventRepository.save(ev);
 			ContributionRepository.save(c);
-			return "La contribution a été ajoutée avec succès";
-		} else{
-			return "Désolé, le solde de votre compte est insuffisant !! ";
+			s= "La contribution a été ajoutée avec succès";
+			
+		} else {
+			
+			s="Désolé, le solde de votre compte est insuffisant !! ";
+			System.out.println(s);
 		}
+		return s;
 	}
 
 	@Override
@@ -72,8 +79,8 @@ public class ContributionService implements ContributionServiceI {
 	}
 	
 	@Override
-	public List<Contribution> myContributionHistory() {
-		List<Contribution> list = ContributionRepository.contributionOfClient(ClientController.USERCONNECTED);
+	public List<Contribution> myContributionHistory(Client client) {
+		List<Contribution> list = ContributionRepository.contributionOfClient(client);
 		return list;
 	}
 

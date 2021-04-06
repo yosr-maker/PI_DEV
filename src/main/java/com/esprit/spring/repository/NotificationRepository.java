@@ -18,6 +18,6 @@ import com.esprit.spring.entites.Notification;
 public interface NotificationRepository extends CrudRepository<Notification,Long>, JpaRepository<Notification,Long>{
 	
 	@Query("SELECT n FROM Notification n WHERE n.client=:id")
-	List<Notification> myNotifications(@Param("id") Client id);
+	List<Notification> myNotifications(@Param("id") Client client);
 
 }

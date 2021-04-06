@@ -25,7 +25,7 @@ public class Client extends User {
 	
 	@OneToOne
 	private Basket basket;
-	
+
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="client")
 	private List<Participation> participation;
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="client")

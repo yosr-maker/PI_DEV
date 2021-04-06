@@ -1,6 +1,7 @@
  package com.esprit.spring.entites;
  import java.io.Serializable;
- import java.util.Date;
+
+import java.util.Date;
  import java.util.List;
 
 
@@ -8,11 +9,13 @@
  import javax.persistence.Entity;
  import javax.persistence.EnumType;
  import javax.persistence.Enumerated;
- import javax.persistence.GeneratedValue;
+
+import javax.persistence.GeneratedValue;
  import javax.persistence.GenerationType;
  import javax.persistence.Id;
  import javax.persistence.JoinColumn;
- import javax.persistence.OneToMany;
+
+import javax.persistence.OneToMany;
  import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -55,6 +58,7 @@ import javax.persistence.TemporalType;
  	private List<Participation> participation;
  	@OneToMany(cascade=CascadeType.ALL, mappedBy="event")
  	private List<Contribution> contribution;
+ 
  	
  	public Event() {
  		super();
@@ -87,7 +91,9 @@ import javax.persistence.TemporalType;
  		this.contribution = contribution;
  	}
 
- 	public Long getId() {
+ 
+
+	public Long getId() {
  		return id;
  	}
 
