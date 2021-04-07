@@ -33,6 +33,8 @@ public class UserService implements UserDetailsService {
 		newuser.setFirstName(user.getFirstName());
 		newuser.setLastName(user.getLastName());
 		newuser.setEmail(user.getEmail());
+		newuser.setPhoneNumber(user.getPhoneNumber());
+		newuser.setCin(user.getCin());
 		newuser.setRole(user.getRole());
 		return userRepo.save(newuser);
 	}

@@ -24,8 +24,8 @@ public class Product implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
+	@Column(name = "idProduct")
+	private Long id;
 	
 	@Column(name="Name")
 	private String Name ; 
@@ -65,7 +65,7 @@ public class Product implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="product")
 	private List<Claim> claims;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="product")
+	@OneToMany(mappedBy="product")
 	List<Publication> publications;
 	
 	@ManyToOne
@@ -75,11 +75,15 @@ public class Product implements Serializable {
 	@OneToMany
 	private List<Ad> ads;
 
-	public int getId() {
+	  
+	
+	
+	
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

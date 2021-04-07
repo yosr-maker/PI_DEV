@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.esprit.spring.entites.Claim;
 import com.esprit.spring.entites.Comment;
 import com.esprit.spring.entites.EvaluationComment;
 import com.esprit.spring.entites.Publication;
@@ -45,6 +46,9 @@ public class ForumController {
 		@Autowired
 		CommentServiceI commentService;
 		
+		@Autowired
+		ClientController ClientController ; 
+		
 
 
      //afficher publication à la une
@@ -67,7 +71,7 @@ public class ForumController {
 	@ResponseBody
 	public Response findinterested() {
 		
-	String max = rechercheService.extract(UserController.USERCONNECTED.getId()); // user controller je dois la changer a clientcontroller i think
+	String max = rechercheService.extract(ClientController.CLIENTCONNECTED.getId()); // user controller je dois la changer a clientcontroller i think
 
 	List<Publication> list = publicationService.findbyType(max);
 
@@ -97,12 +101,12 @@ public class ForumController {
 		 
 		 
 	    if (list.size()==0) {
-	    	return Response.status(Status.NOT_FOUND).entity( "There is no publication with the type provided !").build();
+	    	return Response.status(Status.NOT_FOUND).entity( "Pas de publication de ce type!").build();
 	                       
 	    }
 	    else {
 	    	
-	rechercheService.addSearch(r, UserController.USERCONNECTED.getId());
+	rechercheService.addSearch(r, ClientController.CLIENTCONNECTED.getId());
 	return Response.status(Status.OK).entity(list).build();
 	    }
 		 
@@ -110,16 +114,25 @@ public class ForumController {
 	}
 	//////CRUD Publication//////
 	///////list of all Publications///////////
-	@GetMapping("/retrievepublications")
+//	@GetMapping("/retrievepublications")
+//	@ResponseBody
+//	public List<Publication> retrieveALLpublication() {
+//	List<Publication> l = publicationService.retrieveALLpublication();
+//	return l ;
+//	}
+	
+	
+	
+	@GetMapping("/retrieve-publications")
 	@ResponseBody
-	public List<Publication> myy() {
-	List<Publication> l = publicationService.myy();
-	return l ;
+	public List<Publication> getPublications() {
+	List<Publication> list = publicationService.retrieveAllPublications();
+	return list;
 	}
 
 	@PutMapping("/modify-publication")
 	@ResponseBody
-	public Publication updateUser(@RequestBody Publication p ) {
+	public Publication updatePublication(@RequestBody Publication p ) {
 	return publicationService.updatePublication(p);
 	}
 
@@ -130,16 +143,18 @@ public class ForumController {
 	//pour ADMIN test publication  redondantes
 	@PostMapping("/Publication")
 	@ResponseBody
-	public Response addSubject(@RequestBody Publication pu) {
-	    Publication subexists = publicationService.test(pu.getType(), pu.getDescription());
+	public String addPublication(@RequestBody Publication pu) {
+	    Publication pubexists = publicationService.test(pu.getType(), pu.getDescription());
 	   
-	    if (subexists != null) {
-	    	return Response.status(Status.NOT_FOUND).entity( "There is already a Publication exists with these informations").build();
+	    if (pubexists != null) {
+	    	return  "Nous sommes désolés mais il semble que vous êtes entrain de publier une publication avec un contenu qui existe déjà ... veuillez vérifier s'il vous plait" ;
+	    			
 	                       
 	    }
 	    else {
 	    	publicationService.addPublication(pu);
-	    	 return Response.status(Status.OK).entity("add successful").build();
+	    	 return "votre publication a éte publiée avec succès" ; 
+	    			 
 	    }
 	}
 
@@ -155,34 +170,36 @@ public class ForumController {
 
 	@PostMapping("/addComment/{publicationId}")
 	@ResponseBody
-	public Response addComment(@RequestBody Comment u,@PathVariable("publicationId") Long publicationId) {
+	public String addComment(@RequestBody Comment c,@PathVariable("publicationId") Long publicationId) {
 		
-		commentService.addComment(u,UserController.USERCONNECTED.getId(),publicationId);
-	return Response.status(Status.OK).entity("add successful").build();
+		commentService.addComment(c,ClientController.CLIENTCONNECTED.getId(),publicationId);
+	return "Votre commentaire a été bien ajouté " ; 
 
 	    }
 
 	//all comments  ajouter une exception 
 	@GetMapping("/ListComment/{publicationId}")
 	@ResponseBody
-	public Response list(@PathVariable("publicationId") Long publicationId) {
+	public List<Comment> list(@PathVariable("publicationId") Long publicationId) {
 	List<Comment> l = commentService.list(publicationId);
+    // List<Comment> l2 = l2.add("Aucun commentaire pour cette publication! ");
+	
 
 	if (l.size()==0) {
-		return Response.status(Status.NOT_FOUND).entity("There's no comment related to this publication !").build();
+		return null ;
 
 		}
 	else {
-		return Response.status(Status.OK).entity(l).build();
+		return l;
 
 	}
 	}
-	//all userconnected comments ajouter une exception 
+	//all clients comments ajouter une exception 
 	
 	@GetMapping("/myComments/{publicationId}")
 	@ResponseBody
-	public List<Comment> mylist(@PathVariable("publicationId") Long publicationId) {
-	List<Comment> l = commentService.mylist(publicationId, UserController.USERCONNECTED.getId());
+	public List<Comment> myComments(@PathVariable("publicationId") Long publicationId) {
+	List<Comment> l = commentService.myComments(publicationId, ClientController.CLIENTCONNECTED.getId());
 	return l ;
 
 	}
@@ -217,11 +234,10 @@ public class ForumController {
 	//comment evaluation
 	@PostMapping("/evaluate/{commentId}")
 	@ResponseBody
-	public Response addevaluation(@RequestBody EvaluationComment u,@PathVariable("commentId") Long commentId) {
+	public String addevaluation(@RequestBody EvaluationComment u,@PathVariable("commentId") Long commentId) {
 		
 		commentService.addEv(u, commentId);
-	return Response.status(Status.OK).entity("add successful").build();
-
+	return "votre evaluation a été bien enregistrée " ;
 	    }
 
 		
@@ -236,7 +252,7 @@ public class ForumController {
 	@ResponseBody
 	public List<Comment> mylist() {
 
-		
+		 
 		return commentService.Bestcomments();
 
 	}

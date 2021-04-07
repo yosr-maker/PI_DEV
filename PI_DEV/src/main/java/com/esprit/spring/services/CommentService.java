@@ -66,12 +66,12 @@ public class CommentService implements CommentServiceI{
 		}
 
 	@Override
-	public List<Comment> mylist(Long pub_id, Long client_id){
+	public List<Comment> pertinentComments(Long pub_id, Long client_id){
 				
 	Publication p = publicationService.findbyid(pub_id);
 	Client clt = clientRespository.findById(client_id).get();
 
-	List<Comment> l =commentRepository.mylist(p, clt);
+	List<Comment> l =commentRepository.myComments(p, clt);
 	return l ;
 		
 		

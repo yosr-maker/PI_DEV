@@ -2,7 +2,7 @@ package com.esprit.spring.services;
 
 import java.util.List;
 
-
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,7 +72,7 @@ private PublicationRepository publicationRepository;
 @Autowired
 private EvaluationPublicationRepository evaluationPublicationRepository;
 
-
+private static final org.apache.logging.log4j.Logger l= LogManager.getLogger(PublicationService.class);
 
 
 
@@ -84,24 +84,34 @@ public Publication addPublication(Publication publication){
 	}
 
 @Override
-public Publication findbyid(long id){
+public Publication findbyid(Long id){
 	
 		return publicationRepository.findById(id).get() ;
 	}
 
+//@Override
+//public List<Publication> retrieveALLpublication(){
+//	
+//	
+//	
+//	return (List<Publication>) publicationRepository.findAll();
+//	
+//	
+//		
+//	}
+
 @Override
-public List<Publication> myy(){
-	
-	
-	
-	return (List<Publication>)publicationRepository.findAll();
-	
-	
-		
+public List<Publication> retrieveAllPublications() {
+	List<Publication> publications = (List<Publication>) publicationRepository.findAll();
+	for (Publication publication: publications ) {
+		l.info("la liste des publications données +++: " + publication);
 	}
+	
+	return publications;
+}
 
 @Override	
-public void deletePublication(long id){
+public void deletePublication(Long id){
 	
 	publicationRepository.deleteById(id); 
 	
@@ -113,6 +123,7 @@ public Publication updatePublication(Publication publication2){
     publication1.setType(publication2.getType());
     publication1.setDescription(publication2.getDescription());
     publication1.setDate(publication2.getDate());
+  //  publication1.setIdProduct(publication2.getIdProduct());
 		
     publicationRepository.save(publication1);
 		return publication1;
@@ -144,8 +155,7 @@ public List<Publication> findbyType(String type){
 		return publicationRepository.findByType(type);
 	}
 
-
-/////////subject sans interaction//////////
+// publication non commentées
 
 @Override
 public List<Long> notcommented() {
@@ -190,8 +200,15 @@ public EvaluationPublication addrate(int value,Long id) {
 	
 	
 }
-	
-		
+
+@Override
+public List<Publication> retrieveALLpublication() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+
 }
 	
 

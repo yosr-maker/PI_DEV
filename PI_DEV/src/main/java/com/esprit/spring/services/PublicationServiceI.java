@@ -10,10 +10,10 @@ import com.esprit.spring.entites.Publication;
 
 
 public interface PublicationServiceI {
-	 List<Publication> myy();
+	 List<Publication> retrieveALLpublication();
 	 Publication addPublication(Publication publication);
-	 Publication findbyid(long id);
-	 void deletePublication(long id) ;
+	 Publication findbyid(Long id);
+	 void deletePublication(Long id) ;
 	 Publication updatePublication(Publication publication2);
 	 Publication test(String type , String description);
 	 List<String> pub();
@@ -23,6 +23,8 @@ public interface PublicationServiceI {
 	  List<Long> notcommented() ;
 	  void autodeletePublication() ;
 	   EvaluationPublication addrate(int value,Long id);
+	//List<Publication> retrieveAllPublications();
+	List<Publication> retrieveAllPublications();
 	   
 	   
 	

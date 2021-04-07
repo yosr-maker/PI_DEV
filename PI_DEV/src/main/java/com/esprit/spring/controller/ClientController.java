@@ -45,9 +45,9 @@ public class ClientController {
 	
 	public static Client CLIENTCONNECTED ;
 	
-//	@RequestMapping("/bonjour")
-//	@ResponseBody
-//	public String welcome() { return "Bonjour, Bienvenue à application"; }
+	@GetMapping("/bonjour-client")
+	@ResponseBody
+	public String welcome() { return "Bonjour, Bienvenue à votre espace client "; }
 	
 
 	@PostMapping("/register-client")

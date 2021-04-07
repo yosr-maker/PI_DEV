@@ -69,6 +69,8 @@ public class ClientService  implements ClientServiceI{
 		newclient.setFirstName(client.getFirstName());
 		newclient.setLastName(client.getLastName());
 		newclient.setEmail(client.getEmail());
+		newclient.setCin(client.getCin());
+		newclient.setPhoneNumber(client.getPhoneNumber());
 		newclient.setRole(client.getRole());
 		return clientRepository.save(newclient);
 	}

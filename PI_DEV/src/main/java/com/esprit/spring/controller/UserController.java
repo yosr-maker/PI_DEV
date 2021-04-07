@@ -41,7 +41,8 @@ public class UserController {
 	
 	public static User USERCONNECTED ;
 	
-	@RequestMapping("/bonjour")
+ 
+    @RequestMapping("/bonjour")
 	@ResponseBody
 	public String welcome() { return "Bonjour, Bienvenue dans notre application "; }
 	
@@ -51,6 +52,8 @@ public class UserController {
 	public ResponseEntity<?> saveUser(@RequestBody User user) throws Exception {
 		System.out.println("entrer la methode register");
 		return ResponseEntity.ok(userService.addUser(user));
+		
+		
 	}
 
 	@PostMapping("/authenticate")
@@ -108,8 +111,7 @@ public class UserController {
     	userService.deleteUser(userId);
     }
     
-   
-	
+
     
 
 }

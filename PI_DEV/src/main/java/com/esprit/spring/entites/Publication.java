@@ -60,13 +60,11 @@ public class Publication implements Serializable{
 	
 	private static final long serialVersionUID = -6236517548335858347L
 			;
-//	@Id
-//	@GeneratedValue (strategy = GenerationType.IDENTITY)
-//	@Column
-//	private long id;
+
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+
 	@Column(name = "idPublication")
 	private  Long id;
 	
@@ -96,11 +94,11 @@ public class Publication implements Serializable{
 		@JoinColumn(name = "id")
 		private Product product;
 
-		public long getId() {
+		public Long getId() {
 			return id;
 		}
 
-		public void setId(long id) {
+		public void setId(Long id) {
 			this.id = id;
 		}
 
@@ -224,12 +222,7 @@ public class Publication implements Serializable{
 			return true;
 		}
 
-		@Override
-		public String toString() {
-			return "Publication [id=" + id + ", type=" + type + ", title=" + title + ", description=" + description
-					+ ", date=" + date + ", comments=" + comments + ", ratings=" + ratings + ", product=" + product
-					+ "]";
-		}
+		
 
 		public Publication(long id, String type, String title, String description, Date date, List<Comment> comments,
 				List<EvaluationPublication> ratings, Product product) {
@@ -248,6 +241,14 @@ public class Publication implements Serializable{
 			super();
 			// TODO Auto-generated constructor stub
 		}
+
+		@Override
+		public String toString() {
+			return "Publication [id=" + id + ", type=" + type + ", title=" + title + ", description=" + description
+					+ ", date=" + date + ", comments=" + comments + ", ratings=" + ratings + ", product=" + product
+					+ "]";
+		}
+
 		
 		
 		

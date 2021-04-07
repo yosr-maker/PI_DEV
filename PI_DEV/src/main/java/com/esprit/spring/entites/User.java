@@ -271,18 +271,6 @@ public class User   implements Serializable {
 		
 	
 	    
-//	    public void addRole(Role alg) {roles.add(alg);}
-//	    public Set<Role> getRoles(){
-//	        if(this.roles==null){this.roles = new HashSet<Role>();}
-//	        return this.roles;
-//	    }
-//	    public void setRoles(Set<Role> alg){this.roles = alg;}
-//	    public boolean isInRoles(int aid){
-//	        ArrayList<Role> mylgs = new ArrayList<Role>();
-//	        mylgs.addAll(this.roles);
-//	        for(int a=0;a<mylgs.size();a++){if(mylgs.get(a).getId()==aid){return true;}}
-//	        return false;
-	
 
 
 		

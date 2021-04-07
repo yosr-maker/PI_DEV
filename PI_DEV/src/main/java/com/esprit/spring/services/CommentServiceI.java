@@ -15,7 +15,7 @@ public interface CommentServiceI {
 	
 	 List<Comment> list(Long pub_id);
 	 
-	 List<Comment> mylist(Long pub_id, Long client_id);
+	 List<Comment> pertinentComments(Long pub_id, Long client_id);
 	 
 	
 	 void deleteComment(long id) ;
@@ -24,6 +24,8 @@ public interface CommentServiceI {
 	  List<Comment> Bestcomments();
 
 	EvaluationComment addEv(EvaluationComment e, Long id);
+
+	List<Comment> myComments(Long publicationId, Long id);
 	
 
 	
