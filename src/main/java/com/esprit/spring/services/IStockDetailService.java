@@ -1,5 +1,7 @@
 package com.esprit.spring.services;
 
+import java.util.List;
+
 import com.esprit.spring.entites.StockDetail;
 
 public interface IStockDetailService {
@@ -10,9 +12,10 @@ public interface IStockDetailService {
 	public StockDetail getStockDetailById(int id);
 	public Iterable<StockDetail> getAllStockDetail();
 	public void deleteAllStockDetail();
-	public StockDetail affectationProduit(int idProd, int idStock);
+	public StockDetail affectationProduitDansStockDetail(int idProd, int idStock);
 	//public StockDetail desaffectationProduit(int idProd, int idStock);
 	public void sendnotif(int idStockD);
-	public int descrementStock(int idStockdetail);
+	public int descrementStock(int idStockdetail,int nBrProduct);
+	public List<StockDetail> sendnotifProductExpiration();
 
 }

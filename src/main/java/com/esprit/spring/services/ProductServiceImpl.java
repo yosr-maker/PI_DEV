@@ -4,13 +4,17 @@ package com.esprit.spring.services;
 
 
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.esprit.spring.Email.IEmailService;
 import com.esprit.spring.entites.Claim;
 import com.esprit.spring.entites.Product;
+import com.esprit.spring.entites.StockDetail;
 import com.esprit.spring.repository.ProductRepository;
+import com.esprit.spring.repository.StockDetailRepository;
 
 
 @Service
@@ -22,6 +26,14 @@ public class ProductServiceImpl  implements   IProductService{
 	
 	@Autowired(required =true)
 	IEmailService emailService;
+	
+	@Autowired
+	StockDetailRepository stockDetailRepository;
+	
+	
+	
+	
+	
 
 	@Override
 	public Product addProduct(Product product) {
@@ -67,6 +79,28 @@ public class ProductServiceImpl  implements   IProductService{
 		// TODO Auto-generated method stub
 		
 		productRepository.save(prod);
+	}
+	
+	
+	
+	
+    
+	
+	@Transactional
+	@Override
+	public Product affectationStockDtailDansProduit(int idStockDetail, int idProduct) {
+		// TODO Auto-generated method stub
+		 Product prod = productRepository.findById(idProduct).get();
+		 StockDetail stcd = stockDetailRepository.findById(idStockDetail).get();
+		 
+		 if(prod.getStockDetail() ==null){
+			 
+			 prod.setStockDetail(stcd);
+			 return productRepository.save(prod) ;
+		 }
+		
+		 else 
+			 return null;
 	}
 	
 	

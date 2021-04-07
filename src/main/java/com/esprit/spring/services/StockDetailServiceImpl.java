@@ -61,13 +61,18 @@ public class StockDetailServiceImpl implements IStockDetailService{
 	@Override
 	public StockDetail getStockDetailById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		StockDetail stcd =stockDetailRepository.findById(id).orElse(null);
+		return stcd;
 	}
 
 	@Override
 	public Iterable<StockDetail> getAllStockDetail() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		Iterable<StockDetail> I = stockDetailRepository.findAll();
+		
+		return I;
 	}
 
 	@Override
@@ -83,7 +88,7 @@ public class StockDetailServiceImpl implements IStockDetailService{
 	
 	@Transactional
 	@Override
-	public StockDetail affectationProduit(int idProd, int idStock) {
+	public StockDetail affectationProduitDansStockDetail(int idProd, int idStock){
 		// TODO Auto-generated method stub
 		
 		StockDetail stcd = stockDetailRepository.findById(idStock).get();
@@ -138,37 +143,61 @@ public class StockDetailServiceImpl implements IStockDetailService{
 		}
 	
 	
-	public void sendnotifProductExpiration()
+	public List<StockDetail> sendnotifProductExpiration()
 	{
-		//@Temporal(TemporalType.DATE)
+		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date today = new Date(System.currentTimeMillis());
+
+		System.out.println(formatter.format(today));
 		 
 		List <StockDetail> list = (List <StockDetail>) stockDetailRepository.findAll();
+		List <StockDetail> listProductExpiration = new ArrayList<StockDetail>();
 		
 		 for(StockDetail stockD : list ){
 			 
 			 if(stockD.getDexpiration().compareTo(today)==0){
+				 listProductExpiration.add(stockD);
 				 
-				 String t = "jonathan.jibjikilayi@esprit.tn";
-					String sub = "Alert !!!!! ";
+				 String t = "jonathan.jibikilayi@esprit.tn";
+					String sub = "Alert  Produit!!!!! ";
 				 
-				 
-					String b = "le produit:"+stockD.getProduct().getName()+"l,ID"+stockD.getProduct().getId()+"Detail du produit:"+stockD.getProduct().getDescription()+"ce stock vient d expirer veuillz le retirer du depot\n"
+					String b = "le produit:"+stockD.getProduct().getName()+"l'ID"+stockD.getProduct().getId()+
+							"Detail du produit:"+stockD.getProduct().getDescription()+"ce stock vient d expirer veuillez le retirer du depot\n"
 							+ "merci de bien vouloir vour ravitailler aupres de votre fournisseur";
 				 
-					emailService.sendMail(t, sub, b);
-			 }
+					emailService.sendMail(t, sub, b);		
+					
+			            }
 			 
-			 
-		 }
+			 else 
+				 if(stockD.getDexpiration().compareTo(today)<0){
+					 
+					 listProductExpiration.add(stockD);
+					 
+					 String t = "jonathan.jibjikilayi@esprit.tn";
+						String sub = "Alert !!!!! ";
+					 
+						String b = "le produit:"+stockD.getProduct().getName()+"l'ID"+stockD.getProduct().getId()+
+								"Detail du produit:"+stockD.getProduct().getDescription()+"ce stock vient d expirer veuillz le retirer du depot\n"
+								+ "merci de bien vouloir vour ravitailler aupres de votre fournisseur";
+					 
+						emailService.sendMail(t, sub, b);	
+					 
+					 
+				 }
+			  }
 	
-		 
-		
-		
-	}
+		 return listProductExpiration;
+		}
 	
 	
-	public int descrementStock(int idStockdetail){
+	
+	
+	
+	
+	
+	
+	public int descrementStock(int idStockdetail, int nbrProduct){
 		
 		StockDetail stockD = stockDetailRepository.findById(idStockdetail).get();
 		

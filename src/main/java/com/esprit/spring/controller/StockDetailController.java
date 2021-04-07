@@ -1,5 +1,7 @@
 package com.esprit.spring.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +31,7 @@ public class StockDetailController {
 		
 	
 		
-		return iStockDetailService.affectationProduit(idProd, idStock);
+		return iStockDetailService.affectationProduitDansStockDetail(idProd, idStock);
 	}
 	
 	
@@ -42,14 +44,22 @@ public class StockDetailController {
 	
 	
 	
-	@GetMapping("decrementStock/{idStock}")
+	@GetMapping("decrementStock/{idStock}/{nBrProduct}")
 	@ResponseBody
-	public int decrementStock(@PathVariable("idStock") int idStock){
+	public int decrementStock(@PathVariable("idStock") int idStock,@PathVariable("nBrProduct") int nBrProduct){
 		
 		
 		
 		
-		return iStockDetailService.descrementStock(idStock) ;
+		return iStockDetailService.descrementStock(idStock,nBrProduct) ;
 	}
-
+	
+	
+	@GetMapping("List-ProductExpirer")
+	@ResponseBody
+	public List<StockDetail> listProductExprirer(){
+		
+		return iStockDetailService.sendnotifProductExpiration();
+	}
+	
 }
