@@ -111,14 +111,19 @@ public class StockDetailServiceImpl implements IStockDetailService{
 		
 	}
 
-	/*@Override
-	public StockDetail desaffectationProduit(int idProd, int idStock) {
+	@Override
+	public StockDetail desaffectationProduit(int idStock) {
 		// TODO Auto-generated method stub
 		StockDetail stcd = stockDetailRepository.findById(idStock).get();
-		//stcd.getProduct()
+		     
+		if(stcd.getProduct()!=null){
+			  stcd.setProduct(null);
+			  return stockDetailRepository.save(stcd);}
 		
-		return null;
-	}*/
+		else{
+			return null;
+		}
+	}
 	
 	
 
@@ -220,6 +225,47 @@ if(stockD.getQuantiteInstan() <= stockD.getQuantiteMin()){
   return quantity;
 	
 	}
+	
+	
+  public Date incrementeDateExpiretion(Date datexpiration){
+	  
+	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	  Calendar c = Calendar.getInstance();
+	  try {
+	  	c.setTime(datexpiration);
+	  } catch (ParseException e) {
+	  	// TODO Auto-generated catch block
+	  	e.printStackTrace();
+	  }
+	  c.add(Calendar.DATE, -2);  // number of days to add
+	 // dt = sdf.format(c.getTime());
+	  
+	  return c;
+  }
+	
+
+	public void sendNotifSoldeStock(StockDetail stcd)
+	{
+
+		List <StockDetail> list = (List <StockDetail>) stockDetailRepository.findAll();
+		SimpleDateFormat sdf =new  SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar c =Calendar.getInstance();
+		
+		
+		
+		
+		
+		for(StockDetail stcD : list){
+			if(stcD.getProduct().getCategory() == "Alimentaire" && stcD.getDexpiration().compareTo(arg0))
+			{
+				
+			}
+			
+		}
+	}
+	
+	
+	
 
 
 	
