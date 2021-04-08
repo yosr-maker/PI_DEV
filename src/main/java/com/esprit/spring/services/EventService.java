@@ -4,9 +4,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -143,6 +143,7 @@ public class EventService implements EventServiceI {
 			n.setDate(dateFormat.format(date));
 			n.setStatus("Pas encore vu");
 			NotificationRepository.save(n);
+			NotificationService.notifsms(u);
 				
 		}	
 		
@@ -156,7 +157,6 @@ public class EventService implements EventServiceI {
 			u.setMcompte(u.getMcompte()+montantRembourse);
 			Notification n = new Notification();
 			n.setClient(u);
-			//annotation 
 			n.setBody("Mr/Mdm "+u.getLastName()+" "+u.getFirstName()+""
 				+ "Nous avons le regret de vous annoncer que l'événement "+ev.getName()+" vous souhaitez participer a été annulé pour certaines raisons."
 					+ " C'est pourquoi, nous avons remboursé le prix de votre billet. En cas de problème, n'hésitez pas à nous contacter."
@@ -167,7 +167,7 @@ public class EventService implements EventServiceI {
 			ClientRepository.save(u);
 			ContributionRepository.deleteById(c.getId());
 			EventRepository.save(ev);
-			//NotificationService.notifsms(u);
+			NotificationService.notifsms(u);
 		}
 		}
 		
@@ -181,24 +181,24 @@ public class EventService implements EventServiceI {
 		List<String> list = new ArrayList<>();
 		String s = "";
 		List<Long> listId = new ArrayList<>();
-		List<Integer> listViews= new ArrayList<>();
+		List<Integer> listparticipations= new ArrayList<>();
 		List<Event> listEvent = EventRepository.findAll();
 		
 		for (Event ev : listEvent) {
 			listId.add(ev.getId());
-			listViews.add(ev.getParticipantsNbr());
+			listparticipations.add(ev.getParticipantsNbr());
 		}
 		
-		List<Integer> sortedList = new ArrayList<>(listViews);
+		List<Integer> sortedList = new ArrayList<>(listparticipations);
 		Collections.sort(sortedList);
 		
 		for (int i=0; i<3; i++) {
 			int max = sortedList.get(sortedList.size()-1);// retourne le max qui a la dernière position de la liste
-			Long ind = listId.get(listViews.indexOf(max));// prend nbre de participations et retourne id d'event corresspondant
+			Long ind = listId.get(listparticipations.indexOf(max));// prend nbre de participations et retourne id d'event corresspondant
 			s = (i+1)+"- Event: "+EventRepository.findById(ind).get().getName()+" with "+max+" participations ";
 			list.add(s);
 			sortedList.remove(sortedList.size()-1);
-			listViews.set(listViews.indexOf(max), -1);
+			listparticipations.set(listparticipations.indexOf(max), -1);
 		}
 		
 		return list;

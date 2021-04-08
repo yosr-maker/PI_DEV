@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table( name = "T_Product")
 public class Product implements Serializable {
@@ -25,7 +27,7 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private long id;
 	
 	@Column(name="Name")
 	private String Name ; 
@@ -60,6 +62,7 @@ public class Product implements Serializable {
    private Command_line commandLine;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="product")
+	@JsonIgnore
 	private List<Claim> claims;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="product")
@@ -73,11 +76,11 @@ public class Product implements Serializable {
 	private List<Ad> ads;
 
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -190,8 +193,26 @@ public class Product implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getDate() {
-		return getDate();
+
+
+	public Product(long id, String name, String description, String category, float weight, float quantity, float price,
+			List<Basket> baskets, Ray ray, Command_line commandLine, List<Claim> claims, List<Publication> publications,
+			Stock stock, List<Ad> ads) {
+		super();
+		this.id = id;
+		Name = name;
+		Description = description;
+		Category = category;
+		this.weight = weight;
+		Quantity = quantity;
+		Price = price;
+		this.baskets = baskets;
+		this.ray = ray;
+		this.commandLine = commandLine;
+		this.claims = claims;
+		this.publications = publications;
+		this.stock = stock;
+		this.ads = ads;
 	}
 
 

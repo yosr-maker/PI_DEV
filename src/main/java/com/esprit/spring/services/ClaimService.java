@@ -1,6 +1,7 @@
 package com.esprit.spring.services;
 
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -15,8 +16,10 @@ import org.springframework.stereotype.Service;
 import com.esprit.spring.entites.Claim;
 import com.esprit.spring.entites.ClaimDecision;
 import com.esprit.spring.entites.Client;
+import com.esprit.spring.entites.Product;
 import com.esprit.spring.repository.ClaimRepository;
 import com.esprit.spring.repository.ClientRepository;
+import com.esprit.spring.repository.ProductRepository;
 
 
 @Service
@@ -29,24 +32,27 @@ public class ClaimService implements ClaimServiceI{
 		ClientRepository clientRepository;
 		@Autowired
 		ClaimService claimService;
+		@Autowired
+		ProductRepository productRepository;
 
-		private int A;
-		private int B;
-		private int res;
+		//private int A;
+		//private int B;
+		//private int res;
 		
 		private static final org.apache.logging.log4j.Logger l= LogManager.getLogger(ClaimService.class);
 
 	
 @Override
-public Claim save(Claim rec, long u) {
-	Client us = ClientService.findOne(u);
-	rec.setReponse(null);
-	rec.setTraiter(false); 
-	rec.setEtat("En_attente");
-	rec.setClient(us);
-	return claimRepository.save(rec);
+public Claim save(Claim cl, long clientId,long productId) {
+	Client c=clientRepository.findById(clientId).get();
+	Product p = productRepository.findById(productId).get();
+	cl.setClient(c);
+	cl.setProduct(p);
+	claimRepository.save(cl);	
+	return cl;
 
 }
+
 
 @Override
 public void deleteClaim(String id) {
@@ -84,14 +90,23 @@ public void updateDecision(long id, ClaimDecision decision) {
         claimRepository.save(claim);
     }
 }
+@Override
+public Optional<Claim> getByIdClaim(Long id){
+	return claimRepository.findById(id);
+}
+
+
+
+
+
+}
+
 /*
-	
-/*Rembourser reclamation
 @Override
 public void rembourserReclamation(long id){
-	
-	Claim cl;
-	Optional<Claim> c = claimRepository.findById(id);
+
+	Optional<Claim> cl = claimRepository.findById(id);
+	if (cl.isPresent()) {
 	 A = cl.getProduct().getDate();
 	 B = LocalDate.now().getDayOfYear();
 	res = B-A;
@@ -102,9 +117,12 @@ public void rembourserReclamation(long id){
 		claimRepository.ChangetEtat("En_attente", id);
 		
 	}
+	}
+*/
 
-}
 
+
+/*
 @Override
 public void ReparerReclamation(long id){
 	
@@ -141,7 +159,5 @@ public void EchangeReclamation(long id){
 }
 */
 
-
-}
 
 

@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -45,10 +46,11 @@ public class Claim 	implements Serializable {
 	    @NotNull
 	    private String descriptionText;
 	 
-	 
+	
 	 @ManyToOne 
 	 private Client client;
 	 
+
 	@ManyToOne
     @JoinColumn(name = "id")
 	private Product product;

@@ -19,11 +19,6 @@ ClientRepository clientRepository;
 
 
 	
-	/*Chercher un client*/
-	
-	public Client findOne(long id){
-	return clientRepository.findById(id).get();
-	}
 	
 	@Override
 	public Client findbyid(long id) {

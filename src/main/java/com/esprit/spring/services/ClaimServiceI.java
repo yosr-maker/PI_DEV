@@ -1,9 +1,11 @@
 package com.esprit.spring.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.esprit.spring.entites.Claim;
 import com.esprit.spring.entites.ClaimDecision;
+
 public interface ClaimServiceI {
 	
 	
@@ -13,10 +15,11 @@ public interface ClaimServiceI {
 	Claim updateClaim(Claim c);
 	Claim retrieveClaim(String id);
 	void updateDecision(long idClaim, ClaimDecision decision);
-	Claim save(Claim rec, long u);
-/*	void rembourserReclamation(long id);
-	void ReparerReclamation(long id);
+	Optional<Claim> getByIdClaim(Long id);
+	Claim save(Claim cl, long clientId, long productId);
+/*	void ReparerReclamation(long id);
 	void EchangeReclamation(long id);*/
+	//void rembourserReclamation(long id);
 
 
 }

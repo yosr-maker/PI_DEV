@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.esprit.spring.entites.Claim;
-import com.esprit.spring.entites.Client;
+
 import com.esprit.spring.services.ClaimServiceI;
 
 @RestController
@@ -35,13 +35,14 @@ public Claim retrieveClaim(@PathVariable("claim-id") String claimId) {
 return claimService.retrieveClaim(claimId);
 }
 
-@PostMapping("/add-claim")
+@PostMapping("/addClaim/{ProductId}/{clientId}")
 @ResponseBody
-public Claim addClaim(@RequestBody Claim c, @RequestBody long u) {
-Claim claim = claimService.save(c, u);
-return claim;
-}
+public Claim addClaim(@RequestBody Claim cl,@PathVariable("ProductId") Long ProductId,@PathVariable("clientId") Long clientId) {
+	 Claim c =claimService.save(cl,clientId,ProductId);
+	 System.err.println(c.getIdClaim()+"**"+c.getDescriptionText()+"***"+c.getEtat()+"**"+c.getReponse()+"**"+c.getDateClaim()+"**"+c.getDecision()+"**"+c.getTraiter()+c.getClient().getId()+"**"+c.getProduct().getId());
+	return c;
 
+    }
 @DeleteMapping("/remove-claim/{claim-id}")
 @ResponseBody
 public void removeClaim(@PathVariable("claim-id") String claimId) {
@@ -53,4 +54,8 @@ claimService.deleteClaim(claimId);
 public Claim modifyClaim(@RequestBody Claim claim) {
 return claimService.updateClaim(claim);
 }
+
+
+
+
 }

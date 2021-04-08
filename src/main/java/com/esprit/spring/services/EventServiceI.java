@@ -1,11 +1,9 @@
 package com.esprit.spring.services;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.esprit.spring.entites.Client;
 import com.esprit.spring.entites.Event;
 import com.esprit.spring.entites.EventCategory;
 @Service

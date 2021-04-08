@@ -9,6 +9,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 @Entity
 @Table(name="T_CLIENT")
 
@@ -32,7 +35,9 @@ public class Client extends User {
 	private List<Notification> notification;
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="client")
 	private List<Contribution> contribution;
+	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="client")
+	@JsonIgnore
 	private List<Claim> claims;
 
 	public Client(int donation, Basket basket, List<Participation> participation, List<Notification> notification,

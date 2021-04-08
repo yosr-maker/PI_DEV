@@ -29,7 +29,7 @@ public class NotificationService implements NotificationServiceI {
 	ClientRepository ClientRepository;
 	
 	public static final String ACCOUNT_SID = "AC861e84eeadedd8f2915b9bda24eb1430";
-	 public static final String AUTH_TOKEN = "e81dbb367c3bd962127796ed81e6db55";
+	 public static final String AUTH_TOKEN = "bc89da439e37bb0c60f8185fde687dc5";
 	
 	public void notifyAllClient(String eventName, String eventGoal) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -55,10 +55,9 @@ public class NotificationService implements NotificationServiceI {
 		 Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
             Message message = Message.creator(new PhoneNumber(client.getPhoneNumber()),
                     new PhoneNumber("+12179033359"),
-                    "Hi " + client.getPhoneNumber() +
-                    "Nous avons le regret de vous annoncer que l'événement que vous souhaitez participer a été annulé pour certaines raisons."
-				+ " C'est pourquoi, nous avons remboursé le prix de votre billet. En cas de problème, n'hésitez pas à nous contacter."
-				+ " Merci.").create();
+                    "Salut cher client, nous avons le regret de vous annoncer que l'événement que vous souhaitez participer a été annulé pour certaines raisons."
+				    + " C'est pourquoi, nous avons remboursé le prix de votre billet. En cas de problème, n'hésitez pas à nous contacter."
+				    + " Merci.").create();
 
             System.out.println(message.getSid());
             return client;

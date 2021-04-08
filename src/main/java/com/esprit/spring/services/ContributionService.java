@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.esprit.spring.controller.ClientController;
 import com.esprit.spring.entites.Client;
 import com.esprit.spring.entites.Contribution;
 import com.esprit.spring.entites.Event;
