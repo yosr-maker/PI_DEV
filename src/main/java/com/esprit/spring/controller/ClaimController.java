@@ -39,7 +39,7 @@ return claimService.retrieveClaim(claimId);
 @ResponseBody
 public Claim addClaim(@RequestBody Claim cl,@PathVariable("ProductId") Long ProductId,@PathVariable("clientId") Long clientId) {
 	 Claim c =claimService.save(cl,clientId,ProductId);
-	 System.err.println(c.getIdClaim()+"**"+c.getDescriptionText()+"***"+c.getEtat()+"**"+c.getReponse()+"**"+c.getDateClaim()+"**"+c.getDecision()+"**"+c.getTraiter()+c.getClient().getId()+"**"+c.getProduct().getId());
+	 System.err.println(c.getIdClaim()+"**"+c.getDescriptionText()+"***"+c.getDateClaim()+"**"+c.getDecision()+"**"+c.getClient().getId()+"**"+c.getProduct().getId());
 	return c;
 
     }
@@ -55,6 +55,11 @@ public Claim modifyClaim(@RequestBody Claim claim) {
 return claimService.updateClaim(claim);
 }
 
+
+@GetMapping("/displayBadProductsByClaims")
+@ResponseBody
+public List<String> displayBestEventsByCollects()
+{return claimService.displayBadProductsByClaims();}
 
 
 

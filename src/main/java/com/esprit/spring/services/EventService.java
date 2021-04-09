@@ -57,7 +57,6 @@ public class EventService implements EventServiceI {
 		NewEvent.setDate(event.getDate());
 		NewEvent.setHour(event.getHour());
 		NewEvent.setLocation(event.getLocation());		
-		NewEvent.setPoster(event.getPoster());
 		NewEvent.setTicketPrice(event.getTicketPrice());
 		NewEvent.setGoal(event.getGoal());
 		NewEvent.setStatus(false);
@@ -83,7 +82,6 @@ public class EventService implements EventServiceI {
 		ev.setDate(ev.getDate());
 		ev.setHour(ev.getHour());
 		ev.setLocation(ev.getLocation());
-		ev.setPoster(ev.getPoster());
 		ev.setTicketPrice(ev.getTicketPrice());
 		ev.setGoal(ev.getGoal());
 		EventRepository.save(ev);

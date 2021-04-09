@@ -2,12 +2,7 @@ package com.esprit.spring.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.esprit.spring.entites.Client;
-import com.esprit.spring.entites.Jackpot;
 import com.esprit.spring.repository.ClientRepository;
 
 

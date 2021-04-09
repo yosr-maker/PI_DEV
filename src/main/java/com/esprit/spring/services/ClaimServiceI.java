@@ -17,9 +17,7 @@ public interface ClaimServiceI {
 	void updateDecision(long idClaim, ClaimDecision decision);
 	Optional<Claim> getByIdClaim(Long id);
 	Claim save(Claim cl, long clientId, long productId);
-/*	void ReparerReclamation(long id);
-	void EchangeReclamation(long id);*/
-	//void rembourserReclamation(long id);
+	List<String> displayBadProductsByClaims();
 
 
 }

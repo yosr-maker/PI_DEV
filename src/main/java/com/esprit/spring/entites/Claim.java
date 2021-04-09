@@ -17,8 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -37,9 +35,7 @@ public class Claim 	implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dateClaim;
 	
-	private String reponse;
-	private Boolean Traiter;
-	private String Etat;
+	
 
 	
 	 @Column(name = "DESCRIPTION_TEXT")
@@ -76,23 +72,6 @@ public class Claim 	implements Serializable {
 
 	
 
-	public String getReponse() {
-		return reponse;
-	}
-
-	public void setReponse(String reponse) {
-		this.reponse = reponse;
-	}
-
-	
-
-	public String getEtat() {
-		return Etat;
-	}
-
-	public void setEtat(String etat) {
-		Etat = etat;
-	}
 
 	public Client getClient() {
 		return client;
@@ -129,27 +108,18 @@ public class Claim 	implements Serializable {
 
 
 
-	public Claim(Long idClaim, ClaimDecision decision, Date dateClaim, String reponse, Boolean traiter, String etat,
-			String descriptionText, Client client, Product product) {
+	public Claim(Long idClaim, ClaimDecision decision, Date dateClaim,String descriptionText, Client client, Product product) {
 		super();
 		this.idClaim = idClaim;
 		this.decision = decision;
 		this.dateClaim = dateClaim;
-		this.reponse = reponse;
-		Traiter = traiter;
-		Etat = etat;
+
 		this.descriptionText = descriptionText;
 		this.client = client;
 		this.product = product;
 	}
 
-	public Boolean getTraiter() {
-		return Traiter;
-	}
 
-	public void setTraiter(Boolean traiter) {
-		Traiter = traiter;
-	}
 
 	public Claim() {
 		super();
