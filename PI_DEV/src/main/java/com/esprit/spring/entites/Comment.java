@@ -13,40 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-//@Entity
-//@Table(name="T_COMMENT")
-//public class Comment implements Serializable 
-// {
-//	
-//	private static final long serialVersionUID = 1L;
-//	@Id
-//	@GeneratedValue(strategy=GenerationType.IDENTITY)
-//	@Column(name = "commentId")
-//	private long commentId;
-//	public long getCommentId() {
-//		return commentId;
-//	}
-//	public void setCommentId(long commentId) {
-//		this.commentId = commentId;
-//	}
-//	
-//	@Override
-//	public String toString() {
-//		return "Comment [commentId=" + commentId + ", evaluationcomments="
-//				+ evaluationcomments + ", publication=" + publication + "]";
-//	}
-//
-//	
-// 
-//	@OneToMany(mappedBy="comment")
-//   
-//	List <EvaluationComment> evaluationcomments;
-//
-//	@ManyToOne
-//	@JoinColumn(name = "idPublication")
-//	Publication publication;
+
+
 @Entity
 public class Comment implements Serializable 
 {
@@ -59,18 +30,19 @@ private long id;
 @Column
  private String mot;
 
-//@JsonBackReference
-@ManyToOne(cascade=CascadeType.PERSIST)
-@JoinColumn(name="idPublication",referencedColumnName="id")
+
+@ManyToOne
+
+@JoinColumn(name="idPublication")
 private Publication publication;
 
-//@JsonBackReference
-@ManyToOne(cascade=CascadeType.PERSIST)
+
+@ManyToOne
 @JoinColumn(name="idclient",referencedColumnName="id")
 private Client client;
 
 
-///evaluation
+
 
 @OneToMany(mappedBy="comment" , cascade=CascadeType.REMOVE)
 private List<EvaluationComment> ratings;

@@ -18,42 +18,6 @@ import javax.persistence.TemporalType;
 
 
 
-
-//@Entity
-//@Table(name="PUBLICATION")
-//
-// 
-//
-//public class Publication  implements Serializable {
-//
-//	
-//	private static final long serialVersionUID = 1L;
-//	
-//	
-//	
-//	@Id
-//	@GeneratedValue(strategy=GenerationType.IDENTITY)
-//	@Column(name = "idPublication")
-//	private  Long idPublication;
-//
-//
-//	@OneToMany(mappedBy="publication")
-//	List<Comment> comments ; 
-//
-//	@ManyToOne
-//	@JoinColumn(name = "id")
-//	private Product product;
-//}
-//	
-//	
-
-
-
-
-
-
-
-
 @Entity
 @Table(name="PUBLICATION")
 public class Publication implements Serializable{
@@ -80,14 +44,13 @@ public class Publication implements Serializable{
 	@Temporal(TemporalType.DATE)
     private Date date;
 	
-	//@JsonManagedReference
-	//@JsonIgnore
-	@OneToMany(mappedBy="publication",cascade=CascadeType.REMOVE)
+	
+	
+	@OneToMany(mappedBy="publication")
+	
 	public List<Comment> comments;
 	
-	///evaluation
-	
-		@OneToMany(mappedBy="publication" , cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="publication" , cascade=CascadeType.REMOVE)
 	    private List<EvaluationPublication> ratings;
 	    
 		@ManyToOne
