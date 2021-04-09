@@ -249,6 +249,11 @@ public class Publication implements Serializable{
 					+ "]";
 		}
 
+		public Publication get() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 		
 		
 		

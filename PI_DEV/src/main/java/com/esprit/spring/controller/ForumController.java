@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.esprit.spring.entites.Claim;
+
 import com.esprit.spring.entites.Comment;
 import com.esprit.spring.entites.EvaluationComment;
 import com.esprit.spring.entites.Publication;
@@ -25,6 +25,8 @@ import com.esprit.spring.services.CommentServiceI;
 
 import com.esprit.spring.services.PublicationServiceI;
 import com.esprit.spring.services.RechercheServiceI;
+
+
 
 
 
@@ -71,13 +73,12 @@ public class ForumController {
 	@ResponseBody
 	public Response findinterested() {
 		
-	String max = rechercheService.extract(ClientController.CLIENTCONNECTED.getId()); // user controller je dois la changer a clientcontroller i think
-
+	String max = rechercheService.extract(ClientController.CLIENTCONNECTED.getId()); 
 	List<Publication> list = publicationService.findbyType(max);
 
 
 	if (list.size()==0) {
-		return Response.status(Status.NOT_FOUND).entity( "Do a little search ;) ").build();
+		return Response.status(Status.NOT_FOUND).entity( "faites une petite recherche!  ").build();
 
 	                   
 	}
@@ -88,7 +89,7 @@ public class ForumController {
 	}
 
 	
-	//enregistrer ma recherche et retourner les publication cherchées
+	// enregistrer ma recherche et retourner les publications cherchées
 	@GetMapping("/search/{type}")
 	@ResponseBody
 	public Response addSearch(@PathVariable("type") String type) {
@@ -109,9 +110,9 @@ public class ForumController {
 	rechercheService.addSearch(r, ClientController.CLIENTCONNECTED.getId());
 	return Response.status(Status.OK).entity(list).build();
 	    }
-		 
-		 
 	}
+		 
+	
 	//////CRUD Publication//////
 	///////list of all Publications///////////
 //	@GetMapping("/retrievepublications")
@@ -157,7 +158,7 @@ public class ForumController {
 	    			 
 	    }
 	}
-
+    
 	@DeleteMapping("/delete-publication/publication-id}")
 	@ResponseBody
 	public void deletePublication(@PathVariable("publication-id") long publicationId) {
@@ -218,18 +219,18 @@ public class ForumController {
 	}
 
 
-	///////////////////////subject evaluation//////////////////////
-	/*
-	@GetMapping("/rate/{subjectId}")
-	@ResponseBody
-	public Response Rate(@PathVariable("subjectId") Long subjectId) {
-		subjectService.addrate(rate1, subjectId);
-		
-	return Response.status(Status.OK).entity("add successful").build();
+	//evaluation publication
+	
+//	@GetMapping("/rate/{subjectId}")
+//	@ResponseBody
+//	public String Rate(@PathVariable("publicationId") Long publicationId) {
+//		publicationService.addrate(rate1, publicationId);
+//		
+//	return " Le star a été ajouté avec succés " ;
+//
+//	    }  
 
-	    }  
-
-	*/
+	
 
 	//comment evaluation
 	@PostMapping("/evaluate/{commentId}")

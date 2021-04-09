@@ -1,12 +1,14 @@
 package com.esprit.spring.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.esprit.spring.entites.Client;
 import com.esprit.spring.entites.Publication;
 
 
@@ -28,4 +30,10 @@ public interface PublicationRepository extends CrudRepository <Publication, Long
 		//list of id_Publication in class comment
 		 @Query("select p.id from Publication p join p.comments c where c.publication=p")
 		 public List<Long> list1();
+		 
+		 
+		 
+//		 @Query("select p from Publication p where p.id=:pub_id")
+//			Publication findById(@Param ("pub_id") Long pub_id);
+		
 }
