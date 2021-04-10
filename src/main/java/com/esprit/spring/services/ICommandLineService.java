@@ -9,5 +9,7 @@ public interface ICommandLineService {
 	public Command_line addCommandLine(Command_line cml);
 	
 	public Product affectaionProduitToCommandLine(int idCommand, int idProduit,int nbr_Produit);
+	
+	
 
 }

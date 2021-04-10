@@ -4,6 +4,8 @@ package com.esprit.spring.services;
 
 
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,6 +106,18 @@ public class ProductServiceImpl  implements   IProductService{
 		 else 
 			 return stcd.getProduct();
 	}
+
+	@Override
+	public List<Product> getProductMaxCommandLine() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*@Override
+	public List<Product> getProductMaxCommandLine() {
+		List<Product> productF = productRepository.getProductMaxCommandLine();
+		return productF;
+	}*/
 
 	
 	

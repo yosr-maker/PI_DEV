@@ -16,8 +16,7 @@ public Product getProductById(int id);
 public  void updateProduct(Product prod);
 public void deleteAllProduct();
 public Product affectationStockDtailDansProduit(int idStockDetail, int idProduct);
-
-
+public List<Product> getProductMaxCommandLine();
 	
 	
 }
