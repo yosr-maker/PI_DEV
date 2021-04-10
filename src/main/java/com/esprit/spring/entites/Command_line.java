@@ -26,27 +26,29 @@ public class Command_line implements Serializable{
 	
 
 	@Id
-	private int id;
+	private Long id;
 
 	@Column(name="quantity")
-	private float quantityPurchased;
+	private Long quantityPurchased;
 	
 	@OneToMany
-	@JoinColumn(name = "basketId")
+	@JoinColumn(name = "basketId" ,nullable=true)
 	private List <Basket> baskets;
 	
 	
 	@OneToMany
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "id",nullable=true)
 	private List<Product> products;
+	
+	@Column(name="prixToPay")
+	private float prixToPay;
 
-
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -56,7 +58,7 @@ public class Command_line implements Serializable{
 	}
 
 
-	public void setQuantityPurchased(float quantityPurchased) {
+	public void setQuantityPurchased(Long quantityPurchased) {
 		this.quantityPurchased = quantityPurchased;
 	}
 
@@ -71,19 +73,29 @@ public class Command_line implements Serializable{
 	}
 
 
-	/*public List<Product> getProducts() {
+	public List<Product> getProducts() {
 		return products;
 	}
 
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
-	}*/
+	}
 
 
 	public Command_line() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+
+	public float getPrixToPay() {
+		return prixToPay;
+	}
+
+
+	public void setPrixToPay(float prixToPay) {
+		this.prixToPay = prixToPay;
 	}
 	
 	

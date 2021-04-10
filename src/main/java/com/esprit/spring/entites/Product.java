@@ -25,7 +25,7 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Long id;
 	
 	@Column(name="Name")
 	private String Name ; 
@@ -40,7 +40,7 @@ public class Product implements Serializable {
 	private float weight;
 	
 	@Column(name="Quantity")
-	private float Quantity;
+	private Long Quantity;
 	
 	
 	
@@ -71,11 +71,11 @@ public class Product implements Serializable {
 	@OneToMany
 	private List<Ad> ads;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -111,12 +111,12 @@ public class Product implements Serializable {
 		this.weight = weight;
 	}
 
-	public float getQuantity() {
+	public Long getQuantity() {
 		return Quantity;
 	}
 
-	public void setQuantity(float quantity) {
-		Quantity = quantity;
+	public void setQuantity(Long q) {
+		Quantity = q;
 	}
 
 	public float getPrice() {

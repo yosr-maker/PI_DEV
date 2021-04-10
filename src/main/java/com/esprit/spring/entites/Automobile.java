@@ -20,7 +20,7 @@ public class Automobile implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "idAuto")
-	private int idAuto;
+	private Long idAuto;
 	@Column(name="typeAuto")
 	private String typeAuto; 
 	
@@ -28,7 +28,7 @@ public class Automobile implements Serializable {
 	private String Power;
 	
 	@OneToOne
-	@JoinColumn(name="idDriver")
+	@JoinColumn(name="idDriver",nullable = true)
 	Driver driver ; 
 
 	
@@ -44,7 +44,7 @@ public class Automobile implements Serializable {
 
 
 
-	public int getIdAuto() {
+	public Long getIdAuto() {
 		return idAuto;
 	}
 
@@ -52,7 +52,7 @@ public class Automobile implements Serializable {
 
 
 
-	public void setIdAuto(int idAuto) {
+	public void setIdAuto(Long idAuto) {
 		this.idAuto = idAuto;
 	}
 
@@ -104,8 +104,25 @@ public class Automobile implements Serializable {
 		this.driver = driver;
 	}
 
-	
-	
+
+
+
+
+
+
+
+
+	public Automobile(Long idAuto, String typeAuto, String power) {
+		super();
+		this.idAuto = idAuto;
+		this.typeAuto = typeAuto;
+		this.Power = power;
+	}
+
+
+
+
+
 	
 
 }

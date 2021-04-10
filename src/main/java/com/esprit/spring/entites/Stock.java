@@ -32,9 +32,17 @@ public class Stock implements Serializable {
 	private int quantiteMax;
 	
 	@Column(name = "quantiteInstan")
-	private int quantiteInstan;
+	private Long quantiteInstan;
 
 
+
+	
+	@OneToOne(mappedBy="stock")
+	@JoinColumn(name="id")
+	private Product product;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="stock")
+	List<Shalves> shalves;
 
 	public int getIdStock() {
 		return idStock;
@@ -43,14 +51,6 @@ public class Stock implements Serializable {
 	public void setIdStock(int idStock) {
 		this.idStock = idStock;
 	}
-
-	@OneToOne(mappedBy="stock")
-	@JoinColumn(name="id")
-	private Product product;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="stock")
-	List<Shalves> shalves;
-
 
 	
 
@@ -70,11 +70,11 @@ public class Stock implements Serializable {
 		this.quantiteMax = quantiteMax;
 	}
 
-	public int getQuantiteInstan() {
+	public Long getQuantiteInstan() {
 		return quantiteInstan;
 	}
 
-	public void setQuantiteInstan(int quantiteInstan) {
+	public void setQuantiteInstan(Long quantiteInstan) {
 		this.quantiteInstan = quantiteInstan;
 	}
 
