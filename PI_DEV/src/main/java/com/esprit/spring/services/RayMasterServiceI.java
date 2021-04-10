@@ -2,18 +2,28 @@ package com.esprit.spring.services;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import com.esprit.spring.entites.RayMaster;
 
 public interface RayMasterServiceI {
 
-	RayMaster addRayMaster(RayMaster rm);
+	RayMaster findRayMasterByUsername(String username);
 
-	void deleteRayMaster(String id);
+	RayMaster addRayMaster(RayMaster rayMaster);
 
-	RayMaster updateRayMaster(RayMaster rm);
+	UserDetails loadRayMasterByUsername(String username) throws UsernameNotFoundException;
 
-	RayMaster retrieveRayMaster(String id);
+	RayMaster retrieveRayMaster(long id);
 
-	List<RayMaster> retrieveAllRayMaster();
+	List<RayMaster> retrieveAllRayMasters();
+
+	void deleteRayMaster(long id);
+
+	RayMaster authenticate(String username, String email);
+
+	RayMaster updateRayMaster(RayMaster ry);
+
 
 }

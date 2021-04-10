@@ -22,20 +22,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.esprit.spring.config.JwtTokenUtil;
-
-import com.esprit.spring.entites.Client;
-
+import com.esprit.spring.entites.RayMaster;
 import com.esprit.spring.model.JwtRequest;
 import com.esprit.spring.model.JwtResponse;
-import com.esprit.spring.services.ClientService;
+import com.esprit.spring.services.RayMasterService;
+
 
 @RestController
-public class ClientController {
+public class RayMasterController {
 
 
 	
 	@Autowired
-	ClientService clientService;
+	RayMasterService rayMasterService;
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -43,30 +42,30 @@ public class ClientController {
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 	
-	public static Client CLIENTCONNECTED ;
+	public static RayMaster RAYMASTERCONNECTED ;
 	
-	@GetMapping("/bonjour-client")
+	@GetMapping("/bonjour-rayMaster")
 	@ResponseBody
-	public String welcome() { return "Bonjour, Bienvenue à votre espace client "; }
+	public String welcome() { return "Bonjour, Bienvenue à votre espace RayMaster "; }
 	
 
-	@PostMapping("/register-client")
+	@PostMapping("/register-rayMaster")
 	@ResponseBody
-	public ResponseEntity<?> saveClient(@RequestBody Client client) throws Exception {
+	public ResponseEntity<?> saveRayMaster(@RequestBody RayMaster rayMaster) throws Exception {
 		System.out.println("Entring the register method ");
-		return ResponseEntity.ok(clientService.addClient(client));
+		return ResponseEntity.ok(rayMasterService.addRayMaster(rayMaster));
 	}
 
-	@PostMapping("/authenticate-client")
+	@PostMapping("/authenticate-rayMaster")
 	@ResponseBody
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 		try {
 			authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-			final UserDetails userDetails = clientService.loadClientByUsername(authenticationRequest.getUsername());
-			final Client client = clientService.findClientByUsername(authenticationRequest.getUsername());
-			CLIENTCONNECTED = client ;
-			System.out.println(CLIENTCONNECTED.getRole());
+			final UserDetails userDetails = rayMasterService.loadRayMasterByUsername(authenticationRequest.getUsername());
+			final RayMaster rayMaster = rayMasterService.findRayMasterByUsername(authenticationRequest.getUsername());
+			RAYMASTERCONNECTED = rayMaster ;
+			System.out.println(RAYMASTERCONNECTED.getRole());
 
 
 			final String token = jwtTokenUtil.generateToken(userDetails);
@@ -93,30 +92,30 @@ public class ClientController {
 	
 	
 	
-	@GetMapping("/retrieve_clients")
+	@GetMapping("/retrieve_rayMasters")
 	@ResponseBody
-	public List<Client> getClients() {
-	List<Client> list = clientService.retrieveAllClients();
+	public List<RayMaster> getRayMaster() {
+	List<RayMaster> list = rayMasterService.retrieveAllRayMasters();
 	return list;
 	}
 	
-	@GetMapping("/retrieve-client/{clientId}")
+	@GetMapping("/retrieve-rayMaster/{rayMasterId}")
 	@ResponseBody
-	public Client findbyid(@PathVariable("clientId") long clientId) {
-	return clientService.retrieveClient(clientId);
+	public RayMaster findbyid(@PathVariable("rayMasterId") long rayMasterId) {
+	return rayMasterService.retrieveRayMaster(rayMasterId);
 	}
 	
 	
-	@PutMapping("/modify-client")
+	@PutMapping("/modify-rayMaster")
 	@ResponseBody
-	public Client modifyClient(@RequestBody Client client) {
-	return clientService.updateClient(client);
+	public RayMaster modifyRayMaster(@RequestBody RayMaster rayMaster) {
+	return rayMasterService.updateRayMaster(rayMaster);
 	}
     
-    @DeleteMapping("/delete-client/{client-id}")
+    @DeleteMapping("/delete-rayMaster/{rayMaster-id}")
     @ResponseBody
-    public void deleteClient(@PathVariable("client-id") long clientId) {
-    	clientService.deleteClient(clientId);
+    public void deleteRayMaster(@PathVariable("rayMaster-id") long rayMasterId) {
+    	rayMasterService.deleteRayMaster(rayMasterId);
     }
     
    

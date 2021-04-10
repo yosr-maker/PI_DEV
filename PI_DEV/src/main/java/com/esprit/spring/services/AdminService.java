@@ -1,12 +1,17 @@
 package com.esprit.spring.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.esprit.spring.entites.Admin;
+
 import com.esprit.spring.repository.AdminRepository;
 
 
@@ -15,45 +20,75 @@ import com.esprit.spring.repository.AdminRepository;
 public class AdminService implements AdminServiceI {
 	
 
-		@Autowired
-		AdminRepository adminRepository;
-		private static final org.apache.logging.log4j.Logger l= LogManager.getLogger(AdminService.class);
+	@Autowired
+	 AdminRepository adminRepository;
+	
+	@Autowired
+	private PasswordEncoder bcryptEncoder;
+	
+        @Override
 
+	    public Admin addAdmin(Admin admin) {
+	    Admin newadmin = new Admin();
+		newadmin.setUsername(admin.getUsername());
+		newadmin.setPassword(bcryptEncoder.encode(admin.getPassword()));
+		newadmin.setFirstName(admin.getFirstName());
+		newadmin.setLastName(admin.getLastName());
+		newadmin.setEmail(admin.getEmail());
+		newadmin.setCin(admin.getCin());
+		newadmin.setPhoneNumber(admin.getPhoneNumber());
+		newadmin.setRole(admin.getRole());
+		return adminRepository.save(newadmin);
+	}
 
+	public Admin findAdminByUsername(String username) {
+		return adminRepository.findByUsername(username);
+	}
+	
+	
 	@Override
-	public Admin addAdmin(Admin a) {
-		return	adminRepository.save(a);
-		
+	public UserDetails loadAdminByUsername(String username) throws UsernameNotFoundException {
+		Admin admin = adminRepository.findByUsername(username);
+		if (admin == null) {
+			throw new UsernameNotFoundException("Client not found with username: " + username);
+		}
+		return new org.springframework.security.core.userdetails.User(admin.getUsername(), admin.getPassword(),
+				new ArrayList<>());
 	}
 
 	@Override
-	public void deleteAdmin(String id) {
-		adminRepository.deleteById(Long.parseLong(id));
-		
+	public Admin retrieveAdmin(long id) {
+
+		return adminRepository.findById(id).get();
 	}
 
-
-	@Override
-	public Admin updateAdmin(Admin a) {
-		 return adminRepository.save(a);
-		
-	}
-
-	@Override
-	public Admin retrieveAdmin(String id) {
-		Admin a  =adminRepository.findById(Long.parseLong(id)).orElse(null);
-			return a;
-	}
 	@Override
 	public List<Admin> retrieveAllAdmins() {
-		List<Admin> admins = (List<Admin>) adminRepository.findAll();
-		for (Admin admin: admins){
-			l.info("les admins  +++ :" + admin);
-		}
-			
-	return admins;	
+
+		return (List<Admin>) adminRepository.findAll();
 	}
+	@Override
+	public void deleteAdmin(long id) {
+
+		adminRepository.deleteById(id);
 
 	}
+	
+	public Admin authenticate(String username, String email) {
+		Admin a  = adminRepository.findByUsernameAndEmail(username, email);
+		return a;
+	}
+
+
+	
+	
+}
+
+
+
+
+
+
+	
 
 
