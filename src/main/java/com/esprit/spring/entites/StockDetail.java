@@ -52,14 +52,13 @@ public class StockDetail implements Serializable{
 	@JoinColumn(name = "produit_id", referencedColumnName = "id")
 	private Product product;
 
-    //@JsonIgnore
-	//@JsonBackReference
+   
 	@ManyToOne
 	@JoinColumn(name = "stock_id", referencedColumnName = "idStock")
 	private Stock stock;
 	
 	
-	
+	//@JsonBackReference
 	
 	
 	

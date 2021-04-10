@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.esprit.spring.entites.Stock;
+import com.esprit.spring.entites.StockDetail;
+import com.esprit.spring.repository.StockDetailRepository;
 import com.esprit.spring.repository.StockRepository;
 
 @Service
 public class StockServiceImpl implements IStockService {
 
-	
-	
+
+	@Autowired
+	StockDetailRepository stockDetailRepository;
 	
 	@Autowired
 	StockRepository  stockRepository;
@@ -75,7 +78,17 @@ public class StockServiceImpl implements IStockService {
 	
 	
 	
-	
+	public Stock affectaionStockToStockDetail( int idStock, int idStockDetail)
+	{
+		StockDetail stockD = stockDetailRepository.findById(idStockDetail).get();
+		Stock stock = stockRepository.findById(idStock).get();
+				
+		stock.getStockDeatail().add(stockD);
+		
+		return stockRepository.save(stock);
+		
+		
+	}
 	
 	
 	

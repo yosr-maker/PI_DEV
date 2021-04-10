@@ -15,6 +15,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="T_STOCK")
 public class Stock implements Serializable {
@@ -27,27 +30,17 @@ public class Stock implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
       private int idStock;
 	
-	@Column(name = "stockname")
+	//@Column(name = "stockname")
 	private String stockname;
 	
-	
+   
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="stock")
 	private List<StockDetail> stockDeatail;
 
 
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	

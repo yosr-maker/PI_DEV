@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.esprit.spring.entites.Stock;
+import com.esprit.spring.services.IStockDetailService;
 import com.esprit.spring.services.IStockService;
 
 @RestController
@@ -22,6 +23,8 @@ public class StockController {
 	@Autowired
 	IStockService iStockService;
 	
+	@Autowired
+	IStockDetailService iStockDetailService;
 	
 	@PostMapping("/add-stock")
 	@ResponseBody
@@ -72,5 +75,14 @@ public class StockController {
 		
 		return s ;
 	}
+	
+/*	@PutMapping("affectationStockDetaiToStock/{idStock}/{idStockDetail}")
+	@ResponseBody
+	public Stock affectationStockDetaiToStock(@PathVariable("idStock") int idStock,@PathVariable("idStockDetail")  int idStockDetail )
+	{
+		
+		return iStockService.affectaionStockToStockDetail(idStock, idStockDetail);
+		
+	}*/
 
 }
