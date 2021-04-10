@@ -14,9 +14,11 @@ import org.springframework.stereotype.Service;
 
 import com.esprit.spring.Email.IEmailService;
 import com.esprit.spring.entites.Product;
+import com.esprit.spring.entites.Stock;
 import com.esprit.spring.entites.StockDetail;
 import com.esprit.spring.repository.ProductRepository;
 import com.esprit.spring.repository.StockDetailRepository;
+import com.esprit.spring.repository.StockRepository;
 
 
 
@@ -28,6 +30,9 @@ public class StockDetailServiceImpl implements IStockDetailService{
 	@Autowired(required =true)
 	IEmailService emailService;
 	
+	
+	@Autowired
+	StockRepository stockRepository;
 	
 	@Autowired
 	StockDetailRepository stockDetailRepository;
@@ -129,7 +134,7 @@ public class StockDetailServiceImpl implements IStockDetailService{
 
 	
 	public void sendnotif(int idStockD) {
-		// TODO Auto-generated method stub
+	// TODO Auto-generated method stub
 		
 		StockDetail stockD = stockDetailRepository.findById(idStockD).get();
 		
@@ -137,15 +142,14 @@ public class StockDetailServiceImpl implements IStockDetailService{
 
 		if(stockD.getQuantiteInstan() <= stockD.getQuantiteMin()){
 			
-			String t = "jonathan.jibjikilayi@esprit.tn";
-			String sub = "Alert Quotas Attient !!!";
-			String b = "le produit:"+stockD.getProduct().getName()+"l'ID"+stockD.getProduct().getId()+"Detail du produit:"+stockD.getProduct().getDescription()+"sera un rupture bientot le quotas minimum est atteind\n"
+		String t = "jonathan.jibjikilayi@esprit.tn";
+		String sub = "Alert Quotas Attient !!!";
+		String b = "le produit:"+stockD.getProduct().getName()+"l'ID"+stockD.getProduct().getId()+"Detail du produit:"+stockD.getProduct().getDescription()+"sera un rupture bientot le quotas minimum est atteind\n"
 					+ "merci de bien vouloir vour ravitailler aupres de votre fournisseur";
-			
-			emailService.sendMail(t, sub, b);
-			
-			}
-		}
+		
+		emailService.sendMail(t, sub, b);
+	
+		}		}
 	
 	
 	public List<StockDetail> sendnotifProductExpiration()
@@ -163,7 +167,7 @@ public class StockDetailServiceImpl implements IStockDetailService{
 			 if(stockD.getDexpiration().compareTo(today)==0){
 				 listProductExpiration.add(stockD);
 				 
-				 String t = "jonathan.jibikilayi@esprit.tn";
+				 String t = "jibdany03@gmail.com";
 					String sub = "Alert  Produit!!!!! ";
 				 
 					String b = "le produit:"+stockD.getProduct().getName()+"l'ID"+stockD.getProduct().getId()+
@@ -179,7 +183,7 @@ public class StockDetailServiceImpl implements IStockDetailService{
 					 
 					 listProductExpiration.add(stockD);
 					 
-					 String t = "jonathan.jibjikilayi@esprit.tn";
+					 String t = "jibdany03@gmail.com";
 						String sub = "Alert !!!!! ";
 					 
 						String b = "le produit:"+stockD.getProduct().getName()+"l'ID"+stockD.getProduct().getId()+
@@ -206,15 +210,16 @@ public class StockDetailServiceImpl implements IStockDetailService{
 		
 		StockDetail stockD = stockDetailRepository.findById(idStockdetail).get();
 		
-		int quantity =stockD.getQuantiteInstan()-1;
+		int quantity =stockD.getQuantiteInstan()-nbrProduct;
 	
 		stockD.setQuantiteInstan(quantity);
+		stockDetailRepository.save(stockD);
 		
 if(stockD.getQuantiteInstan() <= stockD.getQuantiteMin()){
 			
-			String t = "emmanuel.kamandanzambisa@esprit.tn";
-			String sub = "Alert Quotas Attient !!!";
-			String b = "le produit:"+stockD.getProduct().getName()+"l'ID"+stockD.getProduct().getId()+"Detail du produit:"
+			String t = "jibdany03@gmail.com";
+			String sub = "Alert stock securité Attient !!!";
+			String b = "bonjour mr jonathan,\n "+stockD.getProduct().getName()+" "+"l'ID"+stockD.getProduct().getId()+"Detail du produit:"
 			+stockD.getProduct().getDescription()+"sera un rupture bientot le quotas minimum est atteind\n"
 					+ "merci de bien vouloir vour ravitailler aupres de votre fournisseur";
 			
@@ -227,42 +232,56 @@ if(stockD.getQuantiteInstan() <= stockD.getQuantiteMin()){
 	}
 	
 	
-  public Date incrementeDateExpiretion(Date datexpiration){
-	  
-	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	  Calendar c = Calendar.getInstance();
-	  try {
-	  	c.setTime(datexpiration);
-	  } catch (ParseException e) {
-	  	// TODO Auto-generated catch block
-	  	e.printStackTrace();
-	  }
-	  c.add(Calendar.DATE, -2);  // number of days to add
-	 // dt = sdf.format(c.getTime());
-	  
-	  return c;
-  }
 	
-
-	public void sendNotifSoldeStock(StockDetail stcd)
+	public void affectaionStockToStockDetail( int idStock, int idStockDetail)
 	{
-
-		List <StockDetail> list = (List <StockDetail>) stockDetailRepository.findAll();
-		SimpleDateFormat sdf =new  SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Calendar c =Calendar.getInstance();
-		
-		
-		
-		
-		
-		for(StockDetail stcD : list){
-			if(stcD.getProduct().getCategory() == "Alimentaire" && stcD.getDexpiration().compareTo(arg0))
-			{
+		StockDetail stockD = stockDetailRepository.findById(idStockDetail).get();
+		Stock stock = stockRepository.findById(idStock).get();
 				
-			}
-			
-		}
+		stock.getStockDeatail().add(stockD);
+				
+		
+		
 	}
+	
+	
+//	
+//  public Date incrementeDateExpiretion(Date datexpiration){
+//	  
+//	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//	  Calendar c = Calendar.getInstance();
+//	  try {
+//	  	c.setTime(datexpiration);
+//	  } catch (ParseException e) {
+//	  	// TODO Auto-generated catch block
+//	  	e.printStackTrace();
+//	  }
+//	  c.add(Calendar.DATE, -2);  // number of days to add
+//	 // dt = sdf.format(c.getTime());
+//	  
+//	  return c;
+//  }
+//	
+//
+//	public void sendNotifSoldeStock(StockDetail stcd)
+//	{
+//
+//		List <StockDetail> list = (List <StockDetail>) stockDetailRepository.findAll();
+//		SimpleDateFormat sdf =new  SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		Calendar c =Calendar.getInstance();
+//		
+//		
+//		
+//		
+//		
+//		for(StockDetail stcD : list){
+//			if(stcD.getProduct().getCategory() == "Alimentaire" && stcD.getDexpiration().compareTo(arg0))
+//			{
+//				
+//			}
+//			
+//		}
+//	}
 	
 	
 	

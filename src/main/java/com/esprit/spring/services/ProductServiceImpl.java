@@ -39,11 +39,6 @@ public class ProductServiceImpl  implements   IProductService{
 	public Product addProduct(Product product) {
 		// TODO Auto-generated method stub
 		
-		String t = "jonathan.jibikilayi@esprit.tn";
-		String sub = "bonjour";
-		String b = "ca marche !!!!!!!!!!!!!!!!!!!!!!!!!!!";
-		
-	//	emailService.sendMail(t, sub, b);
 		
 		return productRepository.save(product);
 	}
@@ -83,7 +78,13 @@ public class ProductServiceImpl  implements   IProductService{
 	
 	
 	
-	
+	@Override
+	public void deleteAllProduct() {
+		// TODO Auto-generated method stub
+		
+		productRepository.deleteAll();
+		
+	}
     
 	
 	@Transactional
@@ -100,8 +101,10 @@ public class ProductServiceImpl  implements   IProductService{
 		 }
 		
 		 else 
-			 return null;
+			 return stcd.getProduct();
 	}
+
+	
 	
 	
 	

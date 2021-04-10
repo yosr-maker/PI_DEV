@@ -3,6 +3,7 @@ package com.esprit.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.esprit.spring.entites.Stock;
 import com.esprit.spring.entites.StockDetail;
 import com.esprit.spring.services.IStockDetailService;
 
@@ -28,9 +30,6 @@ public class StockDetailController {
 	@ResponseBody
 	public StockDetail affectationProduct(@PathVariable("idProd") int idProd, @PathVariable("idStock") int idStock){
 		
-		
-	
-		
 		return iStockDetailService.affectationProduitDansStockDetail(idProd, idStock);
 	}
 	
@@ -43,6 +42,46 @@ public class StockDetailController {
 	}
 	
 	
+	@DeleteMapping("/delete-stockDetail/{idStockDetail}")
+	@ResponseBody
+	public void deleteStockDetails(@PathVariable("idStockDetail") int idStockDetail){
+		
+		iStockDetailService.deleteStockDetailById(idStockDetail);
+	}
+	
+	@PutMapping("/updateStockDetail")
+	@ResponseBody
+	public  StockDetail updateStockDetail(@RequestBody StockDetail stockDetail)
+	{
+		
+		return iStockDetailService.updatestockDetail(stockDetail);
+	}
+	
+	
+	@GetMapping("GetAllStockDetail")
+	@ResponseBody
+	public Iterable<StockDetail> getAllStocKDetail()
+	{
+		Iterable<StockDetail> I = iStockDetailService.getAllStockDetail();
+		return I;
+	}
+	
+	@GetMapping("GetByIdStockDetail")
+	@ResponseBody
+	public StockDetail GetStocKDetailById(int idStock){
+		
+		
+		
+		return iStockDetailService.getStockDetailById(idStock);
+	}
+	
+	@DeleteMapping("/deleAllStockDeatai")
+	@ResponseBody
+	public void DeleteAllstockDetais(){
+		
+		iStockDetailService.deleteAllStockDetail();
+	}
+	
 	
 	@GetMapping("decrementStock/{idStock}/{nBrProduct}")
 	@ResponseBody
@@ -50,9 +89,10 @@ public class StockDetailController {
 		
 		
 		
-		
 		return iStockDetailService.descrementStock(idStock,nBrProduct) ;
 	}
+	
+	
 	
 	
 	@GetMapping("List-ProductExpirer")
@@ -60,6 +100,16 @@ public class StockDetailController {
 	public List<StockDetail> listProductExprirer(){
 		
 		return iStockDetailService.sendnotifProductExpiration();
+	}
+	
+	
+	@GetMapping("affectationStockDetaiToStock/{idStock}/{idStockDetail}")
+	@ResponseBody
+	public void affectationStockDetaiToStock(@PathVariable("idStock") int idStock,@PathVariable("idStockDetail")  int idStockDetail )
+	{
+		
+		iStockDetailService.affectaionStockToStockDetail(idStock, idStockDetail);
+		
 	}
 	
 }

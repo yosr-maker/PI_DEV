@@ -17,5 +17,6 @@ public interface IStockDetailService {
 	public void sendnotif(int idStockD);
 	public int descrementStock(int idStockdetail,int nBrProduct);
 	public List<StockDetail> sendnotifProductExpiration();
+	public void affectaionStockToStockDetail( int idStock, int idStockDetail);
 
 }

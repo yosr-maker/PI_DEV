@@ -14,7 +14,7 @@ public Iterable<Product> getAllProduct();
 public void deleteProductBYId(int id);
 public Product getProductById(int id);
 public  void updateProduct(Product prod);
-
+public void deleteAllProduct();
 public Product affectationStockDtailDansProduit(int idStockDetail, int idProduct);
 
 

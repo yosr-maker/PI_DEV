@@ -39,10 +39,10 @@ public class StockDetail implements Serializable{
 	private int quantiteMax;
 	private int quantiteInstan;
 	
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	Date fabrication;
 	
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	Date dexpiration;
 	
 	

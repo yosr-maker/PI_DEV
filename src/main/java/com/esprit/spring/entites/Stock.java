@@ -33,12 +33,75 @@ public class Stock implements Serializable {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="stock")
 	private List<StockDetail> stockDeatail;
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public Stock(int idStock, String stockname, List<StockDetail> stockDeatail) {
+		super();
+		this.idStock = idStock;
+		this.stockname = stockname;
+		this.stockDeatail = stockDeatail;
+	}
+
+
+	public Stock() {
+		super();
+	}
+
+
+	public int getIdStock() {
+		return idStock;
+	}
+
+
+	public void setIdStock(int idStock) {
+		this.idStock = idStock;
+	}
+
+
+	public String getStockname() {
+		return stockname;
+	}
+
+
+	public void setStockname(String stockname) {
+		this.stockname = stockname;
+	}
+
+
+	public List<StockDetail> getStockDeatail() {
+		return stockDeatail;
+	}
+
+
+	public void setStockDeatail(List<StockDetail> stockDeatail) {
+		this.stockDeatail = stockDeatail;
+	}
 	 
 	
-//	@OneToMany(cascade = CascadeType.ALL, mappedBy="stock")
-//	
-//	private List<Product> products;
 
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
