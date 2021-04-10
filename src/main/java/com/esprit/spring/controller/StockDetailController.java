@@ -108,7 +108,7 @@ public class StockDetailController {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
-	@GetMapping("affectation/{idStock}/{idStockDetail}")
+	@PostMapping("affectation/{idStock}/{idStockDetail}")
 	@ResponseBody
 	public StockDetail affectaionStockToStockDetaills(@PathVariable("idStock")int idStock,@PathVariable("idStockDetail") int idStockDetail)
 	{

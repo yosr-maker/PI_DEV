@@ -241,6 +241,8 @@ if(stockD.getQuantiteInstan() <= stockD.getQuantiteMin()){
   return quantity;
 	
 	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public StockDetail affectaionStockToStockDetails(int idStock, int idStockDetail) {
 		// TODO Auto-generated method stub
@@ -256,47 +258,47 @@ if(stockD.getQuantiteInstan() <= stockD.getQuantiteMin()){
 	}
 	
 	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	public Date reductionJour(Date date){
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	Calendar c = Calendar.getInstance();
+	c.setTime(date);
+	System.out.println("date avant ajout "+ sdf.format(c.getTime()));
+	c.add(Calendar.DAY_OF_MONTH, -30);  // number of days to add
+
+	System.out.println("date apres ajout "+ sdf.format(c.getTime()));
+	
+	return c.getTime();
+	}
+  
+	
+
+	public void sendNotifSoldeStock(StockDetail stcd)
+	{
+		List <StockDetail> list = (List <StockDetail>) stockDetailRepository.findAll();
+	
+		
+		for(StockDetail stcD : list){
+			
+			
+			Date date2=reductionJour( stcD.getDexpiration());
+			
+			
+			if( stcD.getProduct().getCategory().equals("alimentaire") &&  stcD.getDexpiration().compareTo(date2)>0)
+			{
+				       
+			}			
+		
+		
+		
+		}
 	
 	
 	
 	
-//	
-//  public Date incrementeDateExpiretion(Date datexpiration){
-//	  
-//	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//	  Calendar c = Calendar.getInstance();
-//	  try {
-//	  	c.setTime(datexpiration);
-//	  } catch (ParseException e) {
-//	  	// TODO Auto-generated catch block
-//	  	e.printStackTrace();
-//	  }
-//	  c.add(Calendar.DATE, -2);  // number of days to add
-//	 // dt = sdf.format(c.getTime());
-//	  
-//	  return c;
-//  }
-//	
-//
-//	public void sendNotifSoldeStock(StockDetail stcd)
-//	{
-//
-//		List <StockDetail> list = (List <StockDetail>) stockDetailRepository.findAll();
-//		SimpleDateFormat sdf =new  SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		Calendar c =Calendar.getInstance();
-//		
-//		
-//		
-//		
-//		
-//		for(StockDetail stcD : list){
-//			if(stcD.getProduct().getCategory() == "Alimentaire" && stcD.getDexpiration().compareTo(arg0))
-//			{
-//				
-//			}
-//			
-//		}
-//	}
+	
+	}
 	
 	
 	

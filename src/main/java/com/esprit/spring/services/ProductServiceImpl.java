@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.esprit.spring.Email.IEmailService;
 import com.esprit.spring.entites.Claim;
+import com.esprit.spring.entites.Command_line;
 import com.esprit.spring.entites.Product;
 import com.esprit.spring.entites.StockDetail;
 import com.esprit.spring.repository.ProductRepository;
@@ -39,7 +40,7 @@ public class ProductServiceImpl  implements   IProductService{
 	public Product addProduct(Product product) {
 		// TODO Auto-generated method stub
 		
-		
+	  
 		return productRepository.save(product);
 	}
 

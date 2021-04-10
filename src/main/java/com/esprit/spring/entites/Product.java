@@ -37,6 +37,11 @@ public class Product implements Serializable {
 	
 	
 
+	
+
+
+
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -58,9 +63,9 @@ public class Product implements Serializable {
 	
    @Column(name="price")
 	private float Price;
-	
-   @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private Date datexpiration;
+   
+    private int nbr_commanline;
+
 	
 	
 
@@ -71,7 +76,9 @@ public class Product implements Serializable {
 	@JoinColumn(name = "idRay")
 	Ray ray;
 	
+	
   @ManyToOne
+  @JoinColumn(name="codeProduct" ,referencedColumnName = "id")
    private Command_line commandLine;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="product")
@@ -107,14 +114,22 @@ public class Product implements Serializable {
 	
 
 
-
-
+	public Product(String name, String description, String category, float weight, float price, 
+			Date datexpiration, Command_line commandLine) {
+		super();
+		this.name = name;
+		Description = description;
+		Category = category;
+		this.weight = weight;
+		Price = price;
+		this.commandLine = commandLine;
+	}
 
 
 
 
 	public Product(int id, String name, String description, String category, float weight, float price,
-			Date datexpiration, List<Basket> baskets, Ray ray, Command_line commandLine, List<Claim> claims,
+			 List<Basket> baskets, Ray ray, Command_line commandLine, List<Claim> claims,
 			List<Publication> publications, List<Ad> ads, StockDetail stockDetail) {
 		super();
 		this.id = id;
@@ -123,7 +138,7 @@ public class Product implements Serializable {
 		Category = category;
 		this.weight = weight;
 		Price = price;
-		this.datexpiration = datexpiration;
+	
 		this.baskets = baskets;
 		this.ray = ray;
 		this.commandLine = commandLine;
@@ -131,6 +146,44 @@ public class Product implements Serializable {
 		this.publications = publications;
 		this.ads = ads;
 		this.stockDetail = stockDetail;
+		
+	}
+
+
+
+
+	public Product(int id, String name, String description, String category, float weight, float price,
+			int nbr_commanline, List<Basket> baskets, Ray ray, Command_line commandLine, List<Claim> claims,
+			List<Publication> publications, List<Ad> ads, StockDetail stockDetail) {
+		super();
+		this.id = id;
+		this.name = name;
+		Description = description;
+		Category = category;
+		this.weight = weight;
+		Price = price;
+		this.nbr_commanline = nbr_commanline;
+		this.baskets = baskets;
+		this.ray = ray;
+		this.commandLine = commandLine;
+		this.claims = claims;
+		this.publications = publications;
+		this.ads = ads;
+		this.stockDetail = stockDetail;
+	}
+
+
+
+
+	public int getNbr_commanline() {
+		return nbr_commanline;
+	}
+
+
+
+
+	public void setNbr_commanline(int nbr_commanline) {
+		this.nbr_commanline = nbr_commanline;
 	}
 
 
@@ -228,16 +281,10 @@ public class Product implements Serializable {
 
 
 
-	public Date getDatexpiration() {
-		return datexpiration;
-	}
 
 
 
 
-	public void setDatexpiration(Date datexpiration) {
-		this.datexpiration = datexpiration;
-	}
 
 
 

@@ -15,7 +15,7 @@ public interface IStockService {
 	public void deleteAllStock();
 	
 		
-	public Stock affectaionStockToStockDetail( int idStock, int idStockDetail);
+	//public Stock affectaionStockToStockDetail( int idStock, int idStockDetail, int nbr_Produit);
 	
 
 }

@@ -33,7 +33,7 @@ public class Stock implements Serializable {
 	//@Column(name = "stockname")
 	private String stockname;
 	
-   
+   @JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="stock")
 	private List<StockDetail> stockDeatail;
 
