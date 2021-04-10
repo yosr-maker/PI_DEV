@@ -5,7 +5,7 @@ package com.esprit.spring.entites;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -34,10 +34,10 @@ public class Client extends User {
 
 
 	@JsonIgnore
-	@OneToMany(mappedBy="client",cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="client")
 	private List<Comment> comments;
 	
-	@OneToMany(mappedBy="client" , cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="client" )
     private List<Recherche> recherches;
 	
 

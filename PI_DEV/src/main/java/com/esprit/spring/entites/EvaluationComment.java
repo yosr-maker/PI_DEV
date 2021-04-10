@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="EVALUATION")
 	
@@ -24,7 +26,10 @@ public class EvaluationComment implements Serializable {
 		@Column(name = "idEvaluation")
 		private  Long idEvaluation;
 		
+		
+		@JsonIgnore
 		@ManyToOne
+		
 		@JoinColumn(name = "commentId")
 		private Comment comment;
 		

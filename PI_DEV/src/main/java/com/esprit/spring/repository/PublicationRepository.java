@@ -22,7 +22,7 @@ public interface PublicationRepository extends CrudRepository <Publication, Long
 		 
 		 List<Publication> findByType(String type);
 		
-		 /////////supp auto Publication//////////
+		 //supp auto Publication
 		 @Query("select p.id from Publication p where CURRENT_DATE - p.date >=:mydate ")
 		 public List<Long> pubs(@Param("mydate") Double mydate);
 		 

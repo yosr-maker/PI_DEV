@@ -2,7 +2,7 @@ package com.esprit.spring.services;
 
 import java.util.List;
 
-
+import com.esprit.spring.entites.EvaluationPublication;
 import com.esprit.spring.entites.Publication;
 
 
@@ -11,7 +11,7 @@ import com.esprit.spring.entites.Publication;
 
 public interface PublicationServiceI {
 
-	Publication addPublication(Publication publication);
+	
 
 	List<Publication> retrieveAllPublications();
 
@@ -30,6 +30,14 @@ public interface PublicationServiceI {
 	List<Publication> retrievePublicationByType(String type);
 
 	List<Long> publicationNonCommentes();
+
+	
+
+	Publication addPublication(Publication publication);
+
+	
+
+	EvaluationPublication addEvaluation(EvaluationPublication eva, Long id);
 	   
 	   
 	

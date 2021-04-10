@@ -37,6 +37,7 @@ public class ClientService  implements ClientServiceI{
 		newclient.setCin(client.getCin());
 		newclient.setPhoneNumber(client.getPhoneNumber());
 		newclient.setRole(client.getRole());
+		newclient.setDateNaissance(client.getDateNaissance());
 		return clientRepository.save(newclient);
 	}
         @Override

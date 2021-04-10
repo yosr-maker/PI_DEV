@@ -73,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable().cors().and()
 				// dont authenticate this particular request
 				.authorizeRequests().antMatchers("/servlet/authenticate","/servlet/register",
-						"/servlet/authenticate-client","/servlet/register-client","/servlet/authenticate-rayMaster","/servlet/register-rayMaster").permitAll().
+						"/servlet/authenticate-client","/servlet/register-client","/servlet/authenticate-rayMaster","/servlet/register-rayMaster","/servlet/register-admin","/servlet/authenticate-admin").permitAll().
 		         // .authorizeRequests().antMatchers("/**").permitAll().
 				// all other requests need to be authenticated
 				anyRequest().authenticated().and().

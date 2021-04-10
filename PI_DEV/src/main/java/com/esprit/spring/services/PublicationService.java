@@ -6,12 +6,14 @@ import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.esprit.spring.entites.EvaluationPublication;
+
 import com.esprit.spring.entites.Publication;
 import com.esprit.spring.repository.EvaluationPublicationRepository;
+import com.esprit.spring.repository.ProductRepository;
 import com.esprit.spring.repository.PublicationRepository;
 import com.esprit.spring.services.PublicationServiceI;
-
 
 
 
@@ -22,7 +24,12 @@ public class PublicationService implements PublicationServiceI {
 
 
 @Autowired
-private PublicationRepository publicationRepository;
+PublicationRepository publicationRepository;
+
+@Autowired
+ProductRepository productRepository;
+
+
 
 
 
@@ -33,12 +40,27 @@ private static final org.apache.logging.log4j.Logger l= LogManager.getLogger(Pub
 
 
 
-@Override	
-public Publication addPublication(Publication publication){
-	publicationRepository.save(publication) ;
-		return publication;
-		
-	}
+//@Override
+//public Publication addPublication(Publication publication,Long prod_id) {
+//	
+//	
+//	
+//	Product p = productRepository.findById(prod_id).get();
+//	
+//	
+//	publication.setProduct(p);
+//	
+//	publicationRepository.save(publication);
+//	return publication ;
+//}
+
+
+@Override
+public Publication addPublication(Publication publication) {
+	
+	publicationRepository.save(publication);
+	return publication ;
+}
 
 @Override
 public Publication retrievePublicationByid(Long id){
@@ -103,22 +125,22 @@ public List<Publication> retrievePublicationByType(String type){
 		return publicationRepository.findByType(type);
 	}
 
-// publication non commentées
+
 
 @Override
 public List<Long> publicationNonCommentes() {
-	 List<Long> mylist = publicationRepository.list1() ; //1
+	 List<Long> mylist = publicationRepository.list1() ; 
 	 Double a = (double) 10;
-	 List<Long> mylist1 = publicationRepository.pubs(a);  //1 2 3
+	 List<Long> pubscom = publicationRepository.pubs(a);  
 	for(Long i : mylist) {
 		
-		if(mylist1.contains(i)) {
-			mylist1.remove(i);
+		if(pubscom.contains(i)) {
+			pubscom.remove(i);
 			
 		}
 	}
 	
- return mylist1 ;
+ return pubscom ;
  
 	  
 }
@@ -126,24 +148,26 @@ public List<Long> publicationNonCommentes() {
 
 	
 
-//evaluation commentaire
-public EvaluationPublication addrate(int value,Long id) {
+
+
+
+
+
+@Override
+public EvaluationPublication addEvaluation(EvaluationPublication eva,Long id) {
 	
-	Publication p = publicationRepository.findById(id).get();
-	EvaluationPublication e = new EvaluationPublication();
-	e.setValue(value);
-	e.setPublication(p);
-	evaluationPublicationRepository.save(e);
-	return e ;
-	
-	
+	Publication publication = publicationRepository.findById(id).get();
+	EvaluationPublication evaluationpub = new EvaluationPublication();
+	int nbr = eva.getNbr();
+	evaluationpub.setNbr(nbr);
+	evaluationpub.setPublication(publication);
+	evaluationPublicationRepository.save(evaluationpub);
+	return evaluationpub ;
+
+
+}
 }
 
-
-
-
-}
-	
 
 		
 		

@@ -1,7 +1,6 @@
 package com.esprit.spring.services;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +44,7 @@ public class CommentService implements CommentServiceI{
 
 	
 	@Override
-	public List<Comment> list(Long pub_id){
+	public List<Comment> retireveComment(Long pub_id){
 				
 	Publication p = publicationRepository.findById(pub_id).get() ;
 	List<Comment> l = commentRepository.list(p);
@@ -61,18 +60,7 @@ public class CommentService implements CommentServiceI{
 		
 		}
 
-//	@Override
-//	public List<Comment> pertinentComments(Long pub_id, Long client_id){
-//				
-//	Publication p = publicationRepository.findById(pub_id).get();
-//	Client clt = clientRespository.findById(client_id).get();
-//
-//	List<Comment> l =commentRepository.myComments(p, clt);    // commentservice.mycomments 
-//	return l ;
-//		
-//		
-//	}
-	///modify comment ////
+
 	
 	@Override	
 	public Comment updateComment(Long id,String mot){
@@ -87,8 +75,7 @@ public class CommentService implements CommentServiceI{
 	
 	
 	
-	///////evaluation/////////
-	////initialiser e dans le controlleur >> view 
+	
 	@Override
 	public EvaluationComment addEvaluation(EvaluationComment e, Long id) {
 		
@@ -96,7 +83,7 @@ public class CommentService implements CommentServiceI{
 		
 		List<Comment> my = evaluationCommentRepository.evsave();
 		if(my.contains(c)) {
-			EvaluationComment v = evaluationCommentRepository.findev(c);
+			EvaluationComment v = evaluationCommentRepository.findevaluation(c);
 			v.setL(v.getL()+e.getL());
 			v.setD(v.getD()+e.getD());
 			
@@ -114,13 +101,13 @@ public class CommentService implements CommentServiceI{
 			
 		}
 	}
-	//comments les plus pertinents
+	
 		@Override
-		public List<Comment> Bestcomments(){
+		public List<Comment> Pertinentcomments(){
 			
 			
 			
-			List<Comment> list = evaluationCommentRepository.myfind(evaluationCommentRepository.best()) ;
+			List<Comment> list = evaluationCommentRepository.myfind(evaluationCommentRepository.mostliked()) ;
 			
 		    
 			return list;
@@ -129,93 +116,86 @@ public class CommentService implements CommentServiceI{
 			
 			
 		}
-		@Override
-		public List<Comment> pertinentComments(Long pub_id, Long client_id) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-//
-//		@Override
-//		public Comment addComment(Comment comment,Long client_id,Long pub_id) {
-//			
-//			Client clt = clientRespository.findById(client_id).get();
-//			
-//			Publication p = publicationRepository.findById(pub_id).get();
-//			
-//			comment.setClient(clt);
-//			comment.setPublication(p);
-//			
-//			commentRepository.save(comment);
-//			return comment ;
-//			
-//			
-//		
-//		}	
+		
+
 		@Override
 		public Comment addComment(Comment comment,Long client_id,Long pub_id) {
 			
-			List<String> forbiddenwords = new ArrayList<>();
-			forbiddenwords.add("con");
-			forbiddenwords.add("***");
-			forbiddenwords.add("mdr");
-			forbiddenwords.add("raciste");
-			forbiddenwords.add("stupid");
-			forbiddenwords.add("shut");
-			forbiddenwords.add("violance");
-			forbiddenwords.add("frapper");
+			Client clt = clientRespository.findById(client_id).get();
+			
+			Publication p = publicationRepository.findById(pub_id).get();
+			
+			comment.setClient(clt);
+			comment.setPublication(p);
+			
+			commentRepository.save(comment);
+			return comment ;
 			
 			
-			 if (isForbidden(comment))
-				 return null ; 
-			 else {
-				 
-				    Client clt = clientRespository.findById(client_id).get();
-					
-					Publication p = publicationRepository.findById(pub_id).get();
-					
-					comment.setClient(clt);
-					comment.setPublication(p);
-					
-					commentRepository.save(comment);
-					return comment ;
-			 }
-		}
+		
+		}	
+
 			
 		    @Override
-			public boolean isForbidden (Comment cmt) {
+			public boolean isForbidden (Comment cmt, List<String> forbiddenwords ) {
 				
-				List<String> forbiddenwords = new ArrayList<>();
+		
+				forbiddenwords.add("con");
+				forbiddenwords.add("***");
+				forbiddenwords.add("mdr");
+				forbiddenwords.add("raciste");
+				forbiddenwords.add("stupid");
+				forbiddenwords.add("shut");
+				forbiddenwords.add("violance");
+				forbiddenwords.add("frapper");
 				
-				String mot = cmt.getMot();
+				
+				 
+				String[] mots = cmt.getMot().split("");
+				String[] forbidden = (String[]) forbiddenwords.toArray() ; 
 			
-			  for (String s:forbiddenwords) {
-				if (check(s,mot)) {
+				 if (check(forbidden,mots)) {
 					
 				  return true ;
 				  }
 				
 					
-			  } 
+			   
 			return false ;
 			
 		
 			}
 			
 			
-	
 		
-			
-         public boolean check(String word, String mot)  {
-        	 if(word.length() > mot.length())
-        		 return false ; 
-        	 
-        	 int i=0 ;
-        	 while (i<word.length()) {
-        		 if(word.charAt(i) != mot.charAt(i))
-        			 return false ; 
-        		 i++;
-        	 }
-        	 return true ; 
-        	 
-         }
+//         public boolean check(String word, String mot)  {
+//        	 if(word.length() > mot.length())
+//        		 return false ; 
+//        	 
+//        	 int i=0 ;
+//        	 while (i<word.length()) {
+//        		 if(word.charAt(i) != mot.charAt(i))
+//        			 return false ; 
+//        		 i++;
+//        	 }
+//        	 return true ; 
+//        	 
+//         }
+
+
+public boolean check ( String[] word ,  String[] mot)  {
+	
+	 
+	 int i=0 ;
+	 int j=0 ;
+	 while ( (i<word.length) && (j<mot.length) ) {
+		 if(word[i] != mot[j])
+			 return false ; 
+		 i++;
+		 j++ ; 
+	 }
+	 return true ; 
+	 
 }
+}
+

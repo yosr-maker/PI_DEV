@@ -2,7 +2,7 @@ package com.esprit.spring.entites;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -25,19 +27,21 @@ public class EvaluationPublication implements Serializable{
 	private long id;
 	
 	@Column
-	 private int value;
+	 private int nbr;
 	
 	
 	
-	//@JsonIgnore 
-    @ManyToOne(cascade=CascadeType.PERSIST)
+	@JsonIgnore 
+    @ManyToOne
     private Publication publication;
 
 
 
+	
 	public long getId() {
 		return id;
 	}
+
 
 
 
@@ -47,15 +51,18 @@ public class EvaluationPublication implements Serializable{
 
 
 
-	public int getValue() {
-		return value;
+
+	public int getNbr() {
+		return nbr;
 	}
 
 
 
-	public void setValue(int value) {
-		this.value = value;
+
+	public void setNbr(int nbr) {
+		this.nbr = nbr;
 	}
+
 
 
 
@@ -65,9 +72,11 @@ public class EvaluationPublication implements Serializable{
 
 
 
+
 	public void setPublication(Publication publication) {
 		this.publication = publication;
 	}
+
 
 
 
@@ -76,10 +85,11 @@ public class EvaluationPublication implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + nbr;
 		result = prime * result + ((publication == null) ? 0 : publication.hashCode());
-		result = prime * result + value;
 		return result;
 	}
+
 
 
 
@@ -94,31 +104,24 @@ public class EvaluationPublication implements Serializable{
 		EvaluationPublication other = (EvaluationPublication) obj;
 		if (id != other.id)
 			return false;
+		if (nbr != other.nbr)
+			return false;
 		if (publication == null) {
 			if (other.publication != null)
 				return false;
 		} else if (!publication.equals(other.publication))
-			return false;
-		if (value != other.value)
 			return false;
 		return true;
 	}
 
 
 
+
 	@Override
 	public String toString() {
-		return "Evaluation_publication [id=" + id + ", value=" + value + ", publication=" + publication + "]";
+		return "EvaluationPublication [id=" + id + ", nbr=" + nbr + ", publication=" + publication + "]";
 	}
 
-
-
-	public EvaluationPublication(long id, int value, Publication publication) {
-		super();
-		this.id = id;
-		this.value = value;
-		this.publication = publication;
-	}
 
 
 

@@ -24,7 +24,7 @@ public interface CommentRepository extends CrudRepository<Comment,Long>{
 	 public List<Comment> list(@Param("publication") Publication publication);
 	 
 	 
-	 //list of client's comments of the subject
+	 //list of client's comments of the publication
 	 @Query("select p from Comment p where p.publication=:publication and p.client=:client")
 	 public List<Comment> myComments(@Param("publication") Publication publication,@Param("client") Client client);
 

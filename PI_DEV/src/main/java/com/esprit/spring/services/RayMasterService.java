@@ -37,6 +37,7 @@ public class RayMasterService  implements RayMasterServiceI{
 		newrayMaster.setCin(rayMaster.getCin());
 		newrayMaster.setPhoneNumber(rayMaster.getPhoneNumber());
 		newrayMaster.setRole(rayMaster.getRole());
+		newrayMaster.setDateNaissance(rayMaster.getDateNaissance());
 		return rayMasterRepository.save(newrayMaster);
 	}
         @Override

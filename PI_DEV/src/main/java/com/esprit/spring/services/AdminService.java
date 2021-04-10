@@ -38,6 +38,7 @@ public class AdminService implements AdminServiceI {
 		newadmin.setCin(admin.getCin());
 		newadmin.setPhoneNumber(admin.getPhoneNumber());
 		newadmin.setRole(admin.getRole());
+		newadmin.setDateNaissance(admin.getDateNaissance());
 		return adminRepository.save(newadmin);
 	}
 
@@ -81,6 +82,11 @@ public class AdminService implements AdminServiceI {
 
 
 	
+	@Override
+	public Admin updateAdmin(Admin a) {
+		adminRepository.save(a);
+		return a;
+	}
 	
 }
 

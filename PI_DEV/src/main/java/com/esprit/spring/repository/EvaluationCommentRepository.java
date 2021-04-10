@@ -16,11 +16,11 @@ public interface EvaluationCommentRepository extends CrudRepository<EvaluationCo
 	public List<Comment> evsave();
 	
 	@Query("select e from EvaluationComment e where e.comment=:comment")
-	public EvaluationComment findev(@Param("comment") Comment comment);
+	public EvaluationComment findevaluation(@Param("comment") Comment comment);
 
-	 ////comments + pertinents//////
+	 //comments pertinents
 	@Query("select max(e.l) from EvaluationComment e")
-	public int best();
+	public int mostliked();
 	
 
 	

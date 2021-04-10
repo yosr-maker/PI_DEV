@@ -65,8 +65,8 @@ public class Product implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="product")
 	private List<Claim> claims;
 	
-	@OneToMany(mappedBy="product")
-	List<Publication> publications;
+//	@OneToMany(mappedBy="product")
+//	List<Publication> publications;
 	
 	@ManyToOne
 	@JoinColumn(name = "idStock")
@@ -159,13 +159,13 @@ public class Product implements Serializable {
 		this.claims = claims;
 	}
 
-	public List<Publication> getPublications() {
-		return publications;
-	}
-
-	public void setPublications(List<Publication> publications) {
-		this.publications = publications;
-	}
+//	public List<Publication> getPublications() {
+//		return publications;
+//	}
+//
+//	public void setPublications(List<Publication> publications) {
+//		this.publications = publications;
+//	}
 
 	public Stock getStock() {
 		return stock;

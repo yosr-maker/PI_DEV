@@ -3,18 +3,19 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -45,17 +46,17 @@ public class Publication implements Serializable{
     private Date date;
 	
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="publication")
 	
 	public List<Comment> comments;
 	
-	@OneToMany(mappedBy="publication" , cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="publication" )
 	    private List<EvaluationPublication> ratings;
 	    
-		@ManyToOne
-		@JoinColumn(name = "id")
-		private Product product;
+//		@ManyToOne
+//		@JoinColumn(name = "id")
+//		private Product product;
 
 		public Long getId() {
 			return id;
@@ -113,13 +114,13 @@ public class Publication implements Serializable{
 			this.ratings = ratings;
 		}
 
-		public Product getProduct() {
-			return product;
-		}
-
-		public void setProduct(Product product) {
-			this.product = product;
-		}
+//		public Product getProduct() {
+//			return product;
+//		}
+//
+//		public void setProduct(Product product) {
+//			this.product = product;
+//		}
 
 		@Override
 		public int hashCode() {
@@ -129,7 +130,7 @@ public class Publication implements Serializable{
 			result = prime * result + ((date == null) ? 0 : date.hashCode());
 			result = prime * result + ((description == null) ? 0 : description.hashCode());
 			result = prime * result + (int) (id ^ (id >>> 32));
-			result = prime * result + ((product == null) ? 0 : product.hashCode());
+			//result = prime * result + ((product == null) ? 0 : product.hashCode());
 			result = prime * result + ((ratings == null) ? 0 : ratings.hashCode());
 			result = prime * result + ((title == null) ? 0 : title.hashCode());
 			result = prime * result + ((type == null) ? 0 : type.hashCode());
@@ -160,13 +161,13 @@ public class Publication implements Serializable{
 					return false;
 			} else if (!description.equals(other.description))
 				return false;
-			if (id != other.id)
-				return false;
-			if (product == null) {
-				if (other.product != null)
-					return false;
-			} else if (!product.equals(other.product))
-				return false;
+//			if (id != other.id)
+//				return false;
+//			if (product == null) {
+//				if (other.product != null)
+//					return false;
+//			} else if (!product.equals(other.product))
+//				return false;
 			if (ratings == null) {
 				if (other.ratings != null)
 					return false;
@@ -197,7 +198,7 @@ public class Publication implements Serializable{
 			this.date = date;
 			this.comments = comments;
 			this.ratings = ratings;
-			this.product = product;
+			//this.product = product;
 		}
 
 		public Publication() {
@@ -208,7 +209,7 @@ public class Publication implements Serializable{
 		@Override
 		public String toString() {
 			return "Publication [id=" + id + ", type=" + type + ", title=" + title + ", description=" + description
-					+ ", date=" + date + ", comments=" + comments + ", ratings=" + ratings + ", product=" + product
+					+ ", date=" + date + ", comments=" + comments + ", ratings=" + ratings 
 					+ "]";
 		}
 

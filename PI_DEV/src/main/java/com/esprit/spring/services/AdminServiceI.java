@@ -20,6 +20,8 @@ public interface AdminServiceI {
 	List<Admin> retrieveAllAdmins();
 
 	void deleteAdmin(long id);
+
+	Admin updateAdmin(Admin a);
 	
 
 }

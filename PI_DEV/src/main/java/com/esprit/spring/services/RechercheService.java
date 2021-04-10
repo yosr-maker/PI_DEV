@@ -34,11 +34,11 @@ import com.esprit.spring.repository.RechercheRepository;
 		
 		@Override
 		public Recherche addSearch(Recherche recherche,Long idClient){
-			//le user introduit :
+		
 			Client clt = clientRepository.findById(idClient).get();
-			//le type introduit :
+			
 			String t = recherche.getType();
-			//la recherche sur ce type :
+		
 			Recherche r = rechercheRepository.findByTypeAndClient(t, clt);
 			
 			Long a = 1L;
