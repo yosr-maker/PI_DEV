@@ -82,4 +82,8 @@ public class CommandLineController {
 		return commandLineService.getLastProd();
 		
 	}
+	@PostMapping("/affecterClToP/{idcl}/{idp}")
+	public void affecterCLToProduct(@PathVariable ("idcl")Long idCl,@PathVariable ("idp") Long idp) {
+		commandLineService.affecterCLToProduct(idCl, idp);
+	}
 }

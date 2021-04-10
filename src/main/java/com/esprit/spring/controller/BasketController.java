@@ -79,6 +79,7 @@ public class BasketController {
 		return  basketService.consulteListCl();
 		
 	}
+	//NON
 	@PostMapping("/addProductBasket/{idproduct}/{idcl}")
 	
 	public Command_line addProductBasket(@PathVariable("idproduct")Long idp ,@PathVariable("idcl")Long idcl) {
@@ -103,7 +104,7 @@ public class BasketController {
 	public float SumOfMyPurchases() {
 		return basketService.SumOfMyPurchases();
 	}
-	
+	//Non
 	@GetMapping("/affecterBasketToClient/{idb}/{idc}")
 	@ResponseBody
 	public String affecterBasketToClient(@PathVariable("idb")Long idb, @PathVariable("idc")Long idc) {

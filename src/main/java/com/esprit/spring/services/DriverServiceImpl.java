@@ -92,7 +92,7 @@ private static final org.apache.logging.log4j.Logger l= LogManager.getLogger(Dri
 		 driverRepository.save(d);
 		return d.getSalaire();
 	}
-
+//OK
 	@Override
 	public long DriverMounth() {
 		long idmax =  0;
@@ -102,29 +102,11 @@ private static final org.apache.logging.log4j.Logger l= LogManager.getLogger(Dri
 		{
 			idmax=d.getIdDriver();
 		}
-	
-			//d.getNbrDeliveryAffected().MAX_VALUE;
 			
 		}
 		return idmax;
-		/*List<Driver>  dr = new ArrayList();
-		Driver d =driverRepository.findById(idDriver).get();
-		for(Driver driver : dr) {
-			driver.getIdDriver();
-		}
-		return d.getNbrDeliveryAffected().MAX_VALUE;*/
 	}
-//affecter une livraison  à un driver 
-	/*@Override
-	public void affecterDriverToDelivery(Long idDriver, Long deliveryId) {
-	Driver driver = driverRepository.findById(idDriver).get();
-	Delivery delivery = deliveryRepository.findById(deliveryId).get();
-	
-	 delivery.setDriver(driver);
-	 driverRepository.save(driver);
-	
-	}*/
-
+//OK
 	@Override
 	public String affecterAutotoDriver(Long idDriver, Long idAuto) {
 	Driver d = driverRepository.findById(idAuto).get();
@@ -136,16 +118,7 @@ private static final org.apache.logging.log4j.Logger l= LogManager.getLogger(Dri
 	
 	}
 
-	/*@Override
-	public Long setSalary(Long nbrDeliveryAffected,Long idDriver) {
-		Long salFix = (long) 800;
-		if(nbrDeliveryAffected<= 20) {
-			return driverRepository.getOne(idDriver).setSalaire(salFix);
-		}
-		else {
-			Long sal = driverRepository.getOne(idDriver).getSalaire()+8*nbrDeliveryAffected;
-		}*/
-		
+	
 
 
 	

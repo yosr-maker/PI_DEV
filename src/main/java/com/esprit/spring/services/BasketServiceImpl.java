@@ -46,6 +46,7 @@ public class BasketServiceImpl  implements BasketService{
 	
 	@Autowired
 	ProductRepository productRepository;
+	
 	private static final org.apache.logging.log4j.Logger l= LogManager.getLogger(BasketService.class);
 	//List<Command_line> Lcl = commandLineRepository.findAll();
 	@Override
@@ -82,13 +83,12 @@ public class BasketServiceImpl  implements BasketService{
 	}
 
 	
-
+//OK
 	
 	@Override
 	public void viderMaBasket(Long basketId) {
 		Basket b = basketRepository.findById(basketId).get();
 		b.setCommandLine(null);
-		//((List<Basket>) b.getCommandLine()).clear();
 		b.setPrixTotal(0f);
 		b.setQuantiteTotale(0);
 		
@@ -131,6 +131,7 @@ public class BasketServiceImpl  implements BasketService{
 	public List<Command_line> CommandLinesOfMyBasket(Client client){
 		return basketRepository.findMyBasketCommandLines(client);
 	}
+	
 	
 	public Basket findMyLastBasket(Long id) {
 		List<Basket> mybaskets = basketRepository.findMyValidBasketJPQL(id);

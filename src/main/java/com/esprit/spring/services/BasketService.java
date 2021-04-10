@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.esprit.spring.entites.Basket;
+import com.esprit.spring.entites.Client;
 import com.esprit.spring.entites.Command_line;
 import com.esprit.spring.entites.Product;
 
@@ -26,6 +27,8 @@ public interface BasketService {
 	public Collection<Command_line> consulteListCl();
 	public Command_line addProductBasket(Long idcl,Long idp);
 	void ValidateMyBasket(Long id);
-	
-	
+	public float SommeDeMesAchats(Long id);
+	public Basket findMyLastBasket(Long id);
+	public List<Command_line> CommandLinesOfMyBasket(Client client);
+	public List<Command_line> MyCommandLine(Long basketId);
 }

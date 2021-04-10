@@ -6,7 +6,9 @@ import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.esprit.spring.entites.Automobile;
 import com.esprit.spring.entites.Command_line;
+import com.esprit.spring.entites.Driver;
 import com.esprit.spring.entites.Product;
 import com.esprit.spring.repository.CommandLineRepository;
 import com.esprit.spring.repository.ProductRepository;
@@ -43,7 +45,7 @@ public class CommandLineServiceImpl implements CommandLineService {
 	
 	public Command_line addCommandLine(Long prodId, Long quantity) {
 		
-		//LocalDateTime localDateTime = LocalDateTime.now();
+		
 			Product p = proRepository.findById(prodId).get();
 			p.setQuantity(p.getQuantity()-quantity);
 			proRepository.save(p);
@@ -95,6 +97,11 @@ public class CommandLineServiceImpl implements CommandLineService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+	public void affecterCLToProduct(Long idCl, Long idp) {
+		Product p = proRepository.findById(idp).get();
+		Command_line cl =commandLineRepository.findById(idCl).get();
+		
+		cl.setProducts((List<Product>) p);
+		proRepository.save(p);
+	}
 }
