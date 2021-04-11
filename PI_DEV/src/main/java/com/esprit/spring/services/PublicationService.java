@@ -40,19 +40,7 @@ private static final org.apache.logging.log4j.Logger l= LogManager.getLogger(Pub
 
 
 
-//@Override
-//public Publication addPublication(Publication publication,Long prod_id) {
-//	
-//	
-//	
-//	Product p = productRepository.findById(prod_id).get();
-//	
-//	
-//	publication.setProduct(p);
-//	
-//	publicationRepository.save(publication);
-//	return publication ;
-//}
+
 
 
 @Override

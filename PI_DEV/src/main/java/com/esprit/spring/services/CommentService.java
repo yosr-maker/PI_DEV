@@ -1,7 +1,11 @@
 package com.esprit.spring.services;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +19,6 @@ import com.esprit.spring.repository.ClientRepository;
 import com.esprit.spring.repository.CommentRepository;
 import com.esprit.spring.repository.EvaluationCommentRepository;
 import com.esprit.spring.repository.PublicationRepository;
-
 
 
 
@@ -36,6 +39,9 @@ public class CommentService implements CommentServiceI{
 	
 	@Autowired
 	EvaluationCommentRepository evaluationCommentRepository;
+	
+	public static String[] forbiddenWords = new String[] {"con","mdr","***","raciste","stupid","shut","violance","frapper"} ; 
+	
 	
 	
 	
@@ -126,7 +132,7 @@ public class CommentService implements CommentServiceI{
 			Publication p = publicationRepository.findById(pub_id).get();
 			
 			comment.setClient(clt);
-			comment.setPublication(p);
+			comment.setPublication(p);  
 			
 			commentRepository.save(comment);
 			return comment ;
@@ -137,65 +143,64 @@ public class CommentService implements CommentServiceI{
 
 			
 		    @Override
-			public boolean isForbidden (Comment cmt, List<String> forbiddenwords ) {
-				
-		
-				forbiddenwords.add("con");
-				forbiddenwords.add("***");
-				forbiddenwords.add("mdr");
-				forbiddenwords.add("raciste");
-				forbiddenwords.add("stupid");
-				forbiddenwords.add("shut");
-				forbiddenwords.add("violance");
-				forbiddenwords.add("frapper");
-				
-				
-				 
-				String[] mots = cmt.getMot().split("");
-				String[] forbidden = (String[]) forbiddenwords.toArray() ; 
+		    public boolean isForbidden(Comment cmt) {
+		        String[] mots = cmt.getMot().split(" ");
+		        for(String s: forbiddenWords) {
+		            if(check(s, mots))
+		                return true;
+		        }
+		        return false;
+		    }
+
+		    public boolean check(String word, String[] mots) {
+		    	for(String s: mots) {
+		            if(s.equals(word))
+		                return true;
+		        }
+		        return false;
+		       
+		    
 			
-				 if (check(forbidden,mots)) {
-					
-				  return true ;
-				  }
-				
-					
-			   
-			return false ;
-			
-		
-			}
-			
-			
-		
-//         public boolean check(String word, String mot)  {
-//        	 if(word.length() > mot.length())
-//        		 return false ; 
-//        	 
-//        	 int i=0 ;
-//        	 while (i<word.length()) {
-//        		 if(word.charAt(i) != mot.charAt(i))
-//        			 return false ; 
-//        		 i++;
-//        	 }
-//        	 return true ; 
-//        	 
-//         }
+		    }
+
+		 
+         
+  
+	  
+	  @Override
+	  public Client activeClient(Long idpub) {
+		  
+		    Publication publication = publicationRepository.findById(idpub).get();
+	        List<Comment> comments = publication.getComments();
+	        Map <Client, Integer> map = new HashMap<>();
+	 
+	        for (Comment cmt: comments) {
+	            Client c = cmt.getClient();
+	            if(map.containsKey(c)) {
+	                Integer i = map.get(c);
+	                map.replace(c, i + 1);
+	            } else {
+	                map.put(c, 1);
+	            }
+	        }
+	 
+	        Set<Entry<Client, Integer>> set = map.entrySet();
+	 
+	        Integer min = Integer.MIN_VALUE;
+	        Client c = null;
+	 
+	        for(Entry<Client, Integer> entry: set) {
+	            if(entry.getValue() >= min) {
+	                min = entry.getValue();
+	                c = entry.getKey();
+	            }
+	        }
+	 
+	 
+	        return c;
+	    }
 
 
-public boolean check ( String[] word ,  String[] mot)  {
-	
-	 
-	 int i=0 ;
-	 int j=0 ;
-	 while ( (i<word.length) && (j<mot.length) ) {
-		 if(word[i] != mot[j])
-			 return false ; 
-		 i++;
-		 j++ ; 
-	 }
-	 return true ; 
-	 
 }
-}
+
 

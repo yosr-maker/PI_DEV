@@ -40,6 +40,9 @@ public class Client extends User {
 	@OneToMany(mappedBy="client" )
     private List<Recherche> recherches;
 	
+	
+	
+	
 
 	public Client() {
 		super();
@@ -47,9 +50,11 @@ public class Client extends User {
 	}
 
 
+
 	public List<Jackpot> getJackpots() {
 		return jackpots;
 	}
+
 
 
 	public void setJackpots(List<Jackpot> jackpots) {
@@ -57,9 +62,11 @@ public class Client extends User {
 	}
 
 
+
 	public Basket getBasket() {
 		return basket;
 	}
+
 
 
 	public void setBasket(Basket basket) {
@@ -67,9 +74,11 @@ public class Client extends User {
 	}
 
 
+
 	public List<Comment> getComments() {
 		return comments;
 	}
+
 
 
 	public void setComments(List<Comment> comments) {
@@ -77,14 +86,21 @@ public class Client extends User {
 	}
 
 
+
 	public List<Recherche> getRecherches() {
 		return recherches;
 	}
 
 
+
 	public void setRecherches(List<Recherche> recherches) {
 		this.recherches = recherches;
 	}
+
+
+
+	
+
 
 
 	@Override
@@ -94,9 +110,11 @@ public class Client extends User {
 		result = prime * result + ((basket == null) ? 0 : basket.hashCode());
 		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
 		result = prime * result + ((jackpots == null) ? 0 : jackpots.hashCode());
+		
 		result = prime * result + ((recherches == null) ? 0 : recherches.hashCode());
 		return result;
 	}
+
 
 
 	@Override
@@ -121,8 +139,7 @@ public class Client extends User {
 		if (jackpots == null) {
 			if (other.jackpots != null)
 				return false;
-		} else if (!jackpots.equals(other.jackpots))
-			return false;
+		}
 		if (recherches == null) {
 			if (other.recherches != null)
 				return false;
@@ -132,22 +149,27 @@ public class Client extends User {
 	}
 
 
+
 	@Override
 	public String toString() {
 		return "Client [jackpots=" + jackpots + ", basket=" + basket + ", comments=" + comments + ", recherches="
-				+ recherches + "]";
+				+ recherches  + "]";
 	}
 
 
-	public Client(List<Jackpot> jackpots, Basket basket, List<Comment> comments, List<Recherche> recherches) {
+
+	public Client(List<Jackpot> jackpots, Basket basket, List<Comment> comments, List<Recherche> recherches,
+			List<Publication> publications) {
 		super();
 		this.jackpots = jackpots;
 		this.basket = basket;
 		this.comments = comments;
 		this.recherches = recherches;
+		
 	}
 
 
+	
 	
 }
 

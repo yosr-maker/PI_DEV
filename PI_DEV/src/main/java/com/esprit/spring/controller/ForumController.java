@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.esprit.spring.entites.Client;
 import com.esprit.spring.entites.Comment;
 import com.esprit.spring.entites.EvaluationComment;
 import com.esprit.spring.entites.Publication;
@@ -56,9 +56,9 @@ public class ForumController {
 	
      
 
-	@GetMapping("/publication-ala-une")
+	@GetMapping("/RecentPub")
 	@ResponseBody
-	public List<String> getdate() {
+	public List<String> recentPub() {
 		List<String> list = publicationService.pub();
 	return list;
 	}
@@ -92,10 +92,10 @@ public class ForumController {
 	}
 
 	
-	// enregistrer ma recherche et retourner les publications cherchées
-	@GetMapping("/search/{type}")
+	
+	@GetMapping("/rechercheType/{type}")
 	@ResponseBody
-	public Response addSearch(@PathVariable("type") String type) {
+	public Response addRechercheParType(@PathVariable("type") String type) {
 		
 		
 		Recherche r = new Recherche(type);
@@ -138,23 +138,7 @@ public class ForumController {
 
 
 	
-//	@PostMapping("/Publication/{productId}")
-//	@ResponseBody
-//	public String addPublication(@RequestBody Publication pu ,@PathVariable("productId") Long productId ) {
-//	    Publication pubexists = publicationService.test(pu.getType(), pu.getDescription());
-//	   
-//	    if (pubexists != null) {
-//	    	return  "Nous sommes désolés mais il semble que vous êtes entrain de publier une publication avec un contenu qui existe déjà ... veuillez vérifier s'il vous plait" ;
-//	    			
-//	                       
-//	    }
-//	    else {
-//	    	publicationService.addPublication(pu,productId);
-//	    	 return "votre publication a éte publiée avec succès" ; 
-//	    			 
-//	    }
-//	}
-	
+
 	
 	@PostMapping("/Publication")
 	@ResponseBody
@@ -190,18 +174,9 @@ public class ForumController {
 	public String addComment(@RequestBody Comment u, Long id,@PathVariable("publicationId") Long publicationId) {
 		
 		
-		List<String> forbiddenwords = new ArrayList<>();
-		forbiddenwords.add("con");
-		forbiddenwords.add("***");
-		forbiddenwords.add("mdr");
-		forbiddenwords.add("raciste");
-		forbiddenwords.add("stupid");
-		forbiddenwords.add("shut");
-		forbiddenwords.add("violance");
-		forbiddenwords.add("frapper");
 		
 		
-		 if (commentService.isForbidden(u,forbiddenwords))
+		 if (commentService.isForbidden(u))
 			 return  "votre commentaire est  du contenu indésirable " ; 
 
 		 else {
@@ -213,22 +188,19 @@ public class ForumController {
 		
 	
 	    }
+	
+	
+	@GetMapping("/MostActifClient/{publicationId}")
+	@ResponseBody
+	public Client activeClient(@PathVariable("publicationId") Long publicationId) {
+		
+		return commentService.activeClient(publicationId);
+	}
+	
+	
+	
+	
 
-	
-	
-	
-	
-	
-//	@PostMapping("/addComment/{publicationId}")
-//	@ResponseBody
-//	public String addComment(@RequestBody Comment u, Long id,  @PathVariable("publicationId") Long publicationId ) {
-//		 
-//		 // commentService.addComment(u,ClientController.CLIENTCONNECTED.getId(),publicationId);
-//		   commentService.addComment(u,(long) 2,publicationId);
-//		 
-//		
-//	return "Votre commentaire a été bien ajouté" ;
-//	}
 
 	
 	@GetMapping("/ListComment/{publicationId}")
