@@ -42,7 +42,7 @@ public class CommandLineServiceImpl implements CommandLineService {
 		commandLineRepository.deleteById(id);
 		
 	}
-	
+	@Override
 	public Command_line addCommandLine(Long prodId, Long quantity) {
 		
 		
@@ -57,23 +57,17 @@ public class CommandLineServiceImpl implements CommandLineService {
 			commandLineRepository.save(cl);
 			return cl;
 	}
-	
+	@Override
 	public void updateCommandLineById(Long idcl, Long quantity) {
 		Command_line  cl = commandLineRepository.findById(idcl).get();
 		float prix1 = (cl.getPrixToPay()/cl.getQuantityPurchased())*quantity;
 		commandLineRepository.mettreAjourCommandLineByIdJPQL(quantity, prix1, idcl);
-		
 	}
-
+	@Override
 	public int getLastProd() {
 		return commandLineRepository.getLastCommandLineJPQL();
 		
 	}
-	
-	
-
-	
-
 	@Override
 	public Command_line retrieveCommandLine(Long id) {
 		
@@ -88,20 +82,22 @@ public class CommandLineServiceImpl implements CommandLineService {
 
 	@Override
 	public Command_line findOneC(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return commandLineRepository.findById(id).get();
 	}
 
-	@Override
-	public Command_line findCommandLine(Long id, Long ommandeId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	public void affecterCLToProduct(Long idCl, Long idp) {
 		Product p = proRepository.findById(idp).get();
 		Command_line cl =commandLineRepository.findById(idCl).get();
 		
 		cl.setProducts((List<Product>) p);
 		proRepository.save(p);
+	}
+
+	@Override
+	public Command_line findCommandLine(Long id, Long ommandeId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

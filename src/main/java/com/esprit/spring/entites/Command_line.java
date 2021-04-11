@@ -21,12 +21,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name="COMMAND_LINE")
 
 public class Command_line implements Serializable{
-
-
-
-	private static final long serialVersionUID = 1L;
 	
-
+private static final long serialVersionUID = 1L;
+	
 	@Id
 	private Long id;
 

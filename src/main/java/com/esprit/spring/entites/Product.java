@@ -43,9 +43,6 @@ public class Product implements Serializable {
 	
 	@Column(name="Quantity")
 	private Long Quantity;
-	
-	
-	
 		
 	@Column(name="price")
 	private float Price;
