@@ -274,11 +274,11 @@ if(stockD.getQuantiteInstan() <= stockD.getQuantiteMin()){
   
 	
 
-	public void sendNotifSoldeStock(StockDetail stcd)
+	public List<StockDetail> sendNotifSoldeStock(StockDetail stcd)
 	{
 		List <StockDetail> list = (List <StockDetail>) stockDetailRepository.findAll();
 	
-		
+		List <StockDetail> listexpiration = new  ArrayList<StockDetail>();
 		for(StockDetail stcD : list){
 			
 			
@@ -287,7 +287,8 @@ if(stockD.getQuantiteInstan() <= stockD.getQuantiteMin()){
 			
 			if( stcD.getProduct().getCategory().equals("alimentaire") &&  stcD.getDexpiration().compareTo(date2)>0)
 			{
-				       
+				listexpiration.add(stcD) ;
+				   
 			}			
 		
 		
@@ -298,7 +299,7 @@ if(stockD.getQuantiteInstan() <= stockD.getQuantiteMin()){
 	
 	
 	
-	}
+	return listexpiration; }
 	
 	
 	
