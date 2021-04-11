@@ -78,11 +78,7 @@ public class EventController {
 		EventService.deleteEvent(eventID);
 	}
 
-	/*@GetMapping("/retrieve-all-Participations")
-	public List<Participation> getParticipations(){
-		return ParticipationService.participationsList();
-	}
-	*/
+
 	
 	/*user :*/
 	@PostMapping("/add-Contribution/{event-id}/{clientId}/{amount}")

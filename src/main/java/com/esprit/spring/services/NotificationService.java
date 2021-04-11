@@ -29,7 +29,7 @@ public class NotificationService implements NotificationServiceI {
 	ClientRepository ClientRepository;
 	
 	public static final String ACCOUNT_SID = "AC861e84eeadedd8f2915b9bda24eb1430";
-	 public static final String AUTH_TOKEN = "bc89da439e37bb0c60f8185fde687dc5";
+	 public static final String AUTH_TOKEN = "c3766f62781d8a1ee94b02332948fdc5";
 	
 	public void notifyAllClient(String eventName, String eventGoal) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
