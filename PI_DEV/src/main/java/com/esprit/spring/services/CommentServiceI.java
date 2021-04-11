@@ -2,6 +2,7 @@ package com.esprit.spring.services;
 
 import java.util.List;
 
+import com.esprit.spring.entites.Client;
 import com.esprit.spring.entites.Comment;
 import com.esprit.spring.entites.EvaluationComment;
 
@@ -23,7 +24,11 @@ public interface CommentServiceI {
 
 	Comment addComment(Comment comment, Long client_id, Long pub_id);
 
-	boolean isForbidden(Comment cmt, List<String> forbiddenwords);
+	
+
+	boolean isForbidden(Comment cmt);
+
+	Client activeClient(Long idpub);
 
 	
 

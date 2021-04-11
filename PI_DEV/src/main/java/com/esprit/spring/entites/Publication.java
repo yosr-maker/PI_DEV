@@ -51,13 +51,12 @@ public class Publication implements Serializable{
 	
 	public List<Comment> comments;
 	
+	
+    
+	
 	@OneToMany(mappedBy="publication" )
 	    private List<EvaluationPublication> ratings;
 	    
-//		@ManyToOne
-//		@JoinColumn(name = "id")
-//		private Product product;
-
 		public Long getId() {
 			return id;
 		}
@@ -114,14 +113,14 @@ public class Publication implements Serializable{
 			this.ratings = ratings;
 		}
 
-//		public Product getProduct() {
-//			return product;
-//		}
-//
-//		public void setProduct(Product product) {
-//			this.product = product;
-//		}
 
+
+		
+
+		
+		
+
+		
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -129,8 +128,7 @@ public class Publication implements Serializable{
 			result = prime * result + ((comments == null) ? 0 : comments.hashCode());
 			result = prime * result + ((date == null) ? 0 : date.hashCode());
 			result = prime * result + ((description == null) ? 0 : description.hashCode());
-			result = prime * result + (int) (id ^ (id >>> 32));
-			//result = prime * result + ((product == null) ? 0 : product.hashCode());
+			result = prime * result + ((id == null) ? 0 : id.hashCode());
 			result = prime * result + ((ratings == null) ? 0 : ratings.hashCode());
 			result = prime * result + ((title == null) ? 0 : title.hashCode());
 			result = prime * result + ((type == null) ? 0 : type.hashCode());
@@ -161,13 +159,11 @@ public class Publication implements Serializable{
 					return false;
 			} else if (!description.equals(other.description))
 				return false;
-//			if (id != other.id)
-//				return false;
-//			if (product == null) {
-//				if (other.product != null)
-//					return false;
-//			} else if (!product.equals(other.product))
-//				return false;
+			if (id == null) {
+				if (other.id != null)
+					return false;
+			} else if (!id.equals(other.id))
+				return false;
 			if (ratings == null) {
 				if (other.ratings != null)
 					return false;
@@ -185,11 +181,24 @@ public class Publication implements Serializable{
 				return false;
 			return true;
 		}
-
+		
+		
+		
 		
 
-		public Publication(long id, String type, String title, String description, Date date, List<Comment> comments,
-				List<EvaluationPublication> ratings, Product product) {
+		@Override
+		public String toString() {
+			return "Publication [id=" + id + ", type=" + type + ", title=" + title + ", description=" + description
+					+ ", date=" + date + ", comments=" + comments + ", ratings=" + ratings + "]";
+		}
+		
+		
+		
+		
+		
+
+		public Publication(Long id, String type, String title, String description, Date date, List<Comment> comments,
+				List<EvaluationPublication> ratings) {
 			super();
 			this.id = id;
 			this.type = type;
@@ -198,7 +207,6 @@ public class Publication implements Serializable{
 			this.date = date;
 			this.comments = comments;
 			this.ratings = ratings;
-			//this.product = product;
 		}
 
 		public Publication() {
@@ -206,20 +214,8 @@ public class Publication implements Serializable{
 			// TODO Auto-generated constructor stub
 		}
 
-		@Override
-		public String toString() {
-			return "Publication [id=" + id + ", type=" + type + ", title=" + title + ", description=" + description
-					+ ", date=" + date + ", comments=" + comments + ", ratings=" + ratings 
-					+ "]";
-		}
-
-		public Publication get() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
 		
-		
+
 		
 		
 }
