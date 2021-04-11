@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table( name = "T_Product")
 public class Product implements Serializable {
@@ -56,6 +58,7 @@ public class Product implements Serializable {
 	Ray ray;
 	
    @ManyToOne
+   
    private Command_line commandLine;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="product")
