@@ -1,6 +1,8 @@
+
 package com.esprit.spring.entites;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,64 +14,94 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table( name = "T_Product")
+@Table(name = "T_Product")
 public class Product implements Serializable {
-
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-	
-	@Column(name="Name")
-	private String Name ; 
-	
-	@Column(name="Description")
-	private String Description ;
-	
-	@Column(name="Category")
-	private String Category; 
-	
-	@Column(name="Weight")
+
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "description")
+	private String Description;
+
+	@Column(name = "category")
+	private String Category;
+
+	@Column(name = "weight")
 	private float weight;
-	
-	@Column(name="Quantity")
-	private float Quantity;
-	
-	
-	
-		
-	@Column(name="price")
+
+	@Column(name = "price")
 	private float Price;
-	
+	// @Column(name = "NbcomanLine")
+	private int nbrcommanline;
+
 	@ManyToMany
 	List<Basket> baskets;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idRay")
 	Ray ray;
-	
-   @ManyToOne
-   private Command_line commandLine;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="product")
-	private List<Claim> claims;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="product")
-	List<Publication> publications;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "idStock")
-	Stock stock;
-	
+	@JoinColumn(name = "idCommandLine", referencedColumnName = "id")
+	private Command_line commandLine;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+	private List<Claim> claims;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+	List<Publication> publications;
+
 	@OneToMany
 	private List<Ad> ads;
+
+	@JsonIgnore
+	@OneToOne
+	private StockDetail stockDetail;
+
+	public Product(int id) {
+		super();
+		this.id = id;
+	}
+
+	public Product() {
+		super();
+	}
+
+	public Product(int id, String name, String description, String category, float weight, float price,
+			int nbrcommanline, List<Basket> baskets, Ray ray, Command_line commandLine, List<Claim> claims,
+			List<Publication> publications, List<Ad> ads, StockDetail stockDetail) {
+		super();
+		this.id = id;
+		this.name = name;
+		Description = description;
+		Category = category;
+		this.weight = weight;
+		Price = price;
+		this.nbrcommanline = nbrcommanline;
+		this.baskets = baskets;
+		this.ray = ray;
+		this.commandLine = commandLine;
+		this.claims = claims;
+		this.publications = publications;
+		this.ads = ads;
+		this.stockDetail = stockDetail;
+	}
 
 	public int getId() {
 		return id;
@@ -80,11 +112,11 @@ public class Product implements Serializable {
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -111,20 +143,20 @@ public class Product implements Serializable {
 		this.weight = weight;
 	}
 
-	public float getQuantity() {
-		return Quantity;
-	}
-
-	public void setQuantity(float quantity) {
-		Quantity = quantity;
-	}
-
 	public float getPrice() {
 		return Price;
 	}
 
 	public void setPrice(float price) {
 		Price = price;
+	}
+
+	public int getNbrcommanline() {
+		return nbrcommanline;
+	}
+
+	public void setNbrcommanline(int nbrcommanline) {
+		this.nbrcommanline = nbrcommanline;
 	}
 
 	public List<Basket> getBaskets() {
@@ -143,6 +175,14 @@ public class Product implements Serializable {
 		this.ray = ray;
 	}
 
+	public Command_line getCommandLine() {
+		return commandLine;
+	}
+
+	public void setCommandLine(Command_line commandLine) {
+		this.commandLine = commandLine;
+	}
+
 	public List<Claim> getClaims() {
 		return claims;
 	}
@@ -159,22 +199,6 @@ public class Product implements Serializable {
 		this.publications = publications;
 	}
 
-	public Stock getStock() {
-		return stock;
-	}
-
-	public void setStock(Stock stock) {
-		this.stock = stock;
-	}
-
-	public Command_line getCommandLine() {
-		return commandLine;
-	}
-
-	public void setCommandLine(Command_line commandLine) {
-		this.commandLine = commandLine;
-	}
-
 	public List<Ad> getAds() {
 		return ads;
 	}
@@ -183,12 +207,12 @@ public class Product implements Serializable {
 		this.ads = ads;
 	}
 
-	public Product() {
-		super();
-		// TODO Auto-generated constructor stub
+	public StockDetail getStockDetail() {
+		return stockDetail;
 	}
 
-	
-	
-}
+	public void setStockDetail(StockDetail stockDetail) {
+		this.stockDetail = stockDetail;
+	}
 
+}
