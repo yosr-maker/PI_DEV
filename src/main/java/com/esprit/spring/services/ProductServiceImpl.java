@@ -113,11 +113,14 @@ public class ProductServiceImpl  implements   IProductService{
 		return null;
 	}
 
-	/*@Override
-	public List<Product> getProductMaxCommandLine() {
-		List<Product> productF = productRepository.getProductMaxCommandLine();
-		return productF;
-	}*/
+	@Override
+	public List<Product> ProductMoreCommandLine() {
+		// TODO Auto-generated method stub
+		
+		List<Product> listTopProductCommand = productRepository.findTopByOrderByNbrcommanlineDesc();
+		return listTopProductCommand ;
+	}
+
 
 	
 	

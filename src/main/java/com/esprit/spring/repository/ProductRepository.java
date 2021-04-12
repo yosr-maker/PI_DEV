@@ -12,9 +12,6 @@ import com.esprit.spring.entites.Product;
 public interface ProductRepository extends CrudRepository<Product, Integer> {
 	
 	
-	/*@Query(value = "SELECT new com.esprit.spring.entites.Product  MAX ( nbr_commanline ) FROM Product")
-	public List<Product> getProductMaxCommandLine();
-
-	// List<Product> findProductByStockId(int id);*/
+	public List<Product> findTopByOrderByNbrcommanlineDesc();
 
 }

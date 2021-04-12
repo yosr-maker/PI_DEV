@@ -18,36 +18,24 @@ import com.esprit.spring.services.IProductService;
 
 @RestController
 public class Command_lineController {
-	
-	
+
 	@Autowired
 	ICommandLineService iCommandLineService;
 
 	@Autowired
 	IProductService productS;
+
 	@PostMapping("add-commandLine")
 	@ResponseBody
-	public Command_line adCommandLine( @RequestBody Command_line cml)
-	{
+	public Command_line adCommandLine(@RequestBody Command_line cml) {
 		return iCommandLineService.addCommandLine(cml);
 	}
-	
+
 	@PostMapping("affectationProduitToCommandLine/{idCommand}/{idProduit}/{nbr_Produit}")
 	@ResponseBody
-	public void affectaionProduitToCommandLine(@PathVariable("idCommand") int idCommand,@PathVariable("idProduit")  int idProduit, @PathVariable("nbr_Produit") int nbr_Produit)
-	{
+	public void affectaionProduitToCommandLine(@PathVariable("idCommand") int idCommand,
+			@PathVariable("idProduit") int idProduit, @PathVariable("nbr_Produit") int nbr_Produit) {
 		iCommandLineService.affectaionProduitToCommandLine(idCommand, idProduit, nbr_Produit);
 	}
-	
-	/*@GetMapping("recuperationCommanline/{idcommand}")
-	@ResponseBody List<Product> getProductByIdCommand()*/
-	
-	
-	@GetMapping("produitPluscommnandeLine")
-	public  List<Product> getMoreCommandeLine(){
-		
-	return	productS.getProductMaxCommandLine();
-	}
-	
 
 }

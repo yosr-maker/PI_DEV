@@ -97,4 +97,12 @@ public class ProductController {
 		iProductService.updateProduct(prod);
 	}
 
+	@GetMapping(value="/topProductCommand")
+	@ResponseBody
+	 public List<Product> topProductCommand(){
+		 
+		List<Product> topCommandProduct =  iProductService.ProductMoreCommandLine();
+		
+		return topCommandProduct;
+	 }
 }

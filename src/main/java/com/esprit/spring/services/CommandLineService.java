@@ -36,11 +36,13 @@ public class CommandLineService implements ICommandLineService {
 		Command_line cmline = iCommandLineRepository.findById(idCommand).get();
 		 Product prod     = productRepository.findById(idProduit).get();
 		 
-		 r=  prod.getNbr_commanline()+nbr_Produit;
+		 r=  prod.getNbrcommanline()+nbr_Produit;
 		  
-		prod.setNbr_commanline(r);
+		prod.setNbrcommanline(r);
 		 
-		
+		cmline.getProducts().add(prod);
+		prod.setCommandLine(cmline);
+		iCommandLineRepository.save(cmline);
 		 return productRepository.save(prod);
 		 
 		  

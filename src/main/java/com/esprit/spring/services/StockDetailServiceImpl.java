@@ -105,7 +105,8 @@ public class StockDetailServiceImpl implements IStockDetailService{
 		  if(stcd.getProduct() == null){
 			  
 			  
-			  //Product produit = new Product(idProd);
+			 prod.setStockDetail(stcd);
+			 productRepository.save(prod);
 			  stcd.setProduct(prod);
 			 return stockDetailRepository.save(stcd);
 		  }
@@ -294,7 +295,6 @@ if(stockD.getQuantiteInstan() <= stockD.getQuantiteMin()){
 		
 		
 		}
-	
 	
 	
 	
