@@ -47,7 +47,7 @@ public class Product implements Serializable {
 
 	@Column(name = "price")
 	private float Price;
-	//@Column(name = "NbcomanLine")
+	// @Column(name = "NbcomanLine")
 	private int nbrcommanline;
 
 	@ManyToMany
@@ -70,7 +70,7 @@ public class Product implements Serializable {
 	@OneToMany
 	private List<Ad> ads;
 
-	// @JsonIgnore
+	@JsonIgnore
 	@OneToOne
 	private StockDetail stockDetail;
 
@@ -82,9 +82,6 @@ public class Product implements Serializable {
 	public Product() {
 		super();
 	}
-	
-	
-	
 
 	public Product(int id, String name, String description, String category, float weight, float price,
 			int nbrcommanline, List<Basket> baskets, Ray ray, Command_line commandLine, List<Claim> claims,
@@ -217,8 +214,5 @@ public class Product implements Serializable {
 	public void setStockDetail(StockDetail stockDetail) {
 		this.stockDetail = stockDetail;
 	}
-
-
-
 
 }

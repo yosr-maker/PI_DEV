@@ -58,13 +58,25 @@ public class StockDetail implements Serializable{
 	private Stock stock;
 	
 	
-	//@JsonBackReference
+	
 	
 	
 	
 	
 
 	
+
+	public StockDetail(int idStockDetail, int quantiteMin, int quantiteMax, int quantiteInstan, Date fabrication,
+			Date dexpiration, Product product) {
+		super();
+		this.idStockDetail = idStockDetail;
+		this.quantiteMin = quantiteMin;
+		this.quantiteMax = quantiteMax;
+		this.quantiteInstan = quantiteInstan;
+		this.fabrication = fabrication;
+		this.dexpiration = dexpiration;
+		this.product = product;
+	}
 
 	public StockDetail() {
 		super();
