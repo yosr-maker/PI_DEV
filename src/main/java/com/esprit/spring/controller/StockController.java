@@ -26,7 +26,7 @@ public class StockController {
 	@Autowired
 	IStockDetailService iStockDetailService;
 	
-	@PostMapping("/add-stock")
+	@PostMapping("add-stock")
 	@ResponseBody
 	public Stock addstok(@RequestBody  Stock stock)
 	{

@@ -2,6 +2,8 @@ package com.esprit.spring.controller;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +45,7 @@ public class StockDetailController {
 	@PostMapping("add-StockDetail")
 	@ResponseBody
 	public StockDetail addStockDetails(@RequestBody StockDetail stcd){
-		stcd.getProduct().setStockDetail(stcd);
+		//stcd.getProduct().setStockDetail(stcd);
 		iStockDetailService.addStockDetail(stcd);
 		return stcd ;
 		
@@ -75,7 +77,7 @@ public class StockDetailController {
 		return I;
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	@GetMapping("GetByIdStockDetail")
+	@GetMapping("GetByIdStockDetail/{idStocks}")
 	@ResponseBody
 	public StockDetail GetStocKDetailById(int idStock){
 		
@@ -86,7 +88,7 @@ public class StockDetailController {
 	
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	@DeleteMapping("/deleAllStockDeatai")
+	@DeleteMapping("deleAllStockDetail")
 	@ResponseBody
 	public void DeleteAllstockDetais(){
 		
@@ -123,6 +125,16 @@ public class StockDetailController {
 		return iStockDetailService.affectaionStockToStockDetails(idStock, idStockDetail);
 	}
 
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@GetMapping("solde")
+	@ResponseBody
+	public List<StockDetail> solde(){
+		
+		List<StockDetail> soldes = iStockDetailService.sendNotifSoldeStock();
+				
+		return soldes;
+	}
 	
 	
 }
