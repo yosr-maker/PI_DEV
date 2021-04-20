@@ -13,41 +13,40 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 
 @Entity
 @Table(name="COMMAND_LINE")
 
 public class Command_line implements Serializable{
+
+
+
+	private static final long serialVersionUID = 1L;
 	
-private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	private Long id;
+	private int id;
 
 	@Column(name="quantity")
-	private Long quantityPurchased;
+	private float quantityPurchased;
 	
 	@OneToMany
-	@JoinColumn(name = "basketId" ,nullable=true)
+	@JoinColumn(name = "basketId")
 	private List <Basket> baskets;
 	
 	
 	@OneToMany
-	@JoinColumn(name = "id",nullable=true)
+	@JoinColumn(name = "id")
 	private List<Product> products;
-	
-	@Column(name="prixToPay")
-	private float prixToPay;
 
-	public Long getId() {
+
+	public int getId() {
 		return id;
 	}
 
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -57,7 +56,7 @@ private static final long serialVersionUID = 1L;
 	}
 
 
-	public void setQuantityPurchased(Long quantityPurchased) {
+	public void setQuantityPurchased(float quantityPurchased) {
 		this.quantityPurchased = quantityPurchased;
 	}
 
@@ -72,29 +71,19 @@ private static final long serialVersionUID = 1L;
 	}
 
 
-	public List<Product> getProducts() {
+	/*public List<Product> getProducts() {
 		return products;
 	}
 
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
-	}
+	}*/
 
 
 	public Command_line() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-
-	public float getPrixToPay() {
-		return prixToPay;
-	}
-
-
-	public void setPrixToPay(float prixToPay) {
-		this.prixToPay = prixToPay;
 	}
 	
 	

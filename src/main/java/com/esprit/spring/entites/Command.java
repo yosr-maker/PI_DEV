@@ -23,7 +23,7 @@ public class Command implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "commandId")
-	private Long commandId;
+	private int commandId;
 	
 	@Column(name="TotalPrice")
 	private String totalPrice ;
@@ -39,14 +39,14 @@ public class Command implements Serializable{
 	Payment payment ;
 	
 	@OneToOne
-	@JoinColumn(name = "basketId",nullable=true)
+	@JoinColumn(name = "basketId")
 	Basket basket;
 	
 	
-	public Long getCommandId() {
+	public int getCommandId() {
 		return commandId;
 	}
-	public void setCommandId(Long commandId) {
+	public void setCommandId(int commandId) {
 		this.commandId = commandId;
 	}
 	public String getTotalPrice() {
