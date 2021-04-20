@@ -20,118 +20,31 @@ public class Payment implements Serializable{
 
 	
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "paymentId")
-	private Long paymentId;
-	
+	private int paymentId;
 	
 	
 	@Column(name="typeOfPayment")
 	private String typeOfPayment ;
 	
 	
-	@Column(name="facture")
-	private Long facture ;
-	
 	@OneToOne(mappedBy="payment")
-	@JoinColumn(name = "commandId",nullable=true)
+	@JoinColumn(name = "commandId")
 	private Command Command;
 	
 	@OneToOne( mappedBy="payment")
 	private Donation donations;
 	
 	@ManyToOne
-	@JoinColumn(name="deliveryId",nullable=true)
+	@JoinColumn(name="deliveryId")
 	private Delivery deliverie;
 	
 	
 	
 	
-	public String getTypeOfPayment() {
-		return typeOfPayment;
-	}
-
-
-
-
-	public void setTypeOfPayment(String typeOfPayment) {
-		this.typeOfPayment = typeOfPayment;
-	}
-
-
-
-
-	public Long getFacture() {
-		return facture;
-	}
-
-
-
-
-	public void setFacture(Long facture) {
-		this.facture = facture;
-	}
-
-
-
-
-	public Command getCommand() {
-		return Command;
-	}
-
-
-
-
-	public void setCommand(Command command) {
-		Command = command;
-	}
-
-
-
-
-	public Donation getDonations() {
-		return donations;
-	}
-
-
-
-
-	public void setDonations(Donation donations) {
-		this.donations = donations;
-	}
-
-
-
-
-	public Delivery getDeliverie() {
-		return deliverie;
-	}
-
-
-
-
-	public void setDeliverie(Delivery deliverie) {
-		this.deliverie = deliverie;
-	}
-
-
-
-
-	public Payment(Long paymentId, String typeOfPayment, Long facture, com.esprit.spring.entites.Command command,
-			Donation donations, Delivery deliverie) {
-		super();
-		this.paymentId = paymentId;
-		this.typeOfPayment = typeOfPayment;
-		this.facture = facture;
-		Command = command;
-		this.donations = donations;
-		this.deliverie = deliverie;
-	}
-
-
-
-
 	public Payment() {
 		super();
 		// TODO Auto-generated constructor stub

@@ -25,7 +25,7 @@ public class Delivery implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "deliveryId")
-	private Long deliveryId;
+	private int deliveryId;
 	
 	
 	@Temporal(TemporalType.DATE)
@@ -37,27 +37,21 @@ public class Delivery implements Serializable{
 	
 	
 	@ManyToOne
-	@JoinColumn(name="idDriver",nullable = true)
+	@JoinColumn(name="idDriver")
 	Driver driver;
 	
 	
 	
-	public Driver getDriver() {
-		return driver;
-	}
-	public void setDriver(Driver driver) {
-		this.driver = driver;
-	}
 	public List<Payment> getPayments() {
 		return payments;
 	}
 	public void setPayments(List<Payment> payments) {
 		this.payments = payments;
 	}
-	public Long getDeliveryId() {
+	public int getDeliveryId() {
 		return deliveryId;
 	}
-	public void setDeliveryId(Long deliveryId) {
+	public void setDeliveryId(int deliveryId) {
 		this.deliveryId = deliveryId;
 	}
 	public Date getDateDelivery() {
