@@ -9,95 +9,91 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ManyToAny;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="T_STOCK")
 public class Stock implements Serializable {
 
 	
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "idStock")
-	private int idStock;
+      private int idStock;
 	
+	//@Column(name = "stockname")
+	private String stockname;
 	
-	@Column(name = "quantiteMin")
-	private int quantiteMin;
-	
-	@Column(name = "quantiteMax")
-	private int quantiteMax;
-	
-	@Column(name = "quantiteInstan")
-	private int quantiteInstan;
+   @JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="stock")
+	private List<StockDetail> stockDeatail;
 
+
+	
+	
+
+	
+	
+	
+	public Stock(int idStock, String stockname, List<StockDetail> stockDeatail) {
+		super();
+		this.idStock = idStock;
+		this.stockname = stockname;
+		this.stockDeatail = stockDeatail;
+	}
+
+
+	public Stock() {
+		super();
+	}
 
 
 	public int getIdStock() {
 		return idStock;
 	}
 
+
 	public void setIdStock(int idStock) {
 		this.idStock = idStock;
 	}
 
-	@OneToOne(mappedBy="stock")
-	@JoinColumn(name="id")
-	private Product product;
+
+	public String getStockname() {
+		return stockname;
+	}
+
+
+	public void setStockname(String stockname) {
+		this.stockname = stockname;
+	}
+
+
+	public List<StockDetail> getStockDeatail() {
+		return stockDeatail;
+	}
+
+
+	public void setStockDeatail(List<StockDetail> stockDeatail) {
+		this.stockDeatail = stockDeatail;
+	}
+	 
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="stock")
-	List<Shalves> shalves;
-
 
 	
-
-	public int getQuantiteMin() {
-		return quantiteMin;
-	}
-
-	public void setQuantiteMin(int quantiteMin) {
-		this.quantiteMin = quantiteMin;
-	}
-
-	public int getQuantiteMax() {
-		return quantiteMax;
-	}
-
-	public void setQuantiteMax(int quantiteMax) {
-		this.quantiteMax = quantiteMax;
-	}
-
-	public int getQuantiteInstan() {
-		return quantiteInstan;
-	}
-
-	public void setQuantiteInstan(int quantiteInstan) {
-		this.quantiteInstan = quantiteInstan;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
-	public List<Shalves> getShalves() {
-		return shalves;
-	}
-
-	public void setShalves(List<Shalves> shalves) {
-		this.shalves = shalves;
-	}
-
-	public Stock() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
+	
+	
+	
+	
 	
 	
 	
