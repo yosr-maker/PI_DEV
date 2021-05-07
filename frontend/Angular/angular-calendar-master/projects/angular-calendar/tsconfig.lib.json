@@ -1,0 +1,28 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/lib",
+    "target": "es2015",
+    "module": "es2015",
+    "declaration": true,
+    "inlineSources": true,
+    "importHelpers": true,
+    "types": [],
+    "lib": [
+      "dom",
+      "es2015"
+    ],
+    "emitDecoratorMetadata": true
+  },
+  "angularCompilerOptions": {
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "strictTemplates": true,
+    "strictInjectionParameters": true,
+    "trace": true
+  },
+  "exclude": [
+    "test/**/*.ts",
+    "**/*.spec.ts"
+  ]
+}

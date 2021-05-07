@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\build-tool-examples",
+    "\\build-tool-examples\\angular-cli",
+    "\\build-tool-examples\\angular-cli\\src",
+    "\\build-tool-examples\\angular-cli\\src\\app",
+    "\\projects",
+    "\\projects\\angular-calendar",
+    "\\projects\\angular-calendar\\src",
+    "\\projects\\angular-calendar\\src\\date-adapters",
+    "\\projects\\angular-calendar\\src\\date-adapters\\date-fns"
+  ],
+  "PreviewInSolutionExplorer": false
+}

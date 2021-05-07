@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.json",
+  "files": [
+    "projects/angular-calendar/src/modules/calendar.module.ts",
+    "projects/angular-calendar/src/modules/day/calendar-day.module.ts",
+    "projects/angular-calendar/src/modules/day/calendar-day-view.component.ts",
+    "projects/angular-calendar/src/modules/week/calendar-week.module.ts",
+    "projects/angular-calendar/src/modules/week/calendar-week-view.component.ts",
+    "projects/angular-calendar/src/modules/month/calendar-month.module.ts",
+    "projects/angular-calendar/src/modules/month/calendar-month-view.component.ts",
+    "projects/angular-calendar/src/modules/common/calendar-common.module.ts",
+    "projects/angular-calendar/src/modules/common/calendar-date.pipe.ts",
+    "projects/angular-calendar/src/modules/common/calendar-date-formatter.interface.ts",
+    "projects/angular-calendar/src/modules/common/calendar-event-times-changed-event.interface.ts",
+    "projects/angular-calendar/src/modules/common/calendar-date-formatter.provider.ts",
+    "projects/angular-calendar/src/modules/common/calendar-event-title-formatter.provider.ts",
+    "projects/angular-calendar/src/modules/common/calendar-moment-date-formatter.provider.ts",
+    "projects/angular-calendar/src/modules/common/calendar-native-date-formatter.provider.ts",
+    "projects/angular-calendar/src/modules/common/calendar-next-view.directive.ts",
+    "projects/angular-calendar/src/modules/common/calendar-previous-view.directive.ts",
+    "projects/angular-calendar/src/modules/common/calendar-today.directive.ts"
+  ]
+}
