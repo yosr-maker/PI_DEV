@@ -1,0 +1,6 @@
+*.json
+*.js
+*.css
+CHANGELOG.md
+build-tool-examples
+projects/angular-calendar/src/variables.scss
