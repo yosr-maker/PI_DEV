@@ -235,7 +235,7 @@ public class StockDetailServiceImpl implements IStockDetailService{
 		
 if(stockD.getQuantiteInstan() <= stockD.getQuantiteMin()){
 			
-			String t = "jibdany03@gmail.com";
+			String t = "jonathan.jibikilayi@esprit.tn";
 			String sub = "Alert stock securité Attient !!!";
 			String b = "bonjour mr jonathan,\n "+stockD.getProduct().getName()+" "+"l'ID"+stockD.getProduct().getId()+"Detail du produit:"
 			+stockD.getProduct().getDescription()+"sera un rupture bientot le quotas minimum est atteind\n"
@@ -281,7 +281,7 @@ if(stockD.getQuantiteInstan() <= stockD.getQuantiteMin()){
   
 	
 
-	public List<StockDetail> sendNotifSoldeStock(StockDetail stcd)
+	public List<StockDetail> sendNotifSoldeStock()
 	{
 		List <StockDetail> list = (List <StockDetail>) stockDetailRepository.findAll();
 	
@@ -292,7 +292,7 @@ if(stockD.getQuantiteInstan() <= stockD.getQuantiteMin()){
 			Date date2=reductionJour( stcD.getDexpiration());
 			
 			
-			if( stcD.getProduct().getCategory().equals("alimentaire") &&  stcD.getDexpiration().compareTo(date2)>0)
+			if(   stcD.getDexpiration().compareTo(date2)<0)
 			{
 				listexpiration.add(stcD) ;
 				   
