@@ -36,7 +36,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
                         <div class="dropdown-menu">
                             <a href="wishlist.html" class="dropdown-item">Forum</a>
-                            <a href="login.html" class="dropdown-item">Events</a>
+                            <a routerLink="adminEvent" class="dropdown-item">Events</a>
                             <a href="contact.html" class="dropdown-item">Contact Us</a>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                         </div>
                         <!-- Add product -->
                         <div class="tab-pane fade" id="stock-tab" role="tabpanel" aria-labelledby="stock-nav">
-                            <app-admin-products ></app-admin-products>
+                            <app-admin-products  *ngIf=""></app-admin-products>
                         </div>
 
                         <!-- PAYMENT -->

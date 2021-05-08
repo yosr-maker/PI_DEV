@@ -35,12 +35,13 @@ export class AdminProductsComponent implements OnInit {
   }
 
   ajouterProd(){
-    //console.log(this.product)
+    console.log(this.product)
     this.product.stockDetail= this.stockDetail;
-    this.product.stockDetail.
-   // console.log(this.product.stockDetail)
-    //this.serviceproduct.addproduct(this.product).subscribe();
+   this.product.stockDetail
+   //console.log(this.product.stockDetail)
+    this.serviceproduct.addproduct(this.product).subscribe();
     this.toggleListe();
   }
 
+  
 }

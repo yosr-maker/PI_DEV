@@ -27,14 +27,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminProductsComponent } from './admin-products/admin-products.component';
 
 import { FormsModule } from "@angular/forms";
+import { AdminEventComponent } from './admin-event/admin-event.component';
+import { ContributionComponent } from './contribution/contribution.component';
+import { BodyComponent } from './components/body/body.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { CrudproduckComponent } from './crudproduck/crudproduck.component';
 
 
-
-const ROUTES : Routes =[
-  {path :'tableau', component: DeliverytabComponent},
-  {path :'forum', component: ForumComponent }
-
-]
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +55,12 @@ const ROUTES : Routes =[
     DeliverytabComponent,
     ParticipationComponent,
     AdminProductsComponent,
+    AdminEventComponent,
+    ContributionComponent,
+    BodyComponent,
+    HeaderComponent,
+    FooterComponent,
+    CrudproduckComponent,
   
 
    
@@ -69,8 +75,7 @@ const ROUTES : Routes =[
     MbscModule,
     HttpClientJsonpModule,
     HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot(ROUTES)
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

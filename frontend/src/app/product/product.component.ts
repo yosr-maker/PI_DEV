@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '../entity/Product';
 import { ProductService } from '../services/product.service';
 
@@ -16,9 +17,11 @@ list : Product[]
   constructor(private productService : ProductService) { }
 
   ngOnInit(): void {
-    this.productService.getAllproduct().subscribe(data=>{
+    this.productService.getAllproduct().subscribe( data => {
       this.list=data;
     })
+
   }
+
 
 }

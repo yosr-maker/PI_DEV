@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbCarousel, NgbCarouselConfig, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-home',
@@ -14,14 +15,20 @@ export class HomeComponent implements OnInit {
   /*images = [1055, 194, 368].map((n) => `https://picsum.photos/id/${n}/900/500`);*/
   images = ["assets/img/slider-1.jpg","assets/img/slider-2.jpg","assets/img/slider-2.jpg"]
  
+  products: any;
 
-  constructor(config: NgbCarouselConfig) {
+  constructor(config: NgbCarouselConfig,
+              private productService : ProductService) {
     // customize default values of carousels used by this component tree
     config.showNavigationArrows = true;
     config.showNavigationIndicators = true;
   }
 
   ngOnInit(): void {
+    this.productService.getAllproduct().subscribe( data => {
+      this.products = data;
+    })
+
   }
 
   saveTodos(): void {
