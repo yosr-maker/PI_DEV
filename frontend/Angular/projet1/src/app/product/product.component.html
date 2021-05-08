@@ -1,0 +1,13 @@
+<p>product works!</p>
+<h1>id </h1>
+{{P.id}}
+<h1>title  </h1>
+{{P.title}}
+<h1>price </h1>
+{{P.price}}
+<h1>quantity </h1>
+{{P.quantity}}
+<h1>like </h1>
+{{P.like}}
+<button (click)="increment()"> like </button>
+<button [disabled]="P.quantity==0" (click)="decrement()">buy</button>

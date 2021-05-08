@@ -1,0 +1,381 @@
+<div> <!-- wrap the whole form in a div cause angular likes it and to give it all a container and some padding. -->
+    <div class="row">
+        <div class="col-xs-12">
+            <span class="btn active btn-default"><img src="//placehold.it/30x30&text=1" class="img-circle"><br>Create your gift</span>
+            <span  class="btn btn-default"  ng-click="proceedToPayment()"><img src="//placehold.it/30x30&text=2" class="img-circle"><br>Submit payment</span>
+        </div>
+    </div>
+
+    <div class="clearfix"><br></div>
+    <form id="giftform" name="giftform" novalidate class="designation-form">
+
+        <!-- ------------------------- Designations Area -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>
+                    Designate your gift&nbsp;&nbsp;&nbsp;&nbsp;<small><a href="#" data-toggle="modal" data-target="#givingoptions">Learn more about giving options</a></small>
+                </h2>
+            </div>
+        </div>
+
+        <!--giving options pop-up-->
+        <div class="modal fade" id="givingoptions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <ul class="list-unstyled givingoptions">
+                            <li><strong>College/School/Program</strong> - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                            <li><strong>Diversity</strong> - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                            <li><strong>Greatest Need</strong> - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                            <li><strong>Regional Campuses</strong> - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                            <li><strong>Special Interest</strong> - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                            <li><strong>Student Support</strong> - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end pop-up-->
+
+        <div class="col-lg-10 col-lg-offset-1 col-md-offset-1">
+            <div>
+                <div ng-hide="newDesignation.customDesignation">
+
+                    <div class="clearfix"><br></div>
+                    <div class="row" ng-show="giftform.program.$dirty && form.program.$invalid">
+                        <p class="errors">You must select a Program to Designate.</p>
+                    </div>
+
+                    <div class="row">
+                                <h3>Select the Type of gift:</h3>
+                                <select ng-required="!newDesignation.customDesignation" ng-click="designationChosen()" ng-model="newDesignation.chosenDesignation" ng-options="d.name for d in designations"  class="form-control input-lg" >
+                                </select>
+                    </div>
+                    <div class="row" ng-hide="newDesignation.customDesignation" ng-show="newDesignation.chosenDesignation.name">
+                                <h3>Search or Select a Program from {{newDesignation.chosenDesignation.name}}:</h3>
+                                <select name="program"  ng-required="!newDesignation.customDesignation" ng-model="newDesignation.chosenProgram" ng-options="p.name for p in newDesignation.chosenDesignation.children"  class="form-control input-lg"></select>
+                    </div>
+                </div>
+
+                <!-- ------------------------- Custom Designations Area -->
+                <div ng-show="newDesignation.customDesignation">
+                    <div class="row">
+
+                            <h4>What program should we fund with your gift:</h4>
+                            <div class="row" ng-show="gift.program.$dirty && form.program.$invalid">
+                                <p class="error">You must select a Program to Designate.</p>
+                            </div>
+                            <input class="form-control input-lg" ng-required="newDesignation.customDesignation" type="text" ng-model="newDesignation.customDesignationName">
+
+                            <h4>Enter contact information for this gift:</h4>
+                            <input class="form-control input-lg" type="text" ng-required="newDesignation.customDesignation" ng-model="newDesignation.customDesignationContact">
+
+
+                            <div class="btn btn-default btn-lg add-gifts" ng-click="cancelCustomDesignation()">Cancel and Choose Existing Gift Type</div>
+                    </div>
+                </div>
+
+                <div class="row" ng-hide="newDesignation.customDesignation">
+                    <div class="checkbox">
+                        <div class="btn btn-default add-gifts" ng-click="addCustomDesignation()"> I'd like to enter my own designation</div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Gift Amount Area -->
+            <div class="gift-amount">
+                <div class="row">
+                    <h3>Select gift amount</h3>
+                </div>
+
+                <div class="row">
+                    <p ng-hide="newDesignation.giftAmount" class="show-on-submit errors">You must select or enter a Dollar Amount.</p>
+                    <p ng-show="giftform.giftAmount.$error.min" class="errors">$5 minimum</p>
+                </div>
+
+                <div class="row">
+                    <ul>
+                        <li class="col-sm-2 col-xs-4" ng-repeat="level in givingLevels" ng-hide="$last && chooseOtherAmount">
+                            <span class="btn btn-default btn-lg" ng-class="{active: $index == selected}"  ng-click="changeGiftAmount(level, $index)">
+                                {{ level.label }}
+                            </span>
+                        </li>
+                        <li class="col-lg-3 col-md-3 col-sm-6" ng-show="chooseOtherAmount">
+                            <p ng-show="giftform.giftAmount.$error.min">$5 minimum</p>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span><input class="form-control input-lg" name="giftAmount" ng-required="chooseOtherAmount" min="5" integer type="text" ng-model="newDesignation.giftAmount"><span class="input-group-addon">.00</span></div>
+                        </li>
+                    </ul>
+                </div>
+            </div> <!-- end gift-amount -->
+
+            <div class="row"> <!-- ----------------------------------- Summary of New Gift -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-heading">This Gift</h3>
+                    </div>
+
+                    <table class="table">
+                        <tr>
+                            <td><strong>Program Name</strong></td>
+                            <td><strong>Amount</strong></td>
+                        </tr>
+
+                        <!-- Designations -->
+                        <tr>
+                            <td><span ng-hide="newDesignation.chosenDesignation.name">Please choose gift type.</span><span ng-show="newDesignation.chosenDesignation.name">{{newDesignation.chosenDesignation.name}} - <span ng-hide="newDesignation.chosenProgram.name">Please choose which program.</span>{{newDesignation.chosenProgram.name}}</span></td>
+                            <td><span ng-hide="newDesignation.giftAmount">Please choose the amount of your gift.</span>{{newDesignation.giftAmount}}</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div> <!-- End New Gift Summary -->
+
+        <div class="row">
+            <div class="btn btn-default add-gifts" ng-click="addAnotherDesignation()">+ Add Another Gift</div>
+        </div>
+
+            <!-- ----------------------------------- Summary of ALL GIFTS -->
+            <div ng-show='myDesignations.length'>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-heading">Your Other Gifts</h3>
+                    </div>
+
+                    <table class="table">
+                        <tbody><tr>
+                            <td><strong>Program Name</strong></td>
+                            <td><strong>Amount</strong></td>
+                            <td>&nbsp;</td>
+                        </tr>
+
+                        <!-- Designation -->
+                        <tr ng-repeat="designation in myDesignations">
+                            <td>{{designation.chosenDesignation.name}} - {{designation.chosenProgram.name}}</td>
+                            <td>{{designation.giftAmount}}</td>
+                            <td class="text-center remove-gift" ng-click="removeDesignation($index)"><span class="glyphicon glyphicon-remove"></span>Remove this Gift</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div><!-- end Summary of ALL GIFTS -->
+
+            <!-- Recurring Gift -->
+            <div ng-show="myGift.recurring">
+                <h4>This is a recurring gift that will be charged to you <span ng-hide="myGift.installmentFrequency">Please choose frequency</span>{{myGift.installmentFrequency}}.</h4>
+            </div>
+
+            <!-- Tribute -->
+            <div ng-show="myGift.tribute">
+                <h4>This is a tribute gift.</h4>
+                <p ng-show="myGift.tributeHonoreeNameFirst">In {{myGift.tributeType}} of {{myGift.tributeHonoreeNameFirst}} {{myGift.tributeHonoreeNameLast}}</p>
+                <p ng-show="myGift.tributeNotifyNameFull">    When this gift is made, we will notify {{myGift.tributeNotifyNameFull}}<span ng-show="myGift.tributeNotifyAddressStreet1"> at<br />
+                    {{myGift.tributeNotifyAddressStreet1}}<br />
+                    {{myGift.tributeNotifyAddressStreet2}}<br />
+                    {{myGift.tributeNotifyAddressCity}}<span ng-show="myGift.tributeNotifyAddressCity">, </span>{{myGift.tributeNotifyAddressState}} {{myGift.tributeNotifyAddressZip}}</span> <br />
+                <span ng-show="myGift.tributeMessageBody">We will send this tribute message:<br />
+                    {{myGift.tributeMessageBody}}</span>
+                </p>
+            </div>
+            <!-- Recurring Gift -->
+            <p ng-show="gift.recurring">Your gift(s) are recurring and will be charged to you {{gift.installmentFrequency}}.</p>
+
+            <!-- Tribute -->
+            <div ng-show="gift.tribute">
+                <p>
+                        This is a tribute gift {{gift.tributeType}} {{gift.tributeHonoreeNameFirst}} {{gift.tributeHonoreeNameLast}}
+                </p>
+                <p>When this gift is made, we will notify {{gift.tributeNotifyNameFull}} at<br />
+                        {{gift.tributeNotifyAddressStreet1}}<br />
+                        {{gift.tributeNotifyAddressStreet2}}<br />
+                        {{gift.tributeNotifyAddressCity}}, {{gift.tributeNotifyAddressState}} {{gift.tributeNotifyAddressZip}} <br />
+                        Along with this message:<br />
+                        {{gift.tributeMessageBody}}
+                </p>
+            </div>
+        </div>
+
+        <div class="row"> <!-- ------------------------------------------ Gift Options -->
+            <div class="col-lg-12">
+                <h2>Gift options</h2>
+
+                <div class="col-lg-8 col-lg-offset-1  col-md-offset-1">
+
+                    <div class="panel panel-default"> <!-- Recurring Gift -->
+                        <div class="panel-body">
+                            <div>
+                                <label class="radio-inline">
+                                    <input ng-model="myGift.recurring" type="radio" checked>
+                                    This is a one-time gift
+                                </label>
+                                <label class="radio-inline">
+                                    <input ng-model="myGift.recurring" type="radio" value="true">
+                                    This is a recurring gift
+                                </label>
+                            </div>
+
+                            <div ng-show="myGift.recurring" class="animate-show">
+                                <!-- &installment.frequency=one-time | monthly | quarterly | semi-annually | annually -->
+                                <h3>Select frequency of gift:</h3>
+                                <select ng-model="myGift.installmentFrequency" class="form-control input-lg">
+                                    <option value="monthly"  ng-selected="true">Monthly</option>
+                                    <option value="quarterly">Quarterly</option>
+                                    <option value="semi-annually">Semi-Annually</option>
+                                    <option value="annually">Annually</option>
+                                </select><br><br>
+                            </div>
+                        </div>
+                    </div> <!-- end Recurring Gift -->
+
+                    <div class="panel panel-default"> <!-- ---- Tribute -->
+                        <div class="panel-body">
+                            <div class="checkbox">
+                                <label>
+                                    <input ng-model="myGift.tribute" type="checkbox"> This is an honor or memorial gift
+                                </label>
+                            </div>
+
+                            <div ng-show="myGift.tribute">
+                                <h3>Select the honor/memorial gift type:</h3>
+
+                                <select ng-model="myGift.tributeType" class="form-control input-lg">
+                                    <option value="tribute" ng-selected="true">In honor of</option>
+                                    <option value="memorial">In memory of</option>
+                                </select>
+
+                                <h3>Enter your honoree info:</h3>
+                                <div class="col-sm-6"><input ng-model="myGift.tributeHonoreeNameFirst" type="text" class="form-control" placeholder="Honoree First Name"></div>
+                                <div class="clearfix visible-xs"><br></div>
+                                <div class="col-sm-6"><input ng-model="myGift.tributeHonoreeNameLast" type="text" class="form-control" placeholder="Honoree Last Name"></div>
+                                <div class="clearfix"><br></div>
+                                <div class="col-sm-12"><input ng-model="myGift.tributeNotifyNameFull" type="text" class="form-control" placeholder="Notification Name"></div>
+                                <div class="clearfix"><br></div>
+                                <div class="col-sm-12"><input ng-model="myGift.tributeNotifyAddressStreet1" type="text" class="form-control" placeholder="Notification Street Address"></div>
+                                <div class="clearfix"><br></div>
+                                <div class="col-sm-12"><input ng-model="myGift.tributeNotifyAddressStreet2" type="text" class="form-control" placeholder="Notification Street Address 2"></div>
+                                <div class="clearfix"><br></div>
+                                <div class="col-sm-6"><input ng-model="myGift.tributeNotifyAddressCity" type="text" class="form-control" placeholder="City"></div>
+
+                                <div class="clearfix visible-xs"><br></div>
+                                <div class="col-sm-6">
+                                    <select ng-model="myGift.tributeNotifyAddressState" class="form-control">
+                                        <option value="AK">AK - Alaska</option>
+                                        <option value="AL">AL - Alabama</option>
+                                        <option value="AR">AR - Arkansas</option>
+                                        <option value="AZ">AZ - Arizona</option>
+                                        <option value="CA">CA - California</option>
+                                        <option value="CO">CO - Colorado</option>
+                                        <option value="CT">CT - Connecticut</option>
+                                        <option value="DC">DC - District of Columbia</option>
+                                        <option value="DE">DE- Delaware</option>
+                                        <option value="FL">FL - Florida</option>
+                                        <option value="GA">GA - Georgia</option>
+                                        <option value="HI">HA - Hawaii</option>
+                                        <option value="IA">IA - Iowa</option>
+                                        <option value="ID">ID - Idaho</option>
+                                        <option value="IL">IL - Illinois</option>
+                                        <option value="IN">IN - Indiana</option>
+                                        <option value="KS">KS - Kansas</option>
+                                        <option value="KY">KY - Kentucky</option>
+                                        <option value="LA">LA - Louisiana</option>
+                                        <option value="MA">MA - Massachusetts</option>
+                                        <option value="MD">MD - Maryland</option>
+                                        <option value="ME">ME - Maine</option>
+                                        <option value="MI">MI - Michigan</option>
+                                        <option value="MN">MN - Minnesota</option>
+                                        <option value="MO">MO - Missouri</option>
+                                        <option value="MS">MS - Mississippi</option>
+                                        <option value="MT">MT - Montana</option>
+                                        <option value="NC">NC - North Carolina</option>
+                                        <option value="ND">ND - North Dakota</option>
+                                        <option value="NE">NE - Nebraska</option>
+                                        <option value="NH">NH - New Hampshire</option>
+                                        <option value="NJ">NJ - New Jersey</option>
+                                        <option value="NM">NM - New Mexico</option>
+                                        <option value="NV">NV - Nevada</option>
+                                        <option value="NY">NY - New York</option>
+                                        <option ng-selected="true" value="OH">OH - Ohio</option>
+                                        <option value="OK">OK - Oklahoma</option>
+                                        <option value="OR">OR - Oregon</option>
+                                        <option value="PA">PA - Pennsylvania</option>
+                                        <option value="RI">RI - Rhode Island</option>
+                                        <option value="SC">SC - South Carolina</option>
+                                        <option value="SD">SD - South Dakota</option>
+                                        <option value="TN">TN - Tennessee</option>
+                                        <option value="TX">TX - Texas</option>
+                                        <option value="UT">UT - Utah</option>
+                                        <option value="VA">VA - Virginia</option>
+                                        <option value="VT">VT - Vermont</option>
+                                        <option value="WA">WA - Washington</option>
+                                        <option value="WI">WI - Wisconsin</option>
+                                        <option value="WV">WV - West Virginia</option>
+                                        <option value="WY">WY - Wyoming</option>
+                                        <option value="AS">AS - American Samoa</option>
+                                        <option value="FM">FM - Federated States of Micronesia</option>
+                                        <option value="GU">GU - Guam</option>
+                                        <option value="MH">MH - Marshall Islands</option>
+                                        <option value="MP">MP - Northern Mariana Islands</option>
+                                        <option value="PR">PR - Puerto Rico</option>
+                                        <option value="PW">PW - Palau</option>
+                                        <option value="VI">VI - Virgin Islands</option>
+                                        <option value="AA">AA - Armed Forces Americas</option>
+                                        <option value="AE">AE - Armed Forces</option>
+                                        <option value="AP">AE - Armed Forces Pacific</option>
+                                        <option value="AB">AB - Alberta</option>
+                                        <option value="BC">BC - British Columbia</option>
+                                        <option value="MB">MB - Manitoba</option>
+                                        <option value="NB">NB - New Brunswick</option>
+                                        <option value="NF">NF - Newfoundland and Labrador</option>
+                                        <option value="NS">NS - Nova Scotia</option>
+                                        <option value="NT">NT - Northwest Territories</option>
+                                        <option value="NU">NU - Nunavut</option>
+                                        <option value="ON">ON - Ontario</option>
+                                        <option value="PE">PE - Prince Edward Island</option>
+                                        <option value="QC">QC - Quebec</option>
+                                        <option value="SK">SK - Saskatchewan</option>
+                                        <option value="YT">YT - Yukon</option>
+                                        <option value="None">None</option>
+                                    </select>
+                                </div>
+                                <div class="clearfix"><br></div>
+                                <div class="col-sm-6"><input ng-model="myGift.tributeNotifyAddressZip" type="text" class="form-control" placeholder="Zip Code"></div>
+
+
+                                <div class="clearfix"><br></div>
+                                <h3>Enter your personal message:</h3>
+                                <div class="col-xs-12">
+                                    <textarea ng-model="myGift.tributeMessageBody" class="form-control" rows="5"></textarea><br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end Tribute -->
+
+                    <div class="panel panel-default"> <!-- Pledge -->
+                        <div class="panel-body">
+                            <div class="checkbox">
+                                <label>
+                                    <input ng-model="myGift.pledge" type="checkbox"> This is a pledge payment
+                                </label>
+                            </div>
+                        </div>
+                    </div> <!-- end Pledge -->
+                </div>
+            </div>
+        </div> <!-- End Gift Options -->
+
+
+        <div class="clearfix"><br></div>
+        <div class="row errors" ng-show="errors">
+            <p>Please fill out all required fields above.</p>
+        </div>
+        <div class="clearfix"><br></div>
+        <div class="row">
+            <div class="col-sm-12 text-center"><span class="btn btn-primary btn-lg" ng-click="proceedToPayment()">Proceed to Payment >></span></div>
+            <br><br><br><br>
+        </div>
+    </form>
+</div>

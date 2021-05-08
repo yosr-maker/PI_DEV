@@ -1,0 +1,16 @@
+{
+  "product": [
+    {
+      "name": "DDD",
+      "price": 34543646436,
+      "description": "D1",
+      "id": 1
+    },
+    {
+      "name": "test",
+      "price": 55,
+      "description": "D2",
+      "id": 2
+    }
+  ]
+}
