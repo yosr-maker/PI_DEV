@@ -1,0 +1,22 @@
+<p>form-product works!</p>
+<form #form="ngForm">
+  <label> id</label>
+  <input type="number" name="id" ngModel  #test="ngModel" required >
+  <div *ngIf="test.invalid && test.touched">
+  <div *ngIf="test.errors.required"> required  </div>
+  </div>
+  <label> title </label>
+  <input type="text" name="title"ngModel  #title="ngModel" required minlength="3">
+  <div *ngIf="title.invalid && title.touched">
+  <div *ngIf="title.errors.minlength">minlength</div>
+  </div>
+  <label> Quantity </label>
+  <input type="number" name="quantity" ngModel #quantity="ngModel" required>
+  <div *ngIf="quantity.invalid">
+  <div *ngIf="quantity.value<0">erreur</div>
+  </div>
+  <button [disabled]="form.invalid"  (click)="save(form.value)">save</button>
+</form>
+<div *ngFor="let p of product">
+  {{p.id}} {{ p.title}} {{ p.quantity}}
+</div>

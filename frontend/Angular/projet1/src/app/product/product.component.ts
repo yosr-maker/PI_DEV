@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-product',
@@ -7,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
+  @Input() P;
+  @Output() test = new EventEmitter();
+  @Output() decrease = new EventEmitter();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
+  increment() {
+this.test.emit(this.P);
+  }
+  decrement() {
+    this.decrease.emit(this.P);
+  }
 }

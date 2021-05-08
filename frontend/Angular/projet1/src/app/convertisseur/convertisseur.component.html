@@ -1,0 +1,8 @@
+<p>convertisseur works!</p>
+<form>
+  <div class="form-group">
+    <input type="text" name="convertion" class="form-control" [(ngModel)]="numero">
+  </div>
+</form>
+<app-to-euro-convert  [C]="numero" (test)="convert($event)"></app-to-euro-convert>
+

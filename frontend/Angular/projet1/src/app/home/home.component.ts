@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbCarousel, NgbCarouselConfig, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -7,34 +6,29 @@ import { NgbCarousel, NgbCarouselConfig, NgbSlideEvent, NgbSlideEventSource } fr
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  listProduct;
 
-  public edited = false;
-  showNavigationArrows = false;
-  showNavigationIndicators = false;
-  /*images = [1055, 194, 368].map((n) => `https://picsum.photos/id/${n}/900/500`);*/
-  images = ["assets/img/slider-1.jpg","assets/img/slider-2.jpg","assets/img/slider-2.jpg"]
- 
-
-  constructor(config: NgbCarouselConfig) {
-    // customize default values of carousels used by this component tree
-    config.showNavigationArrows = true;
-    config.showNavigationIndicators = true;
+  constructor() {
   }
 
   ngOnInit(): void {
+    this.listProduct = [
+      {id: 1, title: 'PC 1', quantity: 10, like: 0, price: 20},
+      {id: 2, title: 'PC 2', quantity: 0, like: 0, price: 30},
+      {id: 3, title: 'PC 3', quantity: 20, like: 0, price: 100},
+    ];
   }
 
-  saveTodos(): void {
-    //show box msg
-    this.edited = true;
-    //wait 3 Seconds and hide
-    setTimeout(function() {
-        this.edited = false;
-        console.log(this.edited);
-    }.bind(this), 3000);
-   }
+  increaselike($event) {
+    let i = this.listProduct.indexOf($event);
+    console.log(i);
+    this.listProduct[i].like++;
 
+  }
 
-   
+  decreasequantity(msg) {
+    let j = this.listProduct.indexOf(msg);
+    this.listProduct[j].quantity--;
+  }
 
 }

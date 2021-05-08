@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>articles.component.spec.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+articles.component.spec.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">{ async, ComponentFixture, TestBed } from </span><span class="s2">'@angular/core/testing'</span><span class="s1">;</span>
+
+<span class="s0">import </span><span class="s1">{ ArticlesComponent } from </span><span class="s2">'./articles.component'</span><span class="s1">;</span>
+
+<span class="s1">describe(</span><span class="s2">'ArticlesComponent'</span><span class="s1">, () =&gt; {</span>
+  <span class="s0">let </span><span class="s1">component: ArticlesComponent;</span>
+  <span class="s0">let </span><span class="s1">fixture: ComponentFixture&lt;ArticlesComponent&gt;;</span>
+
+  <span class="s1">beforeEach(async(() =&gt; {</span>
+    <span class="s1">TestBed.configureTestingModule({</span>
+      <span class="s1">declarations: [ ArticlesComponent ]</span>
+    <span class="s1">})</span>
+    <span class="s1">.compileComponents();</span>
+  <span class="s1">}));</span>
+
+  <span class="s1">beforeEach(() =&gt; {</span>
+    <span class="s1">fixture = TestBed.createComponent(ArticlesComponent);</span>
+    <span class="s1">component = fixture.componentInstance;</span>
+    <span class="s1">fixture.detectChanges();</span>
+  <span class="s1">});</span>
+
+  <span class="s1">it(</span><span class="s2">'should create'</span><span class="s1">, () =&gt; {</span>
+    <span class="s1">expect(component).toBeTruthy();</span>
+  <span class="s1">});</span>
+<span class="s1">});</span>
+</pre>
+</body>
+</html>

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "projet1": {
+    "atelier": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/projet1",
+            "outputPath": "dist/atelier",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -24,15 +24,9 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": ["node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "src/assets/js/main.js",
-              "src/assets/lib/easing/easing.js",
-              "src/assets/lib/easing/easing.min.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -68,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "projet1:build"
+            "browserTarget": "atelier:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "projet1:build:production"
+              "browserTarget": "atelier:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "projet1:build"
+            "browserTarget": "atelier:build"
           }
         },
         "test": {
@@ -116,19 +110,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "projet1:serve"
+            "devServerTarget": "atelier:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "projet1:serve:production"
+              "devServerTarget": "atelier:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "projet1",
+  "defaultProject": "atelier",
   "cli": {
-    "analytics": "577cee30-2562-4e67-b968-65d4f933d0dc"
+    "analytics": "3eaca866-5757-44e7-be4c-4f7c42ec69a3"
   }
 }

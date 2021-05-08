@@ -1,0 +1,34 @@
+li {
+    list-style: none;
+}
+.gift-amount input {
+    margin: 0;
+    min-height: 100%;
+}
+.gift-amount input[name=giftAmount] {
+    min-width: 80px;
+}
+.gift-amount li {
+    margin-bottom: 20px;
+}
+.add-gifts {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.remove-gift {
+    cursor: pointer;
+}
+input.ng-invalid.ng-dirty, .ng-invalid-required.submitted {
+    border-color: #e9322d;
+}
+.donation-progress, .donation-error {
+    display: none;
+}
+.errors {
+    font-weight: bold;
+    color: red;
+}
+
+/* todo: this should be done in step1 in the giftAmount area with built-in ng validation */
+.show-on-submit { display: none; }
+.show-on-submit.submitted { display: block; }

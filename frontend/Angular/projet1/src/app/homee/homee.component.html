@@ -1,0 +1,18 @@
+<p>homee works!</p>
+<div *ngFor="let product of listproduct; let i=index">
+ {{product.name}}
+  {{product.price}}
+
+  <div *ngIf="show && i==j">
+  {{product.description}}
+  </div>
+
+  <button  (click)="showDescription(i)" > detail </button>
+
+  <a routerLink="/detail/{{product.id}}">detail</a>
+
+
+
+
+
+</div>

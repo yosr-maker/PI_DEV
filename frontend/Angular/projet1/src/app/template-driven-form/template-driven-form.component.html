@@ -1,0 +1,32 @@
+<p>template-driven-form works!</p>
+<form  #form="ngForm">
+  <fieldset>
+  <legend> Informations generales </legend>
+  <label> Nom </label>
+  <input type="text"   required ngModel #n="ngModel" >
+    <div class="alert alert-danger" *ngIf="n.invalid && n.touched">
+      ce champ est obligatoire
+    </div>
+  <label> Email</label>
+  <input type="email" name="mail" required ngModel #mail="ngModel"  >
+    <div class="alert alert-danger" *ngIf="mail.invalid && mail.touched">
+     champ obligatoire
+    </div>
+  </fieldset>
+  <fieldset ngModel #paiement="ngModel">
+  <legend> Information de paiement </legend>
+  <label> Type de carte   </label>
+    <input type="text" name="type" required ngModel #t="ngModel"  >
+    <div class="alert alert-danger" *ngIf="t.invalid && t.touched">
+   champ obligatoire
+    </div>
+    <label> Numero carte </label>
+    <input type="text" ngModel #nb="ngModel" required maxlength="16" >
+    <br>
+    <label> Date expiration  </label>
+      <input type="date"  ngModel required > <br>
+      <label> code </label>
+        <input type="password" [hidden]="paiement.invalid" > <br>
+  </fieldset>
+<button [disabled]="form.invalid" (click)=ajouter(form.value)>ajouter </button>
+</form>
