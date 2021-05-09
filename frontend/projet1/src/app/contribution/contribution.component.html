@@ -1,0 +1,244 @@
+<!-- Top bar Start -->
+<div class="top-bar">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <i class="fa fa-envelope"></i>
+                consommiTounsi@gmail.com
+            </div>
+            <div class="col-sm-6">
+                <i class="fa fa-phone-alt"></i>
+                +216 70 345 000 
+            </div>
+        </div>
+    </div>
+  </div>
+<!-- Nav Bar Start -->
+<div class="nav">
+  <div class="container-fluid">
+      <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+          <a href="#" class="navbar-brand">MENU</a>
+          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+              <div class="navbar-nav mr-auto">
+                  <a href="index.html" class="nav-item nav-link">Home</a>
+                  <a href="checkout.html" class="nav-item nav-link">Checkout</a>
+                  <a href="my-account.html" class="nav-item nav-link">My Account</a>
+                  <div class="nav-item dropdown">
+                      <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
+                      <div class="dropdown-menu">
+                          <a href="wishlist.html" class="dropdown-item">Events</a>
+                          <a href="login.html" class="dropdown-item">Forum</a>
+                          <a href="contact.html" class="dropdown-item">Contact Us</a>
+                      </div>
+                  </div>
+              </div>
+              <div class="navbar-nav ml-auto">
+                  <div class="nav-item dropdown">
+                      <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
+                      <div class="dropdown-menu">
+                          <a href="#" class="dropdown-item">Login</a>
+                          <a href="#" class="dropdown-item">Register</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </nav>
+  </div>
+</div>
+<!-- Nav Bar End -->      
+
+
+<!-- Bottom Bar Start -->
+<div class="bottom-bar">
+  <div class="container-fluid">
+      <div class="row align-items-center">
+          <div class="col-md-3">
+              <div class="logo">
+                  <a href="index.html">
+                      <img src="assets/img/logo.png" alt="Logo">
+                  </a>
+              </div>
+          </div>
+        
+    
+      </div>
+  </div>
+</div>
+<!-- Bottom Bar End --> 
+
+<div class="card m-3">
+    <h5  class="card-header" class="text-center"><b>Contribute To This Event </b></h5>
+    <div class="card-body">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group col">
+            <label>Title</label>
+            <select formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+              <option value=""></option>
+              <option value="Mr">Mr</option>
+              <option value="Mrs">Mrs</option>
+              <option value="Miss">Miss</option>
+              <option value="Ms">Ms</option>
+            </select>
+            <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+              <div *ngIf="f.title.errors.required">Title is required</div>
+            </div>
+          </div>
+          <div class="form-group col-5">
+            <label>First Name</label>
+            <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+              <div *ngIf="f.firstName.errors.required">First Name is required</div>
+            </div>
+          </div>
+          <div class="form-group col-5">
+            <label>Last Name</label>
+            <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+              <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Amount</label>
+          <input type="text" formControlName="chiffre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.chiffre.errors }" required pattern="{0-9}" />
+        </div>
+        <div class="form-row">
+          <div class="form-group col">
+            <label>Password</label>
+            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">Password is required</div>
+              <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+          </div>
+          <div class="form-group col">
+            <label>Confirm Password</label>
+            <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+            <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+              <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+              <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group form-check">
+         
+          <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
+          <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
+          <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+        </div>
+        <div class="text-center">
+          <button class="contribute">Contribute</button>
+          <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  
+<div class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-widget">
+                    <h2>Get in Touch</h2>
+                    <div class="contact-info">
+                        <p><i class="fa fa-map-marker"></i>1, 2 rue André Ampère  Pôle Technologique - El Ghazala.</p>
+                        <p><i class="fa fa-envelope"></i>consommiTounsi@gmail.com</p>
+                        <p><i class="fa fa-phone"></i>+215 71 345 000</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-widget">
+                    <h2>Follow Us</h2>
+                    <div class="contact-info">
+                        <div class="social">
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-linkedin-in"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                            <a href=""><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-widget">
+                    <h2>Company Info</h2>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Condition</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-widget">
+                    <h2>Purchase Info</h2>
+                    <ul>
+                        <li><a href="#">Pyament Policy</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row payment align-items-center">
+            <div class="col-md-6">
+                <div class="payment-method">
+                    <h2>We Accept:</h2>
+                    <img src="assets/img/payment-method.png" alt="Payment Method" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="payment-security">
+                    <h2>Secured By:</h2>
+                    <img src="assets/img/godaddy.svg" alt="Payment Security" />
+                    <img src="assetsimg/norton.svg" alt="Payment Security" />
+                    <img src="assets/img/ssl.svg" alt="Payment Security" />
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 copyright">
+                    <p>Copyright &copy; <a href="https://htmlcodex.com">HTML Codex</a>. All Rights Reserved</p>
+                </div>
+
+                <div class="col-md-6 template-by">
+                    <p>Template By <a href="https://htmlcodex.com">HTML Codex</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Bottom End -->       
+    
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    
+    <!-- JavaScript Libraries -->
+    
+    
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</div>
