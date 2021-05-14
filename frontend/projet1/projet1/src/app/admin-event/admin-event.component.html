@@ -1,0 +1,75 @@
+
+<section class="ftco-section">
+    <form #l="ngForm">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6 text-center mb-4">
+            <h2 class="heading-section">List of events </h2>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+  
+            <div class="table-wrap">
+              <table class="table">
+                <thead class="thead-primary">
+                <tr>
+  
+                  <th>Image</th>
+                  <th>Description</th>
+                  <th>Ticket Price</th>
+                  <th>ADD</th>
+                  <th>GET
+                  <th>
+                  <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="alert" role="alert">
+  
+                  <td>
+                    <input type="file"
+                           id="avatar" name="avatar"
+                           accept="image/png, image/jpeg">
+                  </td>
+                  <td>
+                    <div class="email">
+                      <input type="text" name="description" ngModel #D="ngModel" minlength="10" required>
+                      <div *ngIf="D.invalid && D.touched">
+                        <div *ngIf="D.errors.minlength">
+                          faute de saisie
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <input type="number" name="price" ngModel #P="ngModel" pattern="[^a-z]" required>
+                    <div *ngIf="P.invalid && P.touched">
+                      <div *ngIf="P.errors.pattern">
+                        faute de saisie
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <button [disabled]="l.invalid" (click)="submit(l.value)">AddEvent</button>
+                  </td>
+                  <td>
+                    <button [disabled]="l.invalid" (click)="getevent()">RetrieveEvent</button>
+                  </td>
+                  <td>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true"><i class="fa fa-close"></i></span>
+                    </button>
+                  </td>
+                </tr>
+  
+  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
