@@ -1,0 +1,25 @@
+<section class="ftco-section">
+    <div class="container">
+      <!-- Bottom Bar End -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-wrap">
+            <table class="table">
+              <thead class="thead-primary">
+                <tr>
+                  <th  class="text-center">Date</th>
+                  <th  class="text-center">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let contribution of contributionList">
+                  <td class="text-center" style="width: 80px;">{{contribution.contributionDate}}</td>
+                  <td class="text-center" style="width: 80px;">{{contribution.amount}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

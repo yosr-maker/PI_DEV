@@ -1,0 +1,79 @@
+<p>Table is just a mapping of objects to table rows with <code>ngFor</code></p>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th  scope="col">#</th>
+    <th scope="col">Country</th>
+    <th scope="col">Area</th>
+    <th scope="col">Population</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let country of countries; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>
+      <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
+      {{ country.name }}
+    </td>
+    <td>{{ country.area | number }}</td>
+    <td>{{ country.population | number }}</td>
+  </tr>
+  </tbody>
+</table>
+<p>Table is just a mapping of objects to table rows with <code>ngFor</code></p>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th  scope="col">#</th>
+    <th scope="col">idDeli</th>
+    <th scope="col">weight</th>
+    <th scope="col">Lenght</th>
+    <th scope="col">longitude</th>
+    <th scope="col">laltitude</th>
+    <th scope="col"> dateDelivery</th>
+	
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let delivery of deliveries; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>
+      <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
+      {{ delivery.idDeli }}
+    </td>
+    <td>{{ delivery.weight | number }}</td>
+    <td>{{delivery.Lenght | number}}</td>
+    <td>{{ delivery.longitude |number}}</td>
+    <td>{{ delivery.laltitude | number}}</td>
+    <td>{{ delivery.dateDelivery | string}}</td>
+	
+  </tr>
+  </tbody>
+</table>
+<p>Table is just a mapping of objects to table rows with <code>ngFor</code></p>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th  scope="col">#</th>
+    <th scope="col">idAuto</th>
+    <th scope="col">TypeAuto/th>
+    <th scope="col">Power</th>
+	
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let auto of automobiles; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>
+      <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
+      {{ automobile.idAuto }}
+    </td>
+    <td>{{ automobile.typeAuto | string }}</td>
+    <td>{{automobile.power| string}}</td>
+   
+  </tr>
+  </tbody>
+</table>

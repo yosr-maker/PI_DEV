@@ -1,0 +1,35 @@
+<section class="ftco-section">
+    <div class="container">
+      <!-- Bottom Bar End -->
+
+    <mark style="margin-left: 720px;"  [hidden]="!showTotal"> Total Contribution : {{totalContribution}}</mark>
+      <br> <br>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-wrap">
+            <table class="table">
+              <thead class="thead-primary">
+                <tr>
+                  <th  class="text-center">Event Date</th>
+                  <th  class="text-center">Event Price</th>
+                  <th  class="text-center">Client Name</th>
+                  <th  class="text-center">Client Contribution</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let participation of participationList">
+                  <td style="width: 180px;">{{participation.participationDate}}</td>
+                  <td style="width: 90px;">{{participation.price}}</td>
+                  <td style="width: 90px;">{{participation.client.firstName}}</td>
+                  <td style="width: 60px;"><button (click)="sum(participation.client.contribution)" type="button"  style="width: 250px;margin-left: 170px;" class="btn btn-info btn-lg">
+                     show total contribution <i class="fa fa-eye" aria-hidden="true"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

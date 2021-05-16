@@ -1,0 +1,29 @@
+@import '../../assets/css/bootstrap.min.css';
+
+
+::ng-deep .swal2-popup {
+  font-size: 1.6rem !important;
+}
+
+.btn-info {
+  color: #fff;
+  background-color: #ff7361;
+  border-color: #17a2b8;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #ffaa00;}
+
+  .btn-search {
+    color: #1a53ff;
+    
+  }
+  .submit {
+    background-color: rgb(209, 71, 175);
+  }
+
+  ::ng-deep .toast-x {
+    top: 300px;
+    right: 150px;
+  }

@@ -1,0 +1,97 @@
+<section class="ftco-section">
+  <div class="container">
+    <div class="bottom-bar">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-md-3">
+            <div class="logo">
+              <a href="index.html">
+                <img src="../../assets/images/fff.png" alt="Logo">
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="search">
+              <input type="text" (change)="getEventByName()" name="eventname" [(ngModel)]="name" placeholder="Search">
+              <button><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="user">
+              <a href="wishlist.html" class="btn wishlist">
+                <i class="fa fa-heart"></i>
+                <span>(0)</span>
+              </a>
+              <a href="cart.html" class="btn cart">
+                <i class="fa fa-shopping-cart"></i>
+                <span>(0)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="product-search">
+      <input type="text" (change)="getEventByCategory()" name="eventcategory" [(ngModel)]="category"
+        value="By Category">
+      <button><i class="fa fa-search"></i></button>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-md-8">
+        <button (click)="bestEventParticipation()" class="btn btn-search btn-lg pull-left" style="width: 200px;"><i
+            class="fa fa-search"></i> &nbsp;<i class="fa fa-user-plus" aria-hidden="true"></i>
+          <br> best event by participation</button>
+      </div>
+
+      <div class="col-md-4">
+        <button routerLink="/calendar" class="btn btn-search btn-lg pull-right"><i class="fa fa-calendar"></i>
+          <br>Go to events calendar</button>
+      </div>
+    </div>
+    <!-- Bottom Bar End -->
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="table-wrap">
+          <table class="table">
+            <thead class="thead-primary">
+              <tr>
+                <th>&nbsp;</th>
+                <th>Event</th>
+                <th>Date</th>
+                <th>Ticket Price</th>
+                <th>Number of places</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;
+                <th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let event of eventList">
+                <td>
+                  <img style="height: 120px; width: 250px;" src="assets/images/event.jpg">
+                </td>
+                <td>
+                  <div class="email">
+                    <span>{{event.name}} </span>
+                    <span>{{event.description}}</span>
+                  </div>
+                </td>
+                <td style="width: 120px;">{{event.date}}</td>
+                <td style="width: 120px;">{{event.ticketPrice}} dt</td>
+                <td style="width: 120px;">{{event.placesNbr}}</td>
+                <td><button type="button" class="btn btn-info btn-lg" routerLink="/participation"
+                    (click)="copyEvent(event)">Paricipate</button></td>
+                <td><button type="button" class="btn btn-secondary btn-lg" routerLink="/contribution"
+                    (click)="copyEvent(event)">Contribute</button> </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br><br><br><br><br><br><br><br>

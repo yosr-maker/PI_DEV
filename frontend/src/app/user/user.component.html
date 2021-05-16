@@ -1,0 +1,343 @@
+<!-- My Account Start -->
+<div class="my-account">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i
+              class="fa fa-tachometer"></i>Dashboard</a>
+          <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i
+              class="fa fa-shopping-bag"></i>Orders</a>
+          <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i
+              class="fa fa-credit-card"></i>Payment Method</a>
+          <a class="nav-link" id="event-nav" data-toggle="pill" href="#event-tab" role="tab"><i
+              class="far fa-calendar-alt"></i>Events</a>
+          <a class="nav-link" id="delivery-nav" data-toggle="pill" href="#delivery-tab" role="tableau"><i
+              class="fas fa-truck"></i>Delivery</a>
+          <a class="nav-link" id="claims-nav" data-toggle="pill" href="#claims-tab" role="tab"><i
+              class="fas fa-exclamation-triangle"></i>Claims</a>
+          <a class="nav-link" id="stock-nav" data-toggle="pill" href="#stock-tab" role="tab"><i
+              class="fas fa-cubes"></i>Stock</a>
+          <a class="nav-link" id="forum-nav" data-toggle="pill" href="#forum-tab" role="tab"><i
+              class="far fa-comments"></i>Forum</a>
+          <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i
+              class="fa fa-map-marker-alt"></i>address</a>
+          <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i
+              class="fa fa-user"></i>Account Details</a>
+          <a class="nav-link" href="index.html"><i class="fa fa-sign-out"></i>Logout</a>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
+            <h4>Dashboard</h4>
+            <p>
+              <router-outlet></router-outlet>
+            </p>
+          </div>
+          <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>No</th>
+                    <th>Product</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Product Name</td>
+                    <td>01 Jan 2020</td>
+                    <td>$99</td>
+                    <td>Approved</td>
+                    <td><button class="btn">View</button></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Product Name</td>
+                    <td>01 Jan 2020</td>
+                    <td>$99</td>
+                    <td>Approved</td>
+                    <td><button class="btn">View</button></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Product Name</td>
+                    <td>01 Jan 2020</td>
+                    <td>$99</td>
+                    <td>Approved</td>
+                    <td><button class="btn">View</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Add product -->
+          <div class="tab-pane fade" id="stock-tab" role="tabpanel" aria-labelledby="stock-nav">
+            <app-admin-products *ngIf=""></app-admin-products>
+          </div>
+
+          <!-- PAYMENT -->
+
+          <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
+            <h4>Payment</h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In
+              efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique
+              viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus
+              eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
+            </p>
+          </div>
+
+          <!-- EVENT -->
+
+          <div class="tab-pane fade" id="event-tab" role="tabpanel" aria-labelledby="event-nav">
+            <h4>Event</h4>
+            <section class="ftco-section">
+              <div class="container">
+                <div class="bottom-bar">
+                  <div class="container-fluid">
+                    <div class="row align-items-center">
+                      <div class="col-md-3">
+                        <div class="logo">
+                          <a href="index.html">
+                            <img src="../../assets/images/fff.png" alt="Logo">
+                          </a>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="search">
+                          <input type="text" (change)="getEventByName()" name="eventname" [(ngModel)]="name"
+                            placeholder="Search">
+                          <button><i class="fa fa-search"></i></button>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="user">
+                          <a href="wishlist.html" class="btn wishlist">
+                            <i class="fa fa-heart"></i>
+                            <span>(0)</span>
+                          </a>
+                          <a href="cart.html" class="btn cart">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>(0)</span>
+                          </a>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <button class="btn btn-success btn-lg" style="width: 170px;margin-left: 470px;" routerLink='/addEventAdmin'> <i
+                    class="fa fa-plus" aria-hidden="true"></i>
+                  <br> Add</button>
+                  <br><br>
+
+                  <div class="row">
+                    <div class="col-md-3">
+                  <button (click)="bestEventParticipation()"  class="btn btn-search btn-lg pull-left" style="width: 200px;"><i class="fa fa-search"></i> &nbsp;<i class="fa fa-user-plus" aria-hidden="true"></i>
+                    <br> best event by participation</button>
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <button routerLink="/calendar" class="btn btn-search btn-lg pull-right"><i class="fa fa-calendar"></i>
+                      <br>Go to events calendar</button>
+                    </div>
+                  
+                  <div class="col-md-5">
+                    <button (click)="bestEventCollects()" class="btn btn-search btn-lg pull-right" style="width: 200px;"> <i class="fa fa-search"></i > &nbsp;<i class="fa fa-money" aria-hidden="true"></i>
+                    <br> best event by contribution</button>
+                    <br><br>
+                    </div></div>
+                <!-- Bottom Bar End -->
+
+
+                <div class="row">
+                  <div class="col-md-12">
+
+                    <div class="table-wrap">
+                      <table class="table">
+                        <thead class="thead-primary">
+                          <tr>
+                            <th>&nbsp;</th>
+                            <th>Event</th>
+                            <th>Date</th>
+                            <th>Ticket Price</th>
+                            <th>Number of places</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let event of eventList">
+                            <td>
+                              <img style="height: 120px; width: 250px;" src="assets/images/event.jpg">
+                            </td>
+                            <td>
+                              <div class="email">
+                                <span>{{event.name}} </span>
+                                <span>{{event.description}}</span>
+                              </div>
+                            </td>
+                            <td style="width: 120px;">{{event.date}}</td>
+                            <td style="width: 120px;">{{event.ticketPrice}} dt</td>
+                            <td style="width: 120px;">{{event.placesNbr}}</td>
+                            <td><button type="button" class="btn btn-warning btn-lg" routerLink="/participation"
+                                (click)="copyEvent(event)">update <i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+                            <td><button type="button" class="btn btn-danger btn-lg"
+                                (click)="deleteEvent(event)">delete <i class="fa fa-close" aria-hidden="true"></i></button> </td>
+                                <td>
+                                <button type="button" class="btn btn-info btn-lg"
+                                routerLink="/eventParticipation" (click)="copyEvent(event)">show participations  <i class="fa fa-eye" aria-hidden="true"></i></button>
+                                </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- DELIVERY -->
+
+          <div class="tab-pane fade" id="delivery-tab" role="tabpanel" aria-labelledby="delivery-nav">
+            <h4>Delivery</h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In
+              efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique
+              viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus
+              eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
+            </p>
+          </div>
+
+          <!-- CLAIMS -->
+
+          <div class="tab-pane fade" id="claims-tab" role="tabpanel" aria-labelledby="claims-nav">  
+            <h4>Claims</h4>
+            <section class="ftco-section">
+              <div class="container">
+                <!-- Bottom Bar End -->
+
+                <button  (click)="badProductList()" class="btn btn-primary btn-lg pull-right" style="width: 200px;margin-left: 400px;"><i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                  <br> Top Products claimed bad </button>
+                  <br><br>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="table-wrap">
+                      <table class="table">
+                        <thead class="thead-primary">
+                          <tr>
+                            <th  class="text-center">Message</th>
+                            <th  class="text-center">Date</th>
+                            <th  class="text-center">User</th>
+                            <th  class="text-center">Prodcut</th>
+                            <th  class="text-center">Decision</th>
+                            <th>&nbsp;</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let claim of claimList">
+                            <td style="width: 180px;">{{claim.descriptionText}}</td>
+                            <td style="width: 90px;">{{claim.dateClaim}}</td>
+                            <td style="width: 90px;">{{claim.client.firstName}}</td>
+                            <td style="width: 90px;">{{claim.product.name}}</td>
+                            <td style="width: 90px;">{{claim.decision}}</td>
+                            <td style="width: 60px;">
+                              <button type="button" class="btn btn-danger btn-lg"
+                               (click)="deleteClaim(claim)">Delete  <i class="fa fa-close" aria-hidden="true"></i></button>                              
+                              </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- FORUM -->
+
+          <div class="tab-pane fade" id="forum-tab" role="tabpanel" aria-labelledby="forum-nav">
+            <h4>Forum</h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In
+              efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique
+              viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus
+              eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
+            </p>
+          </div>
+
+
+          <!-- div.form-add-product.container -->
+          <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
+            <h4>Address</h4>
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Payment Address</h5>
+                <p>123 Payment Street, Los Angeles, CA</p>
+                <p>Mobile: 012-345-6789</p>
+                <button class="btn">Edit Address</button>
+              </div>
+              <div class="col-md-6">
+                <h5>Shipping Address</h5>
+                <p>123 Shipping Street, Los Angeles, CA</p>
+                <p>Mobile: 012-345-6789</p>
+                <button class="btn">Edit Address</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
+            <h4>Account Details</h4>
+            <div class="row">
+              <div class="col-md-6">
+                <input class="form-control" type="text" placeholder="First Name">
+              </div>
+              <div class="col-md-6">
+                <input class="form-control" type="text" placeholder="Last Name">
+              </div>
+              <div class="col-md-6">
+                <input class="form-control" type="text" placeholder="Mobile">
+              </div>
+              <div class="col-md-6">
+                <input class="form-control" type="text" placeholder="Email">
+              </div>
+              <div class="col-md-12">
+                <input class="form-control" type="text" placeholder="Address">
+              </div>
+              <div class="col-md-12">
+                <button class="btn">Update Account</button>
+                <br><br>
+              </div>
+            </div>
+            <h4>Password change</h4>
+            <div class="row">
+              <div class="col-md-12">
+                <input class="form-control" type="password" placeholder="Current Password">
+              </div>
+              <div class="col-md-6">
+                <input class="form-control" type="text" placeholder="New Password">
+              </div>
+              <div class="col-md-6">
+                <input class="form-control" type="text" placeholder="Confirm Password">
+              </div>
+              <div class="col-md-12">
+                <button class="btn">Save Changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- My Account End -->
