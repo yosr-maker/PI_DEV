@@ -12,116 +12,118 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.apache.logging.log4j.util.PerformanceSensitive;
+import org.hibernate.annotations.Cascade;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
-@Table( name = "T_Product")
-public class Product implements Serializable {
+import net.bytebuddy.dynamic.loading.ClassReloadingStrategy.Strategy;
 
+@Entity
+@Table(name = "T_Product")
+public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private long id;
-	
-	@Column(name="Name")
-	private String Name ; 
-	
-	@Column(name="Description")
-	private String Description ;
-	
-	@Column(name="Category")
-	private String Category; 
-	
-	@Column(name="Weight")
-	private float weight;
-	
-	@Column(name="Quantity")
-	private float Quantity;
-	
+	private int id;
 
-		
-	@Column(name="price")
+	// @Column(name="Name")
+	private String name;
+
+	// @Column(name="Description")
+	private String description;
+
+	// @Column(name="Category")
+	private String category;
+
+	// @Column(name="price")
 	private float Price;
-	
 
-	
+	// @Column(name="Quantity")
+	private float Quantity;
+
+	private String image;
+
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
+	@JsonIgnore
+	private StockDetail stockdetail;
+
 	@ManyToMany
 	List<Basket> baskets;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idRay")
 	Ray ray;
-	
-   @ManyToOne
-   private Command_line commandLine;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="product")
+
+	@ManyToOne
+	private Command_line commandLine;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
 	@JsonIgnore
 	private List<Claim> claims;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="product")
-	List<Publication> publications;
-	
-	@ManyToOne
-	@JoinColumn(name = "idStock")
-	Stock stock;
-	
+
 	@OneToMany
 	private List<Ad> ads;
 
+	public Product(int id, String name, String description, String category, float price, float Quantity, String image,
+			StockDetail stockdetail, List<Basket> baskets, Ray ray, Command_line commandLine, List<Claim> claims,
+			List<Ad> ads) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.category = category;
+		this.Price = price;
+		this.Quantity = Quantity;
+		this.image = image;
+		this.stockdetail = stockdetail;
+		this.baskets = baskets;
+		this.ray = ray;
+		this.commandLine = commandLine;
+		this.claims = claims;
+		this.ads = ads;
+	}
 
-	public long getId() {
+	public Product() {
+		super();
+	}
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 
 	public void setDescription(String description) {
-		Description = description;
+		this.description = description;
 	}
 
 	public String getCategory() {
-		return Category;
+		return category;
 	}
 
 	public void setCategory(String category) {
-		Category = category;
-	}
-
-	public float getWeight() {
-		return weight;
-	}
-
-	public void setWeight(float weight) {
-		this.weight = weight;
-	}
-
-	public float getQuantity() {
-		return Quantity;
-	}
-
-	public void setQuantity(float quantity) {
-		Quantity = quantity;
+		this.category = category;
 	}
 
 	public float getPrice() {
@@ -129,7 +131,31 @@ public class Product implements Serializable {
 	}
 
 	public void setPrice(float price) {
-		Price = price;
+		this.Price = price;
+	}
+
+	public float getQuantity() {
+		return Quantity;
+	}
+
+	public void setQuantity(float quantity) {
+		this.Quantity = quantity;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public StockDetail getStockdetail() {
+		return stockdetail;
+	}
+
+	public void setStockdetail(StockDetail stockdetail) {
+		this.stockdetail = stockdetail;
 	}
 
 	public List<Basket> getBaskets() {
@@ -148,36 +174,20 @@ public class Product implements Serializable {
 		this.ray = ray;
 	}
 
-	public List<Claim> getClaims() {
-		return claims;
-	}
-
-	public void setClaims(List<Claim> claims) {
-		this.claims = claims;
-	}
-
-	public List<Publication> getPublications() {
-		return publications;
-	}
-
-	public void setPublications(List<Publication> publications) {
-		this.publications = publications;
-	}
-
-	public Stock getStock() {
-		return stock;
-	}
-
-	public void setStock(Stock stock) {
-		this.stock = stock;
-	}
-
 	public Command_line getCommandLine() {
 		return commandLine;
 	}
 
 	public void setCommandLine(Command_line commandLine) {
 		this.commandLine = commandLine;
+	}
+
+	public List<Claim> getClaims() {
+		return claims;
+	}
+
+	public void setClaims(List<Claim> claims) {
+		this.claims = claims;
 	}
 
 	public List<Ad> getAds() {
@@ -188,35 +198,4 @@ public class Product implements Serializable {
 		this.ads = ads;
 	}
 
-	public Product() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
-
-	public Product(long id, String name, String description, String category, float weight, float quantity, float price,
-			List<Basket> baskets, Ray ray, Command_line commandLine, List<Claim> claims, List<Publication> publications,
-			Stock stock, List<Ad> ads) {
-		super();
-		this.id = id;
-		Name = name;
-		Description = description;
-		Category = category;
-		this.weight = weight;
-		Quantity = quantity;
-		Price = price;
-		this.baskets = baskets;
-		this.ray = ray;
-		this.commandLine = commandLine;
-		this.claims = claims;
-		this.publications = publications;
-		this.stock = stock;
-		this.ads = ads;
-	}
-
-
-	
-	
 }
-

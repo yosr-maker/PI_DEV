@@ -4,8 +4,12 @@ import com.esprit.spring.entites.Product;
 
 public interface ProductServiceI {
 
-	Product findbyid(long id);
+	public Product findbyid(int id);
 
-	Product addProduct(Product p);
-
+	public Product addProduct(Product p);
+ public Iterable <Product> getAllProduct();
+ public void deleteProduct(int id);
+ public Product updateProduct(Product p);
+ public void deleteAllproduct();
+public  Product findByName(String name);
 }

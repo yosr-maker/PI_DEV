@@ -1,5 +1,8 @@
 package com.esprit.spring.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +40,7 @@ return claimService.retrieveClaim(claimId);
 
 @PostMapping("/addClaim/{ProductId}/{clientId}")
 @ResponseBody
-public Claim addClaim(@RequestBody Claim cl,@PathVariable("ProductId") Long ProductId,@PathVariable("clientId") Long clientId) {
+public Claim addClaim(@RequestBody Claim cl,@PathVariable("ProductId") Long ProductId,@PathVariable("clientId") Long clientId){
 	 Claim c =claimService.save(cl,clientId,ProductId);
 	 System.err.println(c.getIdClaim()+"**"+c.getDescriptionText()+"***"+c.getDateClaim()+"**"+c.getDecision()+"**"+c.getClient().getId()+"**"+c.getProduct().getId());
 	return c;

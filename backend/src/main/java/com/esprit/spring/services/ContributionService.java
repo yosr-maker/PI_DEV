@@ -41,7 +41,7 @@ public class ContributionService implements ContributionServiceI {
 		String s="";
 		Contribution c = new Contribution();
 		Event ev = EventService.findbyId(eid);
-		Client u = ClientService.findbyid(clientId);	
+		Client u = ClientService.retrieveClient(clientId);	
 		System.out.println(u.getMcompte());
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		

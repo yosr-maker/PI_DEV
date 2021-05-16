@@ -1,6 +1,7 @@
 package com.esprit.spring.entites;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @Entity
@@ -23,71 +24,46 @@ public class Stock implements Serializable {
 	@Column(name = "idStock")
 	private int idStock;
 	
-	
-	@Column(name = "quantiteMin")
-	private int quantiteMin;
-	
-	@Column(name = "quantiteMax")
-	private int quantiteMax;
-	
-	@Column(name = "quantiteInstan")
-	private int quantiteInstan;
-
-
-
-	public int getIdStock() {
-		return idStock;
-	}
-
-	public void setIdStock(int idStock) {
-		this.idStock = idStock;
-	}
-
-	@OneToOne(mappedBy="stock")
-	@JoinColumn(name="id")
-	private Product product;
-	
-
 
 	
 
-	public int getQuantiteMin() {
-		return quantiteMin;
+
+
+	public List<StockDetail> getStockDetail() {
+		return stockDetail;
 	}
 
-	public void setQuantiteMin(int quantiteMin) {
-		this.quantiteMin = quantiteMin;
+
+
+
+
+
+	public void setStockDetail(List<StockDetail> stockDetail) {
+		this.stockDetail = stockDetail;
 	}
 
-	public int getQuantiteMax() {
-		return quantiteMax;
-	}
 
-	public void setQuantiteMax(int quantiteMax) {
-		this.quantiteMax = quantiteMax;
-	}
 
-	public int getQuantiteInstan() {
-		return quantiteInstan;
-	}
 
-	public void setQuantiteInstan(int quantiteInstan) {
-		this.quantiteInstan = quantiteInstan;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
 
 
 	public Stock() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+
+
+
+
+
+
+	@OneToMany
+	private List<StockDetail> stockDetail;
+	
+	
+	
+
+
+
 	
 	
 	

@@ -29,7 +29,7 @@ public class NotificationService implements NotificationServiceI {
 	ClientRepository ClientRepository;
 	
 	public static final String ACCOUNT_SID = "AC861e84eeadedd8f2915b9bda24eb1430";
-	 public static final String AUTH_TOKEN = "c3766f62781d8a1ee94b02332948fdc5";
+	public static final String AUTH_TOKEN = "f6fd12dc8e579518975bbf2c98e88c72";
 	
 	public void notifyAllClient(String eventName, String eventGoal) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -62,11 +62,13 @@ public class NotificationService implements NotificationServiceI {
             System.out.println(message.getSid());
             return client;
        }
-
+       
 	public List<Notification> myNotifications(Client client) {
 		List<Notification> list = NotificationRepository.myNotifications(client);
 		return list;
 	}
+
+
 
 	}
 

@@ -3,12 +3,13 @@ package com.esprit.spring.entites;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,7 +23,10 @@ public class Driver implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "idDriver")
-	private int idDriver;
+	private Long idDriver;
+	
+	@Embedded
+	private Shop shop1;
 	
 	@Column(name="lastName")
 	private String lastName; 
@@ -30,22 +34,54 @@ public class Driver implements Serializable {
 	@Column(name="firstName")
 	private String firsttName; 
 	
+	
 	@Column(name="Phone")
 	private String Phone;
 	
-
+	@Column(name="Salaire")
+	private Long salaire;
+	
 	@Column(name="emailDriver")
 	private String emailDriver;
 	
 	@Column(name="Location")
 	private String Location;
+	
+	@Column(name="nbrDeliveryAffected")
+	private Long nbrDeliveryAffected;
 
-	@OneToOne(mappedBy="driver")
-	private Delivery delivery;
+	@OneToMany(mappedBy="driver")
+	private List<Delivery> deliveries;
 	
 	
 	@ManyToMany
-	private List <Automobile> automobiles ;
+	private List<Automobile> automobiles ;
+	
+	public Shop getShop1() {
+		return shop1;
+	}
+
+	public Driver(Long idDriver, Shop shop1, String lastName, String firsttName, String phone, Long salaire,
+			String emailDriver, String location, Long nbrDeliveryAffected, List<Delivery> deliveries,
+			List<Automobile> automobiles) {
+		super();
+		this.idDriver = idDriver;
+		this.shop1 = shop1;
+		this.lastName = lastName;
+		this.firsttName = firsttName;
+		Phone = phone;
+		this.salaire = salaire;
+		this.emailDriver = emailDriver;
+		Location = location;
+		this.nbrDeliveryAffected = nbrDeliveryAffected;
+		this.deliveries = deliveries;
+		this.automobiles = automobiles;
+	}
+
+	public void setShop1(Shop shop1) {
+		this.shop1 = shop1;
+	}
+
 	
 	
 	public List<Automobile> getAutomobiles() {
@@ -56,11 +92,16 @@ public class Driver implements Serializable {
 		this.automobiles = automobiles;
 	}
 
-	public int getIdDriver() {
+	public Long getIdDriver() {
 		return idDriver;
 	}
 
-	public void setIdDriver(int idDriver) {
+	public Driver(Shop shop1) {
+		super();
+		this.shop1 = shop1;
+	}
+
+	public void setIdDriver(Long idDriver) {
 		this.idDriver = idDriver;
 	}
 
@@ -106,13 +147,28 @@ public class Driver implements Serializable {
 
 
 	
-	
-	public Delivery getDelivery() {
-		return delivery;
+	public Long getSalaire() {
+		return salaire;
 	}
 
-	public void setDelivery(Delivery delivery) {
-		this.delivery = delivery;
+	public void setSalaire(Long salaire) {
+		this.salaire = salaire;
+	}
+
+	public Long getNbrDeliveryAffected() {
+		return nbrDeliveryAffected;
+	}
+
+	public void setNbrDeliveryAffected(Long nbrDeliveryAffected) {
+		this.nbrDeliveryAffected = nbrDeliveryAffected;
+	}
+
+	public List<Delivery> getDeliveries() {
+		return deliveries;
+	}
+
+	public void setDeliveries(List<Delivery> deliveries) {
+		this.deliveries = deliveries;
 	}
 
 	public Driver() {
@@ -120,6 +176,12 @@ public class Driver implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+	/*public static Driver getMax(int nbrDA) {
+		// TODO Auto-generated method stub
+		return Driver.getMax(nbrDA);
+	}*/
+
+	
 
 	
 }
