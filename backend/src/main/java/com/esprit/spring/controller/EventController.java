@@ -11,18 +11,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.esprit.spring.entites.Client;
 import com.esprit.spring.entites.Contribution;
 import com.esprit.spring.entites.Event;
 import com.esprit.spring.entites.EventCategory;
 import com.esprit.spring.entites.Notification;
+import com.esprit.spring.entites.Participation;
 import com.esprit.spring.repository.EventRepository;
 import com.esprit.spring.repository.ParticipationRepository;
 import com.esprit.spring.services.ContributionService;
 import com.esprit.spring.services.EventServiceI;
 import com.esprit.spring.services.NotificationService;
 import com.esprit.spring.services.ParticipationService;
+
 
 @RestController
 public class EventController {
@@ -83,11 +84,15 @@ public class EventController {
 	/*user :*/
 	@PostMapping("/add-Contribution/{event-id}/{clientId}/{amount}")
 	@ResponseBody
-	public String Contribute(@PathVariable("event-id") Long eventID,@PathVariable("clientId") Long clientId,@PathVariable("amount") float amount) {
-		return ContributionService.Contribute(eventID, clientId ,amount);
+	public boolean Contribute(@PathVariable("event-id") Long eventID,@PathVariable("clientId") Long clientId,@PathVariable("amount") float amount) {
+		if (ContributionService.Contribute(eventID, clientId ,amount).startsWith("L")) 
+		return true;
+		else 
+		return false;
 	}
 	
-	@RequestMapping("/add-Participation/{eid}/{clientId}")
+
+	@RequestMapping(value="/add-Participation/{eid}/{clientId}" , produces = { "text/plain"})
 	@ResponseBody
 	public String addParticipation(@PathVariable("eid") Long eid,@PathVariable("clientId") Long clientId) {
 		return ParticipationService.addParticipation(eid,clientId);
@@ -115,7 +120,23 @@ public class EventController {
 	public List<Event> passedEvents() {
 		return EventService.passedEvents();
 	}
+
+
+	@GetMapping("/participationsList/{idEvent}")
+	@ResponseBody
+	public List<Participation> participationsList(@PathVariable("idEvent") int idEvent) 
+	{return ParticipationService.participationsList(idEvent);}
 	
+	@GetMapping("/clientParticipationsList/{idClient}")
+	@ResponseBody
+	public List<Participation> clientParticipationsList(@PathVariable("idClient") int idClient) 
+	{return ParticipationService.clientParticipationsList(idClient);}
+	
+	
+	@GetMapping("/clientContributionList/{idClient}")
+	@ResponseBody
+	public List<Contribution> clientContributionList(@PathVariable("idClient") int idClient) 
+	{return ParticipationService.clientContributionList(idClient);}
 	
 
 	@GetMapping("/displayBestEventsByParticipations")
@@ -123,15 +144,6 @@ public class EventController {
 	public List<String> displayBestEventsByParticipations()
 	{return EventService.displayBestEventsByParticipations();}
 	
-	
-
-	@GetMapping("/participationsList/{idEvent}")
-	@ResponseBody
-	public List<String> participationsList(@PathVariable("idEvent") int idEvent) 
-	{return ParticipationService.participationsList(idEvent);}
-	
-	
-
 	@GetMapping("/displayBestEventsByCollects")
 	@ResponseBody
 	public List<String> displayBestEventsByCollects()

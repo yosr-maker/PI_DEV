@@ -2,6 +2,9 @@ package com.esprit.spring.services;
 
 import java.util.List;
 
+import com.esprit.spring.entites.Contribution;
+import com.esprit.spring.entites.Participation;
+
 
 
 public interface ParticipationServiceI {
@@ -10,7 +13,11 @@ public interface ParticipationServiceI {
 
 
 
-	List<String> participationsList(int idEvent);
+	public List<Participation> participationsList(int idEvent);
+	
+	public List<Participation> clientParticipationsList(int clientId); 
+	
+	public List<Contribution> clientContributionList(int clientId); 
 
 
 

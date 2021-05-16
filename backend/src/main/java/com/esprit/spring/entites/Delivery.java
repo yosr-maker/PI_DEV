@@ -25,8 +25,22 @@ public class Delivery implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "deliveryId")
-	private int deliveryId;
+	private Long deliveryId;
 	
+	@Column
+	float weight; 
+	
+	@Column
+	float Lenght ; 
+	
+	@Column 
+	float Width; 
+	
+	@Column 
+	float longitude ;
+	
+	@Column
+	float laltitude ;
 	
 	@Temporal(TemporalType.DATE)
 	private Date dateDelivery;
@@ -37,21 +51,62 @@ public class Delivery implements Serializable{
 	
 	
 	@ManyToOne
-	@JoinColumn(name="idDriver")
+	@JoinColumn(name="idDriver",nullable = true)
 	Driver driver;
 	
 	
+	public float getWeight() {
+		return weight;
+	}
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+	public float getLenght() {
+		return Lenght;
+	}
+	public void setLenght(float lenght) {
+		Lenght = lenght;
+	}
+	public float getWidth() {
+		return Width;
+	}
+	public void setWidth(float width) {
+		Width = width;
+	}
+	public float getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(float longitude) {
+		this.longitude = longitude;
+	}
+	public float getLaltitude() {
+		return laltitude;
+	}
+	public void setLaltitude(float laltitude) {
+		this.laltitude = laltitude;
+	}
+
+
 	
+	
+	
+	public Driver getDriver() {
+		
+		return driver;
+	}
+	public void setDriver(Driver driver) {
+		this.driver = driver;
+	}
 	public List<Payment> getPayments() {
 		return payments;
 	}
 	public void setPayments(List<Payment> payments) {
 		this.payments = payments;
 	}
-	public int getDeliveryId() {
+	public Long getDeliveryId() {
 		return deliveryId;
 	}
-	public void setDeliveryId(int deliveryId) {
+	public void setDeliveryId(Long deliveryId) {
 		this.deliveryId = deliveryId;
 	}
 	public Date getDateDelivery() {
@@ -66,6 +121,20 @@ public class Delivery implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public Delivery(Long deliveryId, float weight, float lenght, float width, float longitude, float laltitude,
+			Date dateDelivery, List<Payment> payments, Driver driver) {
+		super();
+		this.deliveryId = deliveryId;
+		this.weight = weight;
+		Lenght = lenght;
+		Width = width;
+		this.longitude = longitude;
+		this.laltitude = laltitude;
+		this.dateDelivery = dateDelivery;
+		this.payments = payments;
+		this.driver = driver;
+	}
+	
 
 }
 

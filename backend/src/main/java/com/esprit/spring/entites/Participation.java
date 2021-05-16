@@ -25,7 +25,6 @@ public class Participation implements Serializable {
 	@JsonIgnore
 	private Event event;
 	@ManyToOne
-	@JsonIgnore
 	private Client client;
 	
 	public Participation() {

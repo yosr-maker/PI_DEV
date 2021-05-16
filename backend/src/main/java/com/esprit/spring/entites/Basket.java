@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="T_BASKET")
 public class Basket implements Serializable {
@@ -22,14 +24,27 @@ public class Basket implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "basketId")
-	private int basketId;
+	private Long basketId;
 
 	@OneToOne
-	@JoinColumn(name="visitor")
+	@JoinColumn(name="visitor" ,nullable= true)
 	private Visitor visitor;
 	
+	@OneToOne
+	private Facture facture;
 	
-	 @ManyToOne
+	 public Facture getFacture() {
+		return facture;
+	}
+
+
+
+
+	public void setFacture(Facture facture) {
+		this.facture = facture;
+	}
+
+	@ManyToOne
 	 private Command_line commandLine;
 	 
 	
@@ -37,20 +52,75 @@ public class Basket implements Serializable {
 	private Command Command; 
 	
 	@OneToOne
-	@JoinColumn(name="client")
+	@JoinColumn(name="client",nullable= true)
 	private Client client;
+	
+	@Column(name = "prixTotal")
+	private float prixTotal;
+	
+	@Column(name = "isValid")
+	private boolean isValid;
+	
+	//private PaymentType typePaiement;
+	@Column(name = "quantiteTotale")
+	private int quantiteTotale;
+	
+
+	public float getPrixTotal() {
+		return prixTotal;
+	}
+
+
+
+
+	public void setPrixTotal(float prixTotal) {
+		this.prixTotal = prixTotal;
+	}
+
+
+
+
+	public boolean isValid() {
+		return isValid;
+	}
+
+
+
+
+	public void setValid(boolean isValid) {
+		this.isValid = isValid;
+	}
+
+
+
+
+	public int getQuantiteTotale() {
+		return quantiteTotale;
+	}
+
+
+
+
+	public void setQuantiteTotale(int quantiteTotale) {
+		this.quantiteTotale = quantiteTotale;
+	}
+
+
+
 
 	public Basket() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 
-	public int getBasketId() {
+	public Long getBasketId() {
 		return basketId;
 	}
 
-	public void setBasketId(int basketId) {
+	public void setBasketId(Long basketId) {
 		this.basketId = basketId;
 	}
 

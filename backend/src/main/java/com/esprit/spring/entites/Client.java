@@ -30,6 +30,7 @@ public class Client extends User {
 	private Basket basket;
 
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="client")
+	@JsonIgnore
 	private List<Participation> participation;
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="client")
 	private List<Notification> notification;

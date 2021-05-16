@@ -17,41 +17,37 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name="CLAIM")			
-public class Claim 	implements Serializable {
-	
+@Table(name = "CLAIM")
+public class Claim implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idClaim")
 	private Long idClaim;
-	
+
 	@Enumerated(EnumType.STRING)
-    private ClaimDecision decision;
-	
+	private ClaimDecision decision;
+
 	@Temporal(TemporalType.DATE)
 	private Date dateClaim;
-	
-	
 
-	
-	 @Column(name = "DESCRIPTION_TEXT")
-	    @NotNull
-	    private String descriptionText;
-	 
-	
-	 @ManyToOne 
-	 private Client client;
-	 
+	@Column(name = "DESCRIPTION_TEXT")
+	@NotNull
+	private String descriptionText;
 
 	@ManyToOne
-    @JoinColumn(name = "id")
+	private Client client;
+
+	@ManyToOne
+	@JoinColumn(name = "idProduct")
 	private Product product;
 
-	
 	public ClaimDecision getDecision() {
 		return decision;
 	}
@@ -67,11 +63,6 @@ public class Claim 	implements Serializable {
 	public void setDescriptionText(String descriptionText) {
 		this.descriptionText = descriptionText;
 	}
-
-
-
-	
-
 
 	public Client getClient() {
 		return client;
@@ -105,10 +96,8 @@ public class Claim 	implements Serializable {
 		this.dateClaim = dateClaim;
 	}
 
-
-
-
-	public Claim(Long idClaim, ClaimDecision decision, Date dateClaim,String descriptionText, Client client, Product product) {
+	public Claim(Long idClaim, ClaimDecision decision, Date dateClaim, String descriptionText, Client client,
+			Product product) {
 		super();
 		this.idClaim = idClaim;
 		this.decision = decision;
@@ -118,8 +107,6 @@ public class Claim 	implements Serializable {
 		this.client = client;
 		this.product = product;
 	}
-
-
 
 	public Claim() {
 		super();
@@ -180,8 +167,5 @@ public class Claim 	implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-}
 
+}

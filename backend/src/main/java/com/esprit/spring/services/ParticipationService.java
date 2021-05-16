@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.esprit.spring.entites.Client;
+import com.esprit.spring.entites.Contribution;
 import com.esprit.spring.entites.Event;
 import com.esprit.spring.entites.Participation;
 
@@ -45,7 +46,7 @@ public class ParticipationService implements ParticipationServiceI {
 	public String addParticipation(Long eid , Long clientId ) {
 		Participation p = new Participation();
 		Event e = EventService.findbyId(eid);
-		Client c= ClientService.findbyid(clientId);
+		Client c= ClientService.retrieveClient(clientId);
 			System.err.println(c.getFirstName());
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		java.util.Date date = new java.util.Date();	
@@ -73,19 +74,37 @@ public class ParticipationService implements ParticipationServiceI {
 
 
 	@Override
-	public List<String> participationsList(int idEvent) {
+	public List<Participation> participationsList(int idEvent) {
 		Event e =EventRepository.findById((long) idEvent).orElse(null);
 		List<Participation> listparticipation=new ArrayList<Participation>();
 		listparticipation=e.getParticipation();
-		List<String> lnoms=new ArrayList<String>();
-		for(Participation p:listparticipation)
-		{
-			lnoms.add("ID: "+p.getId()+"Price:" +p.getPrice()+" ");
-		}
-		
-		return lnoms;
-		}
+//		List<String> lnoms=new ArrayList<String>();
+//		for(Participation p:listparticipation)
+//		{
+//			lnoms.add("ID: "+p.getId()+"Price:" +p.getPrice()+" ");
+//		}
+//		
+//		return lnoms;
+//		}
 
+		return listparticipation ;
+	}
+
+
+	@Override
+	public List<Participation> clientParticipationsList(int clientId) {
+		Client c =ClientRepository.findById((long) clientId).orElse(null);
+		List<Participation> listparticipation=new ArrayList<Participation>();
+		listparticipation=c.getParticipation();
+		return listparticipation ;
+	}
 	
+	@Override
+	public List<Contribution> clientContributionList(int clientId) {
+		Client c = ClientRepository.findById((long) clientId).orElse(null);
+		List<Contribution> listc=new ArrayList<Contribution>();
+		listc=c.getContribution();
+		return listc ;
+	}
 
 }
