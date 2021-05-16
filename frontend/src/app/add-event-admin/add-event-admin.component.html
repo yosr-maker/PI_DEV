@@ -1,0 +1,59 @@
+
+
+<div id="contact-page" class="container">
+
+    <!-- <div class="col-sm-4">
+        <div class="contact-info">
+          <img src="../../assets/images/iconmain.png" alt="donate image" class="img-fluid mb-3 d-none d-md-block">
+        </div>
+      </div> -->
+
+    <div class="bg">
+      <div class="row">
+        <div class="col-sm-8 pull-left">
+          <div class="contact-form">
+            <h2 class="title text-center">Add Event !</h2>
+            <div class="contact-info">
+                <img src="../../assets/images/iconmain.png" alt="donate image" class="img-fluid mb-3 d-none d-md-block">
+              </div>
+            <div class="status alert alert-success" style="display: none"></div>
+            <form id="main-contact-form" class="contact-form row" name="contact-form">
+              <div class="form-group col-md-4">
+                <input type="text"  [(ngModel)]="event.name" name="name" class="form-control" required="required" placeholder="name">
+              </div>
+              <div class="form-group col-md-3">
+                <input type="number" [(ngModel)]="event.ticketPrice" name="ticketprice" class="form-control" required="required" placeholder="ticket price">
+              </div>
+                <span>dt</span>
+              <div class="form-group col-md-3">
+                <input type="number" [(ngModel)]="event.placesNbr" name="place number" class="form-control" required="required" placeholder="place number">
+              </div>
+              <div class="form-group col-md-4">
+                <span> select event date : </span>
+              </div>
+              <div class="form-group col-md-3">
+                <input type="date" [(ngModel)]="event.date" name="date" class="form-control" required="required" placeholder="date">
+              </div>
+
+              <div class="form-group col-md-12">
+                <textarea  id="message" [(ngModel)]="event.description" name="description"  required="required" class="form-control" rows="8" placeholder="Event Description"></textarea>
+            </div> 
+
+              <br><br>   <br><br>   <br><br>
+              <div class="form-group col-lg-12 mx-auto">
+                <button class="btn btn-dark btn-lg" style="margin-left: 200px;width: 150px;" (click)="addEvent()"> <i class="fa fa-plus" aria-hidden="true"></i>
+                  <br> Add</button>
+                <button class="btn btn-secondary btn-lg" style="width: 150px;"routerLink="/user"> <i class="fas fa-undo"></i>
+                  <br> Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-sm-4 pull-right">
+            <img src="../../assets/images/one.png" class="img-fluid mb-3 d-none d-md-block" alt="donate image" >
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><br><br>

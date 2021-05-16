@@ -1,0 +1,25 @@
+<section class="ftco-section">
+    <div class="container">
+      <!-- Bottom Bar End -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-wrap">
+            <table class="table">
+              <thead class="thead-primary">
+                <tr>
+                  <th  class="text-center">Date</th>
+                  <th  class="text-center">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let participation of participationList">
+                  <td class="text-center" style="width: 80px;">{{participation.participationDate}}</td>
+                  <td  class="text-center" style="width: 80px;">{{participation.price}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

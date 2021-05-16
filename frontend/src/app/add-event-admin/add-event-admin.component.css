@@ -1,0 +1,7 @@
+@import '../../assets/css/main.css';
+@import '../../assets/css/bootstrap.min.css';
+
+
+::ng-deep .swal2-popup {
+    font-size: 1.6rem !important;
+  }

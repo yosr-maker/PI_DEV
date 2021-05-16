@@ -1,0 +1,11 @@
+#nameCateg, #category, #qte-inst, #qte-min, #qte-max{
+    height: 60%;
+}
+
+.form-add-product > div{
+    margin: auto;
+}
+
+.btn-add-product{
+    float: right;
+}

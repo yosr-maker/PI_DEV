@@ -1,0 +1,79 @@
+
+
+<div id="contact-page" class="container back">
+  <div class="bg">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="contact-form">
+          <h2 class="title text-center">Please fill this form !</h2>
+          <div class="status alert alert-success" style="display: none"></div>
+          <form id="main-contact-form" class="contact-form row" name="contact-form" method="post">
+            <div class="row col-md-12">
+            <div class="form-group col-md-3">
+            <!-- Options -->
+            <div class="input-group ">
+              <div class="input-group-prepend">
+                <span class="input-group-text bg-white px-4 border-md border-right-0">
+                  <i class="fa fa-user text-muted"></i>
+                </span>
+              </div>
+              <select style="max-width: 80px"
+                class="custom-select form-control bg-white border-left-0 border-md h-100 font-weight-bold text-muted">
+                <option value="">Mr</option>
+                <option value="">Mrs</option>
+                <option value="">Ms</option>
+              </select>
+            </div>
+            </div>
+           
+            <div class="form-group col-md-4">
+              <input type="text" name="name" class="form-control" required="required" placeholder="name" >
+            </div>
+            <div class="form-group col-md-4">
+              <input type="text" name="lastname" class="form-control" required="required" placeholder="lastname">
+            </div>
+            </div>
+            <div class="form-group col-md-8">
+              <input type="email" name="email" class="form-control" required="required" placeholder="Email">
+            </div>
+            <div class="form-group col-md-6">
+              <input type="tel" name="email" class="form-control" required="required" placeholder="phone">
+            </div>
+            <br><br>   <br><br>   <br><br>
+            <div class="form-group col-lg-12 mx-auto">
+              <button (click)="participate()" class="btn btn-success btn-lg" style="margin-left: 500px;width: 150px;"> <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
+                <br> Participate</button>
+              <button class="btn btn-secondary btn-lg" style="width: 150px;"routerLink="/eventList"> <i class="fas fa-undo"></i>
+                <br> Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="contact-info">
+          <img src="../../assets/images/participate.png" alt="donate image" class="img-fluid mb-3 d-none d-md-block">
+          <h2 class="title text-center">Dont forget to follow us</h2>
+
+          <div class="social-networks">
+            <h2 class="title text-center">Social Networking</h2>
+            <ul>
+              <li>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-google-plus"></i></a>
+              </li>
+              <li>s
+                <a href="#"><i class="fa fa-youtube"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br><br><br><br><br><br><br>

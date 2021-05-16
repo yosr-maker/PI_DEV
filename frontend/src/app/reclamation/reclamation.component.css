@@ -1,0 +1,7 @@
+@import '../../assets/css/main.css';
+@import '../../assets/css/bootstrap.min.css';
+
+::ng-deep .toast-x{ 
+    top:  300px;
+    right: 150px;
+    }
